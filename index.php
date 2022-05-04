@@ -238,6 +238,7 @@ $array = mysqli_fetch_array($query);
 	</script> 
 
 	<script type="text/javascript">
+		// esta funcion no se utiliza porque no resta bien pero si suma muy bien
 		function restar (valor) {
 			var total = 0;	
 		  valor = parseFloat(valor); // Convertir el valor a un entero (número).
