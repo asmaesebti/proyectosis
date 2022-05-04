@@ -1,0 +1,27 @@
+.bord{
+	border-bottom: 1px solid black;
+	
+}
+
+.firma{
+	text-decoration: underline;
+	font-weight: bold;
+	font-size: 25px;
+}
+.error {
+
+	
+	color: red;
+
+
+
+}
+
+.correcto{
+
+	color: green;
+}
+
+.fondo{
+	background-color: beige;
+}
