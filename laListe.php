@@ -27,6 +27,7 @@ $array = mysqli_fetch_array($query);
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.0/sweetalert2.js"></script>
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.css"/>
 	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="laListe.css">
 </head>
 <body class="fondo" style="background-color: beige;">
 
@@ -48,7 +49,7 @@ $array = mysqli_fetch_array($query);
 	<header class="container">
 		<img src="logo.png" width="100%" alt="">
 	</header>
-	<div class="container">
+	<div class="container-fluid ">
 		<div class="row">
 			<div class="col">
 				<h1>La liste de tous les reçus</h1>
@@ -104,6 +105,12 @@ $array = mysqli_fetch_array($query);
 				<div class="row mt-3 ">
 					<div class="col d-flex justify-content-center align-content-center">
 						<a class="btn btn-warning" href="index.php" role="button">Retourner au formulaire</a>
+					</div>
+					<div class="col d-flex justify-content-center align-content-center">
+						<a class="btn btn-danger" href="laListeExcel.php" role="button">La liste en excel</a>
+					</div>
+						<div class="col d-flex justify-content-center align-content-center">
+						<a class="btn btn-primary" href="copiaSeguridad.php" role="button">Sauvegarde de securité de la base de données</a>
 					</div>
 
 					<div class="col d-flex justify-content-center align-content-center">
