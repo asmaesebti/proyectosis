@@ -62,7 +62,7 @@ $array = mysqli_fetch_array($query);
 							<th scope="col">ASSURÉ</th>
 							<th scope="col">PERIODE DU</th>
 							<th scope="col">PERIODE AU</th>
-							<th scope="col">PRIMER TOTALE</th>
+							<th scope="col">PRIME TOTALE</th>
 							<th scope="col">ESPECE</th>
 							<th scope="col">CHEQUE</th>
 							<th scope="col">AUTRE</th>
@@ -111,6 +111,9 @@ $array = mysqli_fetch_array($query);
 					</div>
 						<div class="col d-flex justify-content-center align-content-center">
 						<a class="btn btn-primary" href="copiaSeguridad.php" role="button">Sauvegarde de securité de la base de données</a>
+					</div>
+					<div class="col d-flex justify-content-center align-content-center">
+						<a class="btn btn-success" href="diagram.php" target="_blank" role="button">Diagram du montant</a>
 					</div>
 
 					<div class="col d-flex justify-content-center align-content-center">

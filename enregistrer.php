@@ -20,7 +20,7 @@ if (!isset($_POST['leType'])) {
 	$contador++;
 }
 
-if ($leType != null) {
+if ($leType != null && $leType != "Seleccioner une affaire") {
 	// $errorLetype = "La option choisie est correcte";
 	// $_SESSION['errorLetype'] = $errorLetype;
 	echo "<br>";
@@ -145,6 +145,7 @@ if (!isset($_POST['espece'])) {
 }else{
 	$espece = $_POST['espece'];
 	$espece = valorSeguro($espece);
+	$_SESSION['espece'] = $espece;
 }
 
 
@@ -153,6 +154,7 @@ if (!isset($_POST['cheque'])) {
 
 }else{
 	$cheque = valorSeguro($_POST['cheque']);
+	$_SESSION['cheque'] = $cheque;
 }
 
 if (!isset($_POST['autre'])) {
@@ -185,12 +187,12 @@ if ($contador == 6) {
 
 if ($query) {
 	echo "<br>Données enregistrer correctement";
-	unset($_SESSION['leType']);
-	unset($_SESSION['police']);
-	unset($_SESSION['assure']);
-	unset($_SESSION['du']);
-	unset($_SESSION['au']);
-	unset($_SESSION['totale']);
+	// unset($_SESSION['leType']);
+	// unset($_SESSION['police']);
+	// unset($_SESSION['assure']);
+	// unset($_SESSION['du']);
+	// unset($_SESSION['au']);
+	// unset($_SESSION['totale']);
 
 	// echo "<script> alert('Registro Guardado correctamente');
 	// location.href = 'formularioRegistrarPersonalNoDocente.php';</script>";

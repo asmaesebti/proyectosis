@@ -63,7 +63,7 @@ $array = mysqli_fetch_array($query);
 						</div>
 						<div class="col">
 							<div class="form-group">
-								<input type="text" class="form-control" name="recu" value="<?php echo $array["recu"] + 1; ?>" disabled>
+								<input type="text" class="form-control" name="recu" value="<?php echo (!empty($array['recu'])) ?  $array["recu"] + 1 :  "0" ;  ?>" readonly>
 							</div>
 						</div>
 						
@@ -75,11 +75,11 @@ $array = mysqli_fetch_array($query);
 						<div class="col">
 							<select class="form-select" aria-label="Default select example" name="leType">
 								<option selected>Seleccioner une affaire</option>
-								<option value="Affaire nouvelle" <?php if (isset($_SESSION['leType']) && $_SESSION['leType']=="Affaire nouvelle") echo 'selected';?>  > Affaire nouvelle</option>
-								<option value="Renouvellement" <?php if (isset($_SESSION['leType']) && $_SESSION['leType']=="Renouvellement") echo 'selected';?>>Renouvellement</option>
-								<option value="Changement vehicule" <?php if (isset($_SESSION['leType']) && $_SESSION['leType']=="Changement vehicule") echo 'selected';?>>Changement vehicule</option>
-								<option value="Duplicata" <?php if (isset($_SESSION['leType']) && $_SESSION['leType']=="Duplicata") echo 'selected';?>>Duplicata</option>
-								<option value="Autres" <?php if (isset($_SESSION['leType']) && $_SESSION['leType']=="Autres") echo 'selected';?>>Autres</option>
+								<option value="Affaire nouvelle" <?php echo (isset($_SESSION['leType']) && $_SESSION['leType']=="Affaire nouvelle") ? 'selected' : '';?>  > Affaire nouvelle</option>
+								<option value="Renouvellement" <?php echo (isset($_SESSION['leType']) && $_SESSION['leType']=="Renouvellement") ? 'selected' : '';?>>Renouvellement</option>
+								<option value="Changement vehicule" <?php echo  (isset($_SESSION['leType']) && $_SESSION['leType']=="Changement vehicule") ? 'selected' : '';?>>Changement vehicule</option>
+								<option value="Duplicata" <?php echo (isset($_SESSION['leType']) && $_SESSION['leType']=="Duplicata") ? 'selected' : '';?>>Duplicata</option>
+								<option value="Autres" <?php echo (isset($_SESSION['leType']) && $_SESSION['leType']=="Autres") ? 'selected' : '';?>>Autres</option>
 							</select>
 							<span class="error" style="color: red;"><?php if(isset($_SESSION['errorLetype'])) echo $_SESSION['errorLetype'] ;  ?></span>
 						</div>
@@ -122,12 +122,12 @@ $array = mysqli_fetch_array($query);
 					</div>
 					<div class="form-group mt-4">
 						<label>Nº Police : *</label><span class="error" style="color: red;"><?php if(isset($_SESSION['errorPolice'])) echo $_SESSION['errorPolice'] ;  ?></span>
-						<input type="text" class="form-control" name="police" value="<?php if(isset($_SESSION['police'])) echo $_SESSION['police'] ;  ?>" >
+						<input type="text" class="form-control" name="police" value="<?php echo (isset($_SESSION['police'])) ?  $_SESSION['police'] :  "" ;  ?>" >
 						
 					</div>
 					<div class="form-group">
 						<label>Assure : *</label><span class="error" style="color: red;"><?php if(isset($_SESSION['errorAssure'])) echo $_SESSION['errorAssure'] ;  ?></span>
-						<input type="text" class="form-control" name="assure" value="<?php if(isset($_SESSION['assure'])) echo $_SESSION['assure'] ;  ?>">
+						<input type="text" class="form-control" name="assure" value="<?php echo (isset($_SESSION['assure'])) ? $_SESSION['assure'] : "";  ?>">
 						
 					</div>
 					<div class="form-group">
@@ -135,12 +135,12 @@ $array = mysqli_fetch_array($query);
 						<div class="row">
 							<div class="col">
 								<label>Du : *</label><span class="error" style="color: red;"><?php if(isset($_SESSION['errorDu'])) echo $_SESSION['errorDu'] ;  ?></span>
-								<input type="date" class="form-control" name="du" value="<?php if(isset($_SESSION['du'])) echo $_SESSION['du'] ;  ?>" >
+								<input type="date" class="form-control" name="du" value="<?php echo (isset($_SESSION['du'])) ? $_SESSION['du'] : "";  ?>" >
 								
 							</div>
 							<div class="col">
 								<label>Au : *</label><span class="error" style="color: red;"><?php if(isset($_SESSION['errorAu'])) echo $_SESSION['errorAu'] ;  ?></span>
-								<input type="date" class="form-control" name="au" value="<?php if(isset($_SESSION['au'])) echo $_SESSION['au'] ;  ?>">
+								<input type="date" class="form-control" name="au" value="<?php echo (isset($_SESSION['au'])) ? $_SESSION['au'] : "" ;  ?>">
 								
 							</div>
 						</div>
@@ -151,7 +151,7 @@ $array = mysqli_fetch_array($query);
 								<label>Prime totale : *</label><span class="error" style="color: red;"><?php if(isset($_SESSION['errorTotale'])) echo $_SESSION['errorTotale'] ;  ?></span>
 							</div>
 							<div class="col col-7">
-								<input type="number" class="form-control" id="totale" name="totale" min="0" value="<?php if(isset($_SESSION['totale'])) echo $_SESSION['totale'] ;  ?>"   ><!-- onchange="sumar(this.value);" -->
+								<input type="number" class="form-control" id="totale" name="totale" min="0" value="<?php echo (isset($_SESSION['totale'])) ? $_SESSION['totale'] : "" ;  ?>"   ><!-- onchange="sumar(this.value);" -->
 							</div>
 						</div>
 						
@@ -160,7 +160,7 @@ $array = mysqli_fetch_array($query);
 								<label>Espece :</label>
 							</div>
 							<div class="col col-7">
-								<input type="number" class="form-control" id="espece" name="espece" min="0" value="0" > <!-- onchange="sumar(this.value);" -->
+								<input type="number" class="form-control" id="espece" name="espece" min="0" value="<?php echo (isset($_SESSION['espece'])) ? $_SESSION['espece'] : "0" ;  ?>" > <!-- onchange="sumar(this.value);" -->
 							</div>
 						</div>
 						<div class="row mt-2">
@@ -168,7 +168,7 @@ $array = mysqli_fetch_array($query);
 								<label>Cheque :</label>
 							</div>
 							<div class="col col-7">
-								<input type="number" class="form-control" id="cheque" name="cheque" min="0" value="0"  ><!-- onchange="sumar(this.value);" -->
+								<input type="number" class="form-control" id="cheque" name="cheque" min="0" value="<?php echo (isset($_SESSION['cheque'])) ? $_SESSION['cheque'] : "0" ;  ?>"  ><!-- onchange="sumar(this.value);" -->
 							</div>
 						</div>
 						<div class="row mt-1">
@@ -185,7 +185,7 @@ $array = mysqli_fetch_array($query);
 							</div>
 							<div class="col col-7">
 								<span>El resultado es: </span> <span id="spTotal"></span>
-								<input type="number" class="form-control" id="reste" name="reste" min="0" value="" >
+								<input type="number" class="form-control" id="reste" name="reste" min="0" value="<?php echo (isset($_SESSION['reste'])) ? $_SESSION['reste'] : "0" ;  ?>" >
 							</div>
 						</div>
 					</div>
@@ -296,5 +296,7 @@ unset($_SESSION['assure']);
 unset($_SESSION['du']);
 unset($_SESSION['au']);
 unset($_SESSION['totale']);
+unset($_SESSION['cheque']);
+unset($_SESSION['espece']);
 unset($_SESSION['reste']);
 ?>

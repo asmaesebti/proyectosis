@@ -59,7 +59,7 @@ $recu = $_GET['recu'];
 	<div class="container">
 		<div class="row">
 			<div class="col">
-				<form method="POST" action="procesar_modifierRecu.php">
+				<form method="POST" action="procesar_modifierRecu.php" id="log">
 					
 					<div class="row">
 						<div class="col col-3">
@@ -157,7 +157,7 @@ $recu = $_GET['recu'];
 								<label>Prime totale : *</label><span class="error" style="color: red;"><?php if(isset($_SESSION['errorTotale'])) echo $_SESSION['errorTotale'] ;  ?></span>
 							</div>
 							<div class="col col-7">
-								<input type="number" class="form-control" name="totale" min="0" value="<?php echo $row['totale']; ?>" id="totale" >
+								<input type="number" class="form-control" id="totale" name="totale" min="0" value="<?php echo $row['totale']; ?>" id="totale" >
 							</div>
 						</div>
 						
@@ -190,7 +190,7 @@ $recu = $_GET['recu'];
 								<label>Reste a regler :</label>
 							</div>
 							<div class="col col-7">
-								
+								<span>El resultado es: </span> <span id="spTotal"></span>
 								<input type="number" class="form-control" id="reste" name="reste" min="0" value="<?php echo $row['reste']; ?>" >
 							</div>
 						</div>
@@ -243,6 +243,46 @@ $recu = $_GET['recu'];
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js">
 	</script> 
+	<script type="text/javascript">
+		// esta funcion no se utiliza porque no resta bien pero si suma muy bien
+		function restar (valor) {
+			var total = 0;	
+		  valor = parseFloat(valor); // Convertir el valor a un entero (número).
+
+		  total = document.getElementById('spTotal').innerHTML;
+
+		  // Aquí valido si hay un valor previo, si no hay datos, le pongo un cero "0".
+		  total = (total == null || total == undefined || total == "") ? 0 : total;
+
+		  /* Esta es la resta. */
+		  total =  (parseFloat(valor) - parseFloat(total));
+
+		  // Colocar el resultado de la suma en el control "span".
+		  document.getElementById('spTotal').innerHTML = total;
+		  document.getElementById('reste').value = total;
+		}
+
+		$(document).ready(function() {
+		    if($("#log").length){
+		        $( "#totale" ).keyup(function() {
+		            $.sum();          
+		        }); 
+		        $( "#espece" ).keyup(function() {
+		            $.sum();          
+		        });
+		        $( "#cheque" ).keyup(function() {
+		            $.sum();          
+		        }); 
+		     }   
+		        $.sum = function(){
+		            $("#reste").val(parseFloat($("#totale").val()) - parseFloat($("#espece").val()) -parseFloat($("#cheque").val()));
+		        } 
+});
+
+
+
+
+</script>
 	
 </body>
 </html>
