@@ -268,6 +268,9 @@ $array = mysqli_fetch_array($query);
 						<div class="col">
 							<a class="btn btn-success" href="index.php">Rafrechir la page</a>
 						</div>
+						<div class="col">
+							<a class="btn btn-success" href="importarExecl.php">Importar excel</a>
+						</div>
 					</div>
 					<div class="row">
 						<p><span class="error">* Champs obligatoires</span></p>

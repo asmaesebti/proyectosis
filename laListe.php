@@ -115,20 +115,20 @@ $array = mysqli_fetch_array($query);
 					</tbody>
 				</table>
 				<div class="row mt-3 ">
-					<div class="col d-flex justify-content-center align-content-center">
+					<div class="col-3">
 						<a class="btn btn-warning" href="index.php" role="button">Retourner au formulaire</a>
 					</div>
-					<div class="col d-flex justify-content-center align-content-center">
+					<div class="col-2">
 						<a class="btn btn-danger" href="laListeExcel.php" role="button">La liste en excel</a>
 					</div>
-						<div class="col d-flex justify-content-center align-content-center">
+						<div class="col-4">
 						<a class="btn btn-primary" href="copiaSeguridad.php" role="button">Sauvegarde de securité de la base de données</a>
 					</div>
-					<div class="col d-flex justify-content-center align-content-center">
+					<div class="col-2">
 						<a class="btn btn-success" href="diagram.php"  role="button">Diagram du montant</a>
 					</div>
 
-					<div class="col d-flex justify-content-center align-content-center">
+					<div class="col ">
 						<a class="btn btn-success" href="index.php" role="button">Salir</a>
 					</div>
 				</div>
