@@ -54,6 +54,14 @@ $array = mysqli_fetch_array($query);
 		<div class="row">
 			<div class="col">
 				<form method="POST" action="enregistrer.php" id="log">
+
+					<div class="row">
+						<div class="col">
+							<div class="form-group mt-3">
+								<?php setlocale(LC_ALL,"es_ES"); echo strftime("%A %d de %B del %Y"); ?>
+							</div>
+						</div>
+					</div>
 					
 					<div class="row">
 						<div class="col col-3">
@@ -64,6 +72,20 @@ $array = mysqli_fetch_array($query);
 						<div class="col">
 							<div class="form-group">
 								<input type="text" class="form-control" name="recu" value="<?php echo (!empty($array['recu'])) ?  $array["recu"] + 1 :  "0" ;  ?>" readonly>
+							</div>
+						</div>
+						
+					</div>
+					<div class="row">
+						<div class="col col-3">
+							<div class="form-group mt-3">
+								<label>Date: *</label>
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-group mb-3">
+								<span class="error" style="color: red;"><?php if(isset($_SESSION['errorFecha_hoy'])) echo $_SESSION['errorFecha_hoy'] ;  ?></span>
+								<input type="date" class="form-control" name="fecha_hoy" value="<?php echo (isset($_SESSION['fecha_hoy'])) ? $_SESSION['fecha_hoy'] : date("Y-m-d");  ?>" >
 							</div>
 						</div>
 						
@@ -121,8 +143,23 @@ $array = mysqli_fetch_array($query);
 						</div>
 					</div>
 					<div class="form-group mt-4">
+						<label>Attestation : *</label><span class="error" style="color: red;"><?php if(isset($_SESSION['errorAttestation'])) echo $_SESSION['errorAttestation'] ;  ?></span>
+						<input type="text" class="form-control" name="attestation" value="<?php echo (isset($_SESSION['attestation'])) ?  $_SESSION['attestation'] :  "" ;  ?>" >
+						
+					</div>
+					<div class="form-group mt-4">
 						<label>Nº Police : *</label><span class="error" style="color: red;"><?php if(isset($_SESSION['errorPolice'])) echo $_SESSION['errorPolice'] ;  ?></span>
 						<input type="text" class="form-control" name="police" value="<?php echo (isset($_SESSION['police'])) ?  $_SESSION['police'] :  "" ;  ?>" >
+						
+					</div>
+					<div class="form-group mt-4">
+						<label>Matricule : *</label><span class="error" style="color: red;"><?php if(isset($_SESSION['errorMatricule'])) echo $_SESSION['errorMatricule'] ;  ?></span>
+						<input type="text" class="form-control" name="matricule" value="<?php echo (isset($_SESSION['matricule'])) ?  $_SESSION['matricule'] :  "" ;  ?>" >
+						
+					</div>
+					<div class="form-group mt-4">
+						<label>Produit : *</label><span class="error" style="color: red;"><?php if(isset($_SESSION['errorProduit'])) echo $_SESSION['errorProduit'] ;  ?></span>
+						<input type="text" class="form-control" name="produit" value="<?php echo (isset($_SESSION['produit'])) ?  $_SESSION['produit'] :  "" ;  ?>" >
 						
 					</div>
 					<div class="form-group">
@@ -180,7 +217,7 @@ $array = mysqli_fetch_array($query);
 							</div>
 						</div>
 						<div class="row">
-							<div class="col col-3">
+							<div class="col col-3 mt-4">
 								<label>Reste a regler :</label>
 							</div>
 							<div class="col col-7">
@@ -188,6 +225,35 @@ $array = mysqli_fetch_array($query);
 								<input type="number" class="form-control" id="reste" name="reste" min="0" value="<?php echo (isset($_SESSION['reste'])) ? $_SESSION['reste'] : "0" ;  ?>" >
 							</div>
 						</div>
+						<div class="row mt-3">
+							<div class="col col-3 mt-2">
+								<div class="form-group">
+									<label>Date Versement: </label>
+								</div>
+							</div>
+							<div class="col">
+								<div class="form-group">
+									<span class="error" style="color: red;"><?php if(isset($_SESSION['errorDate_versement'])) echo $_SESSION['errorDate_versement'] ;  ?></span>
+									<input type="date" class="form-control" name="date_versement" value="<?php echo (isset($_SESSION['date_versement'])) ? $_SESSION['date_versement'] : "";  ?>" >
+								</div>
+							</div>
+
+						</div>
+						<div class="row mt-3">
+							<div class="col col-3 mt-4">
+								<div class="form-group">
+									<label>Mode de paiment: </label>
+								</div>
+							</div>
+							<div class="col">
+								<div class="form-group">
+									<span class="error" style="color: red;"><?php if(isset($_SESSION['errorModePaiment'])) echo $_SESSION['errorModePaiment'] ;  ?></span>
+									<input type="text" class="form-control" name="mode_paiment" value="<?php echo (isset($_SESSION['mode_paiment'])) ? $_SESSION['mode_paiment'] : "";  ?>" >
+								</div>
+							</div>
+
+						</div>
+
 					</div>
 					<div class="row mt-3">
 						<div class="col">
@@ -257,26 +323,26 @@ $array = mysqli_fetch_array($query);
 		}
 
 		$(document).ready(function() {
-		    if($("#log").length){
-		        $( "#totale" ).keyup(function() {
-		            $.sum();          
-		        }); 
-		        $( "#espece" ).keyup(function() {
-		            $.sum();          
-		        });
-		        $( "#cheque" ).keyup(function() {
-		            $.sum();          
-		        }); 
-		     }   
-		        $.sum = function(){
-		            $("#reste").val(parseFloat($("#totale").val()) - parseFloat($("#espece").val()) -parseFloat($("#cheque").val()));
-		        } 
-});
+			if($("#log").length){
+				$( "#totale" ).keyup(function() {
+					$.sum();          
+				}); 
+				$( "#espece" ).keyup(function() {
+					$.sum();          
+				});
+				$( "#cheque" ).keyup(function() {
+					$.sum();          
+				}); 
+			}   
+			$.sum = function(){
+				$("#reste").val(parseFloat($("#totale").val()) - parseFloat($("#espece").val()) -parseFloat($("#cheque").val()));
+			} 
+		});
 
 
 
 
-</script>
+	</script>
 
 </body>
 </html>
@@ -290,6 +356,13 @@ unset($_SESSION['errorDu']);
 unset($_SESSION['errorAu']);
 unset($_SESSION['errorTotale']);
 
+unset($_SESSION['errorFecha_hoy']);
+unset($_SESSION['errorAttestation']);
+unset($_SESSION['errorMatricule']);
+unset($_SESSION['errorProduit']);
+unset($_SESSION['errorDate_versement']);
+unset($_SESSION['errorModePaiment']);
+
 unset($_SESSION['leType']);
 unset($_SESSION['police']);
 unset($_SESSION['assure']);
@@ -299,4 +372,12 @@ unset($_SESSION['totale']);
 unset($_SESSION['cheque']);
 unset($_SESSION['espece']);
 unset($_SESSION['reste']);
+
+unset($_SESSION['fecha_hoy']);
+unset($_SESSION['attestation']);
+unset($_SESSION['matricule']);
+unset($_SESSION['produit']);
+unset($_SESSION['date_versement']);
+unset($_SESSION['mode_paiment']);
+
 ?>

@@ -6,9 +6,32 @@ require_once('conexion.php');
 require_once('valorSeguro.php');
 include('funcionesValidacion.php');
 
-$errorLetype = $errorPolice = $errorAssure = $errorDu = $errorAu = $errorTotale = $errorEspece = $errorCheque = $errorAutre = $errorReste = "";
+$errorLetype = $errorPolice = $errorAssure = $errorDu = $errorAu = $errorTotale = $errorEspece = $errorCheque = $errorAutre = $errorReste = $errorFecha_hoy = 
+$errorAttestation = $errorMatricule = $errorProduit = $errorDate_versement = $errorModePaiment = "";
 $query = "";
 $contador = 0;
+
+if (!isset($_POST['fecha_hoy'])) {
+	$fecha_hoy = null;
+
+}else{
+	$fecha_hoy = $_POST['fecha_hoy'];
+	$fecha_hoy = valorSeguro($fecha_hoy);
+	$_SESSION['fecha_hoy'] = $fecha_hoy;
+	
+}
+
+if ($fecha_hoy != null) {
+	echo "<br>";
+	echo "La date  est correcte";
+	
+}else{
+	$errorFecha_hoy =  "Tu dois choisir une date fecha_hoy";
+	$_SESSION['errorFecha_hoy'] = $errorFecha_hoy;
+	echo "<br>";
+	echo "Tu dois choisir une date fecha_hoy";
+}
+
 
 if (!isset($_POST['leType'])) {
 	$leType = null;
@@ -31,6 +54,26 @@ if ($leType != null && $leType != "Seleccioner une affaire") {
 	echo "<br>";
 	echo "Tu dois seleccioner une opcion";
 }
+if (!isset($_POST['attestation'])) {
+	$attestation = null;
+
+}else{
+	$attestation = $_POST['attestation'];
+	$attestation = valorSeguro($attestation);
+	$_SESSION['attestation'] = $attestation;
+	$contador++;
+}
+
+if ($attestation != null) {
+	echo "<br>";
+	echo "La attestation choisie est correcte";
+	
+}else{
+	$errorAttestation = "Tu dois introduire une attestation";
+	$_SESSION['errorAttestation'] = $errorAttestation;
+	echo "<br>";
+	echo "Tu dois introduire une attestation";
+}
 
 if (!isset($_POST['police'])) {
 	$police = null;
@@ -52,6 +95,49 @@ if ($police != null) {
 	echo "<br>";
 	echo "Tu dois introduire une police";
 }
+
+if (!isset($_POST['matricule'])) {
+	$matricule = null;
+
+}else{
+	$matricule = $_POST['matricule'];
+	$matricule = valorSeguro($matricule);
+	$_SESSION['matricule'] = $matricule;
+	$contador++;
+}
+
+if ($matricule != null) {
+	echo "<br>";
+	echo "La matricule choisie est correcte";
+	
+}else{
+	$errorMatricule = "Tu dois introduire une matricule";
+	$_SESSION['errorMatricule'] = $errorMatricule;
+	echo "<br>";
+	echo "Tu dois introduire une matricule";
+}
+
+if (!isset($_POST['produit'])) {
+	$produit = null;
+
+}else{
+	$produit = $_POST['produit'];
+	$produit = valorSeguro($produit);
+	$_SESSION['produit'] = $produit;
+	$contador++;
+}
+
+if ($produit != null) {
+	echo "<br>";
+	echo "Le produit choisie est correcte";
+	
+}else{
+	$errorProduit = "Tu dois introduir un produit";
+	$_SESSION['errorProduit'] = $errorProduit;
+	echo "<br>";
+	echo "Tu dois introduir un produit";
+}
+
 
 if (!isset($_POST['assure'])) {
 	$assure = null;
@@ -172,12 +258,54 @@ if (!isset($_POST['reste'])) {
 	$_SESSION['reste'] = $reste;
 }
 
+if (!isset($_POST['date_versement'])) {
+	$date_versement = null;
+
+}else{
+	$date_versement = $_POST['date_versement'];
+	$date_versement = valorSeguro($date_versement);
+	$_SESSION['date_versement'] = $date_versement;
+	
+}
+
+if ($date_versement != null) {
+	echo "<br>";
+	echo "La date_versement choisie est correcte";
+	
+}else{
+	$errorDate_versement =  "Tu dois choisir une date versement";
+	$_SESSION['errorDate_versement'] = $errorDate_versement;
+	echo "<br>";
+	echo "Tu dois choisir une date versement";
+}
+
+if (!isset($_POST['mode_paiment'])) {
+	$mode_paiment = null;
+
+}else{
+	$mode_paiment = $_POST['mode_paiment'];
+	$mode_paiment = valorSeguro($mode_paiment);
+	$_SESSION['mode_paiment'] = $mode_paiment;
+	$contador++;
+}
+
+if ($mode_paiment != null) {
+	echo "<br>";
+	echo "Le mode paiment choisie est correcte";
+	
+}else{
+	$errorModePaiment = "Tu dois introduire un mode paiment";
+	$_SESSION['errorModePaiment'] = $errorModePaiment;
+	echo "<br>";
+	echo "Tu dois introduire un mode paiment";
+}
+
 echo "<br>";
 echo $contador;
 
-if ($contador == 6) {
+if ($contador == 10) {
 	
-	$insertar = "INSERT INTO `proyectosis` (`letype`, `police`, `assure`, `du`, `au`, `totale`, `espece` ,  `cheque` , `autre`, `reste` , `cree_le`) VALUES ('$leType','$police','$assure','$du','$au', '$totale', '$espece', '$cheque', '$autre' , '$reste', CURRENT_TIMESTAMP)";
+	$insertar = "INSERT INTO `proyectosis` (`fecha_hoy`, `letype`, `attestation`, `police`, `matricule`, `produit`,`assure`, `du`, `au`, `totale`, `espece` ,  `cheque` , `autre`, `reste` , `date_versement`, `mode_paiment`, `cree_le`) VALUES ('$fecha_hoy','$leType','$attestation','$police', '$matricule', '$produit','$assure','$du','$au', '$totale', '$espece', '$cheque', '$autre' , '$reste', '$date_versement', '$mode_paiment',CURRENT_TIMESTAMP)";
 
 
 	$query = mysqli_query($connection, $insertar);

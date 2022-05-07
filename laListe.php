@@ -56,9 +56,13 @@ $array = mysqli_fetch_array($query);
 				<table class="table table-hover" id="laLista">
 					<thead>
 						<tr>
+							<th scope="col">DATE</th>
 							<th scope="col">REÇU</th>
 							<th scope="col">LE TYPE</th>
+							<th scope="col">ATTESTATION</th>
 							<th scope="col">POLICE</th>
+							<th scope="col">MATRICULE</th>
+							<th scope="col">PRODUIT</th>
 							<th scope="col">ASSURÉ</th>
 							<th scope="col">PERIODE DU</th>
 							<th scope="col">PERIODE AU</th>
@@ -67,6 +71,8 @@ $array = mysqli_fetch_array($query);
 							<th scope="col">CHEQUE</th>
 							<th scope="col">AUTRE</th>
 							<th scope="col">RESTE</th>
+							<th scope="col">DATE VERSEMENT</th>
+							<th scope="col">MODE PAIMENT</th>
 							<th scope="col">CREE LE</th>
 							<th scope="col">Modificar</th>
 							<th scope="col">Eliminar</th>
@@ -78,9 +84,13 @@ $array = mysqli_fetch_array($query);
 						foreach ($query as $row) {
 							?>
 							<tr>
+								<td><?php echo $row['fecha_hoy']; ?></td>
 								<th scope="row"><?php echo $row['recu']; ?></th>
 								<td><?php echo $row['letype']; ?></td>
+								<td><?php echo $row['attestation']; ?></td>
 								<td><?php echo $row['police']; ?></td>
+								<td><?php echo $row['matricule']; ?></td>
+								<td><?php echo $row['produit']; ?></td>
 								<td><?php echo $row['assure']; ?></td>
 								<td><?php echo $row['du']; ?></td>
 								<td><?php echo $row['au']; ?></td>
@@ -89,6 +99,8 @@ $array = mysqli_fetch_array($query);
 								<td><?php echo $row['cheque']; ?></td>
 								<td><?php echo $row['autre']; ?></td>
 								<td><?php echo $row['reste']; ?></td>
+								<td><?php echo $row['date_versement']; ?></td>
+								<td><?php echo $row['mode_paiment']; ?></td>
 								<td><?php echo $row['cree_le']; ?></td>
 								<td class="align-middle"><a class="btn btn-warning" href="modifierRecu.php?recu=<?php echo $row['recu']; ?>">modificar</a> </td>
 								<td class="align-middle"><a class="btn btn-danger" href="eliminerRecu.php?recu=<?php echo $row['recu']; ?>">eliminar</a></td>
@@ -113,7 +125,7 @@ $array = mysqli_fetch_array($query);
 						<a class="btn btn-primary" href="copiaSeguridad.php" role="button">Sauvegarde de securité de la base de données</a>
 					</div>
 					<div class="col d-flex justify-content-center align-content-center">
-						<a class="btn btn-success" href="diagram.php" target="_blank" role="button">Diagram du montant</a>
+						<a class="btn btn-success" href="diagram.php"  role="button">Diagram du montant</a>
 					</div>
 
 					<div class="col d-flex justify-content-center align-content-center">
