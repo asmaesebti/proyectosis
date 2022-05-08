@@ -40,7 +40,7 @@ if (!isset($_POST['leType'])) {
 	$leType = $_POST['leType'];
 	$leType = valorSeguro($leType);
 	$_SESSION['leType'] = $leType;
-	$contador++;
+	
 }
 
 if ($leType != null && $leType != "Seleccioner une affaire") {
@@ -48,11 +48,13 @@ if ($leType != null && $leType != "Seleccioner une affaire") {
 	// $_SESSION['errorLetype'] = $errorLetype;
 	echo "<br>";
 	echo "La option choisie est correcte";
+	$contador++;
 }else{
 	$errorLetype = "* Tu dois seleccioner une opcion";
 	$_SESSION['errorLetype'] = $errorLetype;
 	echo "<br>";
 	echo "Tu dois seleccioner une opcion";
+	
 }
 if (!isset($_POST['attestation'])) {
 	$attestation = null;
@@ -61,18 +63,19 @@ if (!isset($_POST['attestation'])) {
 	$attestation = $_POST['attestation'];
 	$attestation = valorSeguro($attestation);
 	$_SESSION['attestation'] = $attestation;
-	$contador++;
+	
 }
 
 if ($attestation != null) {
 	echo "<br>";
 	echo "La attestation choisie est correcte";
-	
+	$contador++;
 }else{
 	$errorAttestation = "Tu dois introduire une attestation";
 	$_SESSION['errorAttestation'] = $errorAttestation;
 	echo "<br>";
 	echo "Tu dois introduire une attestation";
+	
 }
 
 if (!isset($_POST['police'])) {
@@ -82,18 +85,19 @@ if (!isset($_POST['police'])) {
 	$police = $_POST['police'];
 	$police = valorSeguro($police);
 	$_SESSION['police'] = $police;
-	$contador++;
+	
 }
 
 if ($police != null) {
 	echo "<br>";
 	echo "La police choisie est correcte";
-	
+	$contador++;
 }else{
 	$errorPolice = "Tu dois introduire une police";
 	$_SESSION['errorPolice'] = $errorPolice;
 	echo "<br>";
 	echo "Tu dois introduire une police";
+
 }
 
 if (!isset($_POST['matricule'])) {
@@ -103,13 +107,13 @@ if (!isset($_POST['matricule'])) {
 	$matricule = $_POST['matricule'];
 	$matricule = valorSeguro($matricule);
 	$_SESSION['matricule'] = $matricule;
-	$contador++;
+	
 }
 
 if ($matricule != null) {
 	echo "<br>";
 	echo "La matricule choisie est correcte";
-	
+	$contador++;
 }else{
 	$errorMatricule = "Tu dois introduire une matricule";
 	$_SESSION['errorMatricule'] = $errorMatricule;
@@ -124,13 +128,13 @@ if (!isset($_POST['produit'])) {
 	$produit = $_POST['produit'];
 	$produit = valorSeguro($produit);
 	$_SESSION['produit'] = $produit;
-	$contador++;
+	
 }
 
 if ($produit != null) {
 	echo "<br>";
 	echo "Le produit choisie est correcte";
-	
+	$contador++;
 }else{
 	$errorProduit = "Tu dois introduir un produit";
 	$_SESSION['errorProduit'] = $errorProduit;
@@ -146,13 +150,13 @@ if (!isset($_POST['assure'])) {
 	$assure = $_POST['assure'];
 	$assure = valorSeguro($assure);
 	$_SESSION['assure'] = $assure;
-	$contador++;
+	
 }
 
 if ($assure != null) {
 	echo "<br>";
 	echo "L'assuré choisie est correcte";
-	
+	$contador++;
 }else{
 	$errorAssure = "Tu dois introduire un assuré";
 	$_SESSION['errorAssure'] = $errorAssure;
@@ -167,13 +171,13 @@ if (!isset($_POST['du'])) {
 	$du = $_POST['du'];
 	$du = valorSeguro($du);
 	$_SESSION['du'] = $du;
-	$contador++;
+	
 }
 
 if ($du != null) {
 	echo "<br>";
 	echo "La date du choisie est correcte";
-	
+	$contador++;
 }else{
 	$errorDu =  "Tu dois choisir une date du";
 	$_SESSION['errorDu'] = $errorDu;
@@ -189,13 +193,13 @@ if (!isset($_POST['au'])) {
 	$au = $_POST['au'];
 	$au = valorSeguro($au);
 	$_SESSION['au'] = $au;
-	$contador++;
+	
 }
 
 if ($au != null) {
 	echo "<br>";
 	echo "La date au choisie est correcte";
-	
+	$contador++;
 }else{
 	$errorAu =  "Tu dois choisir une date au";
 	$_SESSION['errorAu'] = $errorAu;
@@ -211,13 +215,13 @@ if (!isset($_POST['totale'])) {
 	$totale = $_POST['totale'];
 	$totale = valorSeguro($totale);
 	$_SESSION['totale'] = $totale;
-	$contador++;
+	
 }
 
 if ($totale != 0) {
 	echo "<br>";
 	echo "Le montant total choisie est correct";
-	
+	$contador++;
 }else{
 	$errorTotale =  "Tu dois introduire un montant total";
 	$_SESSION['errorTotale'] = $errorTotale;
@@ -243,12 +247,14 @@ if (!isset($_POST['cheque'])) {
 	$_SESSION['cheque'] = $cheque;
 }
 
-if (!isset($_POST['autre'])) {
-	$autre = "";
+if (!isset($_POST['virement'])) {
+	$virement = "";
 
 }else{
-	$autre = valorSeguro($_POST['autre']);
+	$virement = valorSeguro($_POST['virement']);
+	$_SESSION['virement'] = $virement;
 }
+
 if (!isset($_POST['reste'])) {
 	$reste = "";
 
@@ -259,7 +265,7 @@ if (!isset($_POST['reste'])) {
 }
 
 if (!isset($_POST['date_versement'])) {
-	$date_versement = null;
+	$date_versement = "00/00/0000";
 
 }else{
 	$date_versement = $_POST['date_versement'];
@@ -268,44 +274,44 @@ if (!isset($_POST['date_versement'])) {
 	
 }
 
-if ($date_versement != null) {
-	echo "<br>";
-	echo "La date_versement choisie est correcte";
+// if ($date_versement != null) {
+// 	echo "<br>";
+// 	echo "La date_versement choisie est correcte";
 	
-}else{
-	$errorDate_versement =  "Tu dois choisir une date versement";
-	$_SESSION['errorDate_versement'] = $errorDate_versement;
-	echo "<br>";
-	echo "Tu dois choisir une date versement";
-}
+// }else{
+// 	$errorDate_versement =  "Tu dois choisir une date versement";
+// 	$_SESSION['errorDate_versement'] = $errorDate_versement;
+// 	echo "<br>";
+// 	echo "Tu dois choisir une date versement";
+// }
 
-if (!isset($_POST['mode_paiment'])) {
-	$mode_paiment = null;
+// if (!isset($_POST['mode_paiment'])) {
+// 	$mode_paiment = null;
 
-}else{
-	$mode_paiment = $_POST['mode_paiment'];
-	$mode_paiment = valorSeguro($mode_paiment);
-	$_SESSION['mode_paiment'] = $mode_paiment;
-	$contador++;
-}
-
-if ($mode_paiment != null) {
-	echo "<br>";
-	echo "Le mode paiment choisie est correcte";
+// }else{
+// 	$mode_paiment = $_POST['mode_paiment'];
+// 	$mode_paiment = valorSeguro($mode_paiment);
+// 	$_SESSION['mode_paiment'] = $mode_paiment;
 	
-}else{
-	$errorModePaiment = "Tu dois introduire un mode paiment";
-	$_SESSION['errorModePaiment'] = $errorModePaiment;
-	echo "<br>";
-	echo "Tu dois introduire un mode paiment";
-}
+// }
+
+// if ($mode_paiment != null) {
+// 	echo "<br>";
+// 	echo "Le mode paiment choisie est correcte";
+	
+// }else{
+// 	$errorModePaiment = "Tu dois introduire un mode paiment";
+// 	$_SESSION['errorModePaiment'] = $errorModePaiment;
+// 	echo "<br>";
+// 	echo "Tu dois introduire un mode paiment";
+// }
 
 echo "<br>";
 echo $contador;
 
-if ($contador == 10) {
+if ($contador == 9) {
 	
-	$insertar = "INSERT INTO `proyectosis` (`fecha_hoy`, `letype`, `attestation`, `police`, `matricule`, `produit`,`assure`, `du`, `au`, `totale`, `espece` ,  `cheque` , `autre`, `reste` , `date_versement`, `mode_paiment`, `cree_le`) VALUES ('$fecha_hoy','$leType','$attestation','$police', '$matricule', '$produit','$assure','$du','$au', '$totale', '$espece', '$cheque', '$autre' , '$reste', '$date_versement', '$mode_paiment',CURRENT_TIMESTAMP)";
+	$insertar = "INSERT INTO `proyectosis` (`fecha_hoy`, `letype`, `attestation`, `police`, `matricule`, `produit`,`assure`, `du`, `au`, `totale`, `espece` ,  `cheque` , `virement`, `reste` ,  `cree_le`) VALUES ('$fecha_hoy','$leType','$attestation','$police', '$matricule', '$produit','$assure','$du','$au', '$totale', '$espece', '$cheque', '$virement' , '$reste', CURRENT_TIMESTAMP)";
 
 
 	$query = mysqli_query($connection, $insertar);

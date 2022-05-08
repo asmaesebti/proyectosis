@@ -1,12 +1,12 @@
 <?php 
 require_once('conexion.php');
 
-$consultarA = "select * from proyectosis";
+$consultarA = "select * from proyectosis_elimines";
 $queryA = mysqli_query($connection, $consultarA);
 $arrayA = mysqli_fetch_array($queryA);
 
 header("Content-Type: application/xls");
-	header("Content-Disposition: attachment; filename=listeRecus.xls");
+	header("Content-Disposition: attachment; filename=listeRecusElimines.xls");
 	header("Pragma: no-cache");
 	header("Expires: 0");
 

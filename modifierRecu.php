@@ -205,7 +205,7 @@ $query = mysqli_query($connection, $consultar);
 									<label>Espece :</label>
 								</div>
 								<div class="col col-7">
-									<input type="number" class="form-control" id="espece" step="0.01" name="espece" min="0" value="<?php echo $row['espece']; ?>" >
+									<input type="number" class="form-control" id="espece" step="0.01" name="espece" min="0" value="<?php echo $row['espece']; ?>" onfocus="if(this.value=='0.00'){ this.value=''; }">
 								</div>
 							</div>
 							<div class="row mt-2">
@@ -213,15 +213,15 @@ $query = mysqli_query($connection, $consultar);
 									<label>Cheque :</label>
 								</div>
 								<div class="col col-7">
-									<input type="number" class="form-control" id="cheque" step="0.01" name="cheque" min="0" value="<?php echo $row['cheque']; ?>" >
+									<input type="number" class="form-control" id="cheque" step="0.01" name="cheque" min="0" value="<?php echo $row['cheque']; ?>" onfocus="if(this.value=='0.00'){ this.value=''; }">
 								</div>
 							</div>
 							<div class="row mt-1">
 								<div class="col col-3">
-									<label>Autre :</label>
+									<label>Virement :</label>
 								</div>
 								<div class="col col-7">
-									<input type="text" class="form-control" name="autre" value="<?php echo $row['autre']; ?>">
+									<input type="number" class="form-control" id="virement" min="0" step="0.01" name="virement" value="<?php echo $row['virement']; ?>" onfocus="if(this.value=='0.00'){ this.value=''; }" >
 								</div>
 							</div>
 							<div class="row">
@@ -242,12 +242,12 @@ $query = mysqli_query($connection, $consultar);
 								<div class="col">
 									<div class="form-group">
 										<span class="error" style="color: red;"><?php if(isset($_SESSION['errorDate_versement'])) echo $_SESSION['errorDate_versement'] ;  ?></span>
-										<input type="date" class="form-control" name="date_versement" value="<?php echo $row['date_versement']; ?>" >
+										<input type="date" class="form-control" name="date_versement" value="<?php echo ($row['date_versement'] == "1970-01-01") ? "" : $row['date_versement'];  ?>" style="color: <?php if(isset($_SESSION['date_versement']) && $_SESSION['date_versement'] == "1970/01/01") echo "beige" ;  ?>" >
 									</div>
 								</div>
 
 							</div>
-							<div class="row mt-3">
+							<div class="row mt-3" hidden>
 								<div class="col col-3 mt-4">
 									<div class="form-group">
 										<label>Mode de paiment: </label>
@@ -267,10 +267,10 @@ $query = mysqli_query($connection, $consultar);
 								<button type="submit" class="btn btn-success p-3" name="enregistrer" >Modifier</button>
 							</div>
 							<div class="col">
-								<a class="btn btn-success" href="laListe.php" target="_blank">La liste de tous les reçus</a>
+								<a class="btn btn-success" href="laListe.php" >La liste de tous les reçus</a>
 							</div>
 							<div class="col">
-								<a class="btn btn-success" href="index.php" target="_blank">Retourner au formulaire</a>
+								<a class="btn btn-success" href="index.php" >Retourner au formulaire</a>
 							</div>
 						</div>
 						<div class="row">
@@ -342,7 +342,7 @@ $query = mysqli_query($connection, $consultar);
 				}); 
 			}   
 			$.sum = function(){
-				$("#reste").val(parseFloat($("#totale").val()) - parseFloat($("#espece").val()) -parseFloat($("#cheque").val()));
+				$("#reste").val((parseFloat($("#totale").val()) - parseFloat($("#espece").val()) -parseFloat($("#cheque").val())).toFixed(2));
 			} 
 		});
 

@@ -47,7 +47,7 @@ if (isset($_POST["import"]))
 			$totale = $excel -> getActiveSheet() -> getCell('K' . $i)->getCalculatedValue();
 			$espece = $excel -> getActiveSheet() -> getCell('L' . $i)->getCalculatedValue();
 			$cheque = $excel -> getActiveSheet() -> getCell('M' . $i)->getCalculatedValue();
-			$autre = $excel -> getActiveSheet() -> getCell('N' . $i)->getCalculatedValue();
+			$virement = $excel -> getActiveSheet() -> getCell('N' . $i)->getCalculatedValue();
 			$reste = $excel -> getActiveSheet() -> getCell('O' . $i)->getCalculatedValue();
 			$date_versement = $excel -> getActiveSheet() -> getCell('P' . $i)->getCalculatedValue();
 			$date_versement=date_create("$date_versement");
@@ -57,7 +57,7 @@ if (isset($_POST["import"]))
 
 	//echo $idp . " - ";
 
-			$consulta =  "INSERT INTO `proyectosis` (`recu`,`fecha_hoy`, `letype`, `attestation`, `police`, `matricule`, `produit`,`assure`, `du`, `au`, `totale`, `espece` ,  `cheque` , `autre`, `reste` , `date_versement`, `mode_paiment`, `cree_le`) VALUES ('$recu','$fecha_hoy','$letype','$attestation','$police', '$matricule', '$produit','$assure','$du','$au', '$totale', '$espece', '$cheque', '$autre' , '$reste', '$date_versement', '$mode_paiment','$cree_le')";
+			$consulta =  "INSERT INTO `proyectosis` (`recu`,`fecha_hoy`, `letype`, `attestation`, `police`, `matricule`, `produit`,`assure`, `du`, `au`, `totale`, `espece` ,  `cheque` , `virement`, `reste` , `date_versement`, `mode_paiment`, `cree_le`) VALUES ('$recu','$fecha_hoy','$letype','$attestation','$police', '$matricule', '$produit','$assure','$du','$au', '$totale', '$espece', '$cheque', '$virement' , '$reste', '$date_versement', '$mode_paiment','$cree_le')";
 
 // $query = "INSERT INTO `pr` (`id`) VALUES ( '$id')";
 			$result = $mysqli->query($consulta);

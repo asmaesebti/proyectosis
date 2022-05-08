@@ -198,7 +198,7 @@ $array = mysqli_fetch_array($query);
 								<label>Espece :</label>
 							</div>
 							<div class="col col-7">
-								<input type="number" class="form-control" id="espece" name="espece" step="0.01" min="0" value="<?php echo (isset($_SESSION['espece'])) ? $_SESSION['espece'] : "0" ;  ?>" > <!-- onchange="sumar(this.value);" -->
+								<input type="number" class="form-control" id="espece" name="espece" step="0.01" min="0" value="<?php echo (isset($_SESSION['espece'])) ? $_SESSION['espece'] : "0" ;  ?>" onfocus="if(this.value=='0'){ this.value=''; }"> <!-- onchange="sumar(this.value);" -->
 							</div>
 						</div>
 						<div class="row mt-2">
@@ -206,15 +206,15 @@ $array = mysqli_fetch_array($query);
 								<label>Cheque :</label>
 							</div>
 							<div class="col col-7">
-								<input type="number" class="form-control" id="cheque" name="cheque" step="0.01" min="0" value="<?php echo (isset($_SESSION['cheque'])) ? $_SESSION['cheque'] : "0" ;  ?>"  ><!-- onchange="sumar(this.value);" -->
+								<input type="number" class="form-control" id="cheque" name="cheque" step="0.01" min="0" value="<?php echo (isset($_SESSION['cheque'])) ? $_SESSION['cheque'] : "0" ;  ?>" onfocus="if(this.value=='0'){ this.value=''; }" ><!-- onchange="sumar(this.value);" -->
 							</div>
 						</div>
 						<div class="row mt-1">
 							<div class="col col-3">
-								<label>Autre :</label>
+								<label>Virement :</label>
 							</div>
 							<div class="col col-7">
-								<input type="text" class="form-control" name="autre">
+								<input type="number" class="form-control" id="virement" name="virement" step="0.01" min="0" value="<?php echo (isset($_SESSION['virement'])) ? $_SESSION['virement'] : "0" ;  ?>" onfocus="if(this.value=='0'){ this.value=''; }">
 							</div>
 						</div>
 						<div class="row">
@@ -235,12 +235,12 @@ $array = mysqli_fetch_array($query);
 							<div class="col">
 								<div class="form-group">
 									<span class="error" style="color: red;"><?php if(isset($_SESSION['errorDate_versement'])) echo $_SESSION['errorDate_versement'] ;  ?></span>
-									<input type="date" class="form-control" name="date_versement" value="<?php echo (isset($_SESSION['date_versement'])) ? $_SESSION['date_versement'] : "";  ?>" >
+									<input type="date" class="form-control" name="date_versement" value="<?php echo (isset($_SESSION['date_versement'])) ? $_SESSION['date_versement'] : "0000/00/00";  ?>" >
 								</div>
 							</div>
 
 						</div>
-						<div class="row mt-3">
+						<div class="row mt-3" hidden>
 							<div class="col col-3 mt-4">
 								<div class="form-group">
 									<label>Mode de paiment: </label>
@@ -249,7 +249,7 @@ $array = mysqli_fetch_array($query);
 							<div class="col">
 								<div class="form-group">
 									<span class="error" style="color: red;"><?php if(isset($_SESSION['errorModePaiment'])) echo $_SESSION['errorModePaiment'] ;  ?></span>
-									<input type="text" class="form-control" name="mode_paiment" value="<?php echo (isset($_SESSION['mode_paiment'])) ? $_SESSION['mode_paiment'] : "";  ?>" >
+									<input type="text" class="form-control" name="mode_paiment" value="<?php echo (isset($_SESSION['mode_paiment'])) ? $_SESSION['mode_paiment'] : "----";  ?>" >
 								</div>
 							</div>
 
@@ -339,7 +339,7 @@ $array = mysqli_fetch_array($query);
 				}); 
 			}   
 			$.sum = function(){
-				$("#reste").val(parseFloat($("#totale").val()) - parseFloat($("#espece").val()) -parseFloat($("#cheque").val()));
+				$("#reste").val((parseFloat($("#totale").val()) - parseFloat($("#espece").val()) -parseFloat($("#cheque").val())).toFixed(2));
 			} 
 		});
 
@@ -365,7 +365,7 @@ unset($_SESSION['errorAttestation']);
 unset($_SESSION['errorMatricule']);
 unset($_SESSION['errorProduit']);
 unset($_SESSION['errorDate_versement']);
-unset($_SESSION['errorModePaiment']);
+// unset($_SESSION['errorModePaiment']);
 
 unset($_SESSION['leType']);
 unset($_SESSION['police']);
@@ -376,12 +376,13 @@ unset($_SESSION['totale']);
 unset($_SESSION['cheque']);
 unset($_SESSION['espece']);
 unset($_SESSION['reste']);
+unset($_SESSION['virement']);
 
 unset($_SESSION['fecha_hoy']);
 unset($_SESSION['attestation']);
 unset($_SESSION['matricule']);
 unset($_SESSION['produit']);
 unset($_SESSION['date_versement']);
-unset($_SESSION['mode_paiment']);
+// unset($_SESSION['mode_paiment']);
 
 ?>

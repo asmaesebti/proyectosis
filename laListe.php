@@ -46,10 +46,11 @@ $array = mysqli_fetch_array($query);
 		<?php
 	}
 	?>
+
 	<header class="container">
 		<img src="logo.png" width="100%" alt="">
 	</header>
-	<div class="container-fluid ">
+	<div class="container-fluid conjunto">
 		<div class="row">
 			<div class="col">
 				<h1>La liste de tous les reçus</h1>
@@ -69,10 +70,9 @@ $array = mysqli_fetch_array($query);
 							<th scope="col">PRIME TOTALE</th>
 							<th scope="col">ESPECE</th>
 							<th scope="col">CHEQUE</th>
-							<th scope="col">AUTRE</th>
+							<th scope="col">VIREMENT</th>
 							<th scope="col">RESTE</th>
 							<th scope="col">DATE VERSEMENT</th>
-							<th scope="col">MODE PAIMENT</th>
 							<th scope="col">CREE LE</th>
 							<th scope="col">Modificar</th>
 							<th scope="col">Eliminar</th>
@@ -81,6 +81,7 @@ $array = mysqli_fetch_array($query);
 					</thead>
 					<tbody>
 						<?php 
+
 						foreach ($query as $row) {
 							?>
 							<tr>
@@ -97,10 +98,10 @@ $array = mysqli_fetch_array($query);
 								<td><?php echo $row['totale']; ?></td>
 								<td><?php echo $row['espece']; ?></td>
 								<td><?php echo $row['cheque']; ?></td>
-								<td><?php echo $row['autre']; ?></td>
+								<td><?php echo $row['virement']; ?></td>
 								<td><?php echo $row['reste']; ?></td>
-								<td><?php echo $row['date_versement']; ?></td>
-								<td><?php echo $row['mode_paiment']; ?></td>
+								<td style="color: <?php echo ($row['date_versement'] == '1970-01-01') ? 'beige' : '';  ?>;"><?php echo $row['date_versement']; ?></td>
+								
 								<td><?php echo $row['cree_le']; ?></td>
 								<td class="align-middle"><a class="btn btn-warning" href="modifierRecu.php?recu=<?php echo $row['recu']; ?>">modificar</a> </td>
 								<td class="align-middle"><a class="btn btn-danger" href="eliminerRecu.php?recu=<?php echo $row['recu']; ?>">eliminar</a></td>
@@ -121,15 +122,18 @@ $array = mysqli_fetch_array($query);
 					<div class="col-2">
 						<a class="btn btn-danger" href="laListeExcel.php" role="button">La liste en excel</a>
 					</div>
-						<div class="col-4">
+						<div class="col-2">
 						<a class="btn btn-primary" href="copiaSeguridad.php" role="button">Sauvegarde de securité de la base de données</a>
 					</div>
 					<div class="col-2">
 						<a class="btn btn-success" href="diagram.php"  role="button">Diagram du montant</a>
 					</div>
 
-					<div class="col ">
+					<div class="col-1 ">
 						<a class="btn btn-success" href="index.php" role="button">Salir</a>
+					</div>
+					<div class="col-2">
+						<a class="btn btn-danger" href="laListeExcelElimines.php" role="button">La liste des eliminés</a>
 					</div>
 				</div>
 			</div>
@@ -161,3 +165,8 @@ $array = mysqli_fetch_array($query);
 	
 </body>
 </html>
+<?php 
+
+unset($_SESSION['date_versement']);
+
+ ?>
