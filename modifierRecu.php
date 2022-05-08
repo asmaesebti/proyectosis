@@ -109,6 +109,7 @@ $query = mysqli_query($connection, $consultar);
 									<option value="Renouvellement" <?php if ($row['letype']=="Renouvellement") echo 'selected';?>>Renouvellement</option>
 									<option value="Changement vehicule" <?php if ($row['letype']=="Changement vehicule") echo 'selected';?>>Changement vehicule</option>
 									<option value="Duplicata" <?php if ($row['letype']=="Duplicata") echo 'selected';?>>Duplicata</option>
+									<option value="Resiliation" <?php if ($row['letype']=="Resiliation") echo 'selected';?>>Resiliation</option>
 									<option value="Autres" <?php if ($row['letype']=="Autres") echo 'selected';?>>Autres</option>
 								</select>
 							</div>
