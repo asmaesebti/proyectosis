@@ -195,7 +195,7 @@ $query = mysqli_query($connection, $consultar);
 									<label>Prime totale : *</label><span class="error" style="color: red;"><?php if(isset($_SESSION['errorTotale'])) echo $_SESSION['errorTotale'] ;  ?></span>
 								</div>
 								<div class="col col-7">
-									<input type="number" class="form-control" id="totale" name="totale" min="0" value="<?php echo $row['totale']; ?>" id="totale" >
+									<input type="number" class="form-control" id="totale" step="0.01" name="totale" min="0" value="<?php echo $row['totale']; ?>" id="totale" >
 								</div>
 							</div>
 							
@@ -204,7 +204,7 @@ $query = mysqli_query($connection, $consultar);
 									<label>Espece :</label>
 								</div>
 								<div class="col col-7">
-									<input type="number" class="form-control" id="espece" name="espece" min="0" value="<?php echo $row['espece']; ?>" >
+									<input type="number" class="form-control" id="espece" step="0.01" name="espece" min="0" value="<?php echo $row['espece']; ?>" >
 								</div>
 							</div>
 							<div class="row mt-2">
@@ -212,7 +212,7 @@ $query = mysqli_query($connection, $consultar);
 									<label>Cheque :</label>
 								</div>
 								<div class="col col-7">
-									<input type="number" class="form-control" id="cheque" name="cheque" min="0" value="<?php echo $row['cheque']; ?>" >
+									<input type="number" class="form-control" id="cheque" step="0.01" name="cheque" min="0" value="<?php echo $row['cheque']; ?>" >
 								</div>
 							</div>
 							<div class="row mt-1">
@@ -229,7 +229,7 @@ $query = mysqli_query($connection, $consultar);
 								</div>
 								<div class="col col-7">
 									<span>El resultado es: </span> <span id="spTotal"></span>
-									<input type="number" class="form-control" id="reste" name="reste" min="0" value="<?php echo $row['reste']; ?>" >
+									<input type="number" class="form-control" id="reste" step="0.01" name="reste" min="0" value="<?php echo $row['reste']; ?>" >
 								</div>
 							</div>
 							<div class="row mt-3">
