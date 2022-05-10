@@ -189,7 +189,7 @@ $array = mysqli_fetch_array($query);
 								<label>Prime totale : *</label><span class="error" style="color: red;"><?php if(isset($_SESSION['errorTotale'])) echo $_SESSION['errorTotale'] ;  ?></span>
 							</div>
 							<div class="col col-7">
-								<input type="number" class="form-control" id="totale" step="0.01" name="totale" min="0" value="<?php echo (isset($_SESSION['totale'])) ? $_SESSION['totale'] : "" ;  ?>"   ><!-- onchange="sumar(this.value);" -->
+								<input type="number" class="form-control" id="totale" step="0.01" name="totale"  value="<?php echo (isset($_SESSION['totale'])) ? $_SESSION['totale'] : "" ;  ?>"   ><!-- onchange="sumar(this.value);" -->
 							</div>
 						</div>
 						
@@ -198,7 +198,7 @@ $array = mysqli_fetch_array($query);
 								<label>Espece :</label>
 							</div>
 							<div class="col col-7">
-								<input type="number" class="form-control" id="espece" name="espece" step="0.01" min="0" value="<?php echo (isset($_SESSION['espece'])) ? $_SESSION['espece'] : "0" ;  ?>" onfocus="if(this.value=='0'){ this.value=''; }"> <!-- onchange="sumar(this.value);" -->
+								<input type="number" class="form-control" id="espece" name="espece" step="0.01"  value="<?php echo (isset($_SESSION['espece'])) ? $_SESSION['espece'] : "0" ;  ?>" onfocus="if(this.value=='0'){ this.value=''; }"> <!-- onchange="sumar(this.value);" -->
 							</div>
 						</div>
 						<div class="row mt-2">
@@ -206,7 +206,7 @@ $array = mysqli_fetch_array($query);
 								<label>Cheque :</label>
 							</div>
 							<div class="col col-7">
-								<input type="number" class="form-control" id="cheque" name="cheque" step="0.01" min="0" value="<?php echo (isset($_SESSION['cheque'])) ? $_SESSION['cheque'] : "0" ;  ?>" onfocus="if(this.value=='0'){ this.value=''; }" ><!-- onchange="sumar(this.value);" -->
+								<input type="number" class="form-control" id="cheque" name="cheque" step="0.01"  value="<?php echo (isset($_SESSION['cheque'])) ? $_SESSION['cheque'] : "0" ;  ?>" onfocus="if(this.value=='0'){ this.value=''; }" ><!-- onchange="sumar(this.value);" -->
 							</div>
 						</div>
 						<div class="row mt-1">
@@ -223,7 +223,7 @@ $array = mysqli_fetch_array($query);
 							</div>
 							<div class="col col-7">
 								<span>El resultado es: </span> <span id="spTotal"></span>
-								<input type="number" class="form-control" id="reste" name="reste" step="0.01" min="0" value="<?php echo (isset($_SESSION['reste'])) ? $_SESSION['reste'] : "0" ;  ?>" >
+								<input type="number" class="form-control" id="reste" name="reste" step="0.01"  value="<?php echo (isset($_SESSION['reste'])) ? $_SESSION['reste'] : "0" ;  ?>" >
 							</div>
 						</div>
 						<div class="row mt-3">

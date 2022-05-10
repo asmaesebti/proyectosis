@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 10-05-2022 a las 16:56:15
+-- Tiempo de generación: 08-05-2022 a las 20:33:26
 -- Versión del servidor: 5.7.31
 -- Versión de PHP: 7.3.21
 
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `proyectosis` (
   `attestation` varchar(100) NOT NULL,
   `police` varchar(100) NOT NULL,
   `matricule` varchar(50) NOT NULL,
-  `produit` varchar(200) NOT NULL,
+  `produit` varchar(20) NOT NULL,
   `assure` varchar(100) NOT NULL,
   `du` date NOT NULL,
   `au` date NOT NULL,
@@ -148,7 +148,7 @@ CREATE TABLE IF NOT EXISTS `proyectosis_copie` (
   `attestation` varchar(100) NOT NULL,
   `police` varchar(100) NOT NULL,
   `matricule` varchar(50) NOT NULL,
-  `produit` varchar(200) NOT NULL,
+  `produit` varchar(20) NOT NULL,
   `assure` varchar(100) NOT NULL,
   `du` date NOT NULL,
   `au` date NOT NULL,
@@ -177,7 +177,7 @@ CREATE TABLE IF NOT EXISTS `proyectosis_elimines` (
   `attestation` varchar(100) NOT NULL,
   `police` varchar(100) NOT NULL,
   `matricule` varchar(50) NOT NULL,
-  `produit` varchar(200) NOT NULL,
+  `produit` varchar(20) NOT NULL,
   `assure` varchar(100) NOT NULL,
   `du` date NOT NULL,
   `au` date NOT NULL,
