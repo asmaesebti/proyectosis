@@ -1,5 +1,6 @@
 <?php 
 require_once('conexion.php');
+//he creado un comentario
 
 $consultarA = "select * from proyectosis";
 $queryA = mysqli_query($connection, $consultarA);
