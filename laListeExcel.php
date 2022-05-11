@@ -27,18 +27,22 @@ header("Content-Type: application/xls");
 			  '. utf8_decode($fila['produit']) . '</td><td>
 			  ' . utf8_decode($fila['assure']) . '</td><td>
 			  ' . utf8_decode($fila['du']) . '</td><td>
-			  ' . utf8_decode($fila['au']) . '</td><td>
-			  ' . utf8_decode($fila['totale']) . '</td><td>
-			  ' . utf8_decode($fila['espece']) . '</td><td>
-			  ' . utf8_decode($fila['cheque']) . '</td><td>
-			   ' . utf8_decode($fila['virement']) . '</td><td>
-			    ' . utf8_decode($fila['reste']) . '</td><td>
+			  ' . utf8_decode($fila['au']) . '</td><td >
+			  ' . str_replace('.',',',utf8_decode($fila['totale'])) . '</td><td>
+			  ' . str_replace('.',',',utf8_decode($fila['espece'])) . '</td><td>
+			  ' . str_replace('.',',',utf8_decode($fila['cheque'])) . '</td><td>
+			   ' . str_replace('.',',',utf8_decode($fila['virement'])) . '</td><td>
+			    ' . str_replace('.',',',utf8_decode($fila['reste'])) . '</td><td>
 			    '. utf8_decode($fila['date_versement']) . '</td><td>
 			    
 			  ' . utf8_decode($fila['cree_le']) . '</td></tr>';
 	}
 	echo '</table>';
 
-
+function formatDollars($dollars)
+{
+    $formatted = "$" . number_format(sprintf('%0.2f', preg_replace("/[^0-9.]/", "", $dollars)), 2);
+    return $dollars < 0 ? "-{$formatted}" : "{$formatted}";
+}
 
  ?>

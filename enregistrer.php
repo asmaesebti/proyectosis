@@ -66,17 +66,17 @@ if (!isset($_POST['attestation'])) {
 	
 }
 
-if ($attestation != null) {
-	echo "<br>";
-	echo "La attestation choisie est correcte";
-	$contador++;
-}else{
-	$errorAttestation = "Tu dois introduire une attestation";
-	$_SESSION['errorAttestation'] = $errorAttestation;
-	echo "<br>";
-	echo "Tu dois introduire une attestation";
+// if ($attestation != null) {
+// 	echo "<br>";
+// 	echo "La attestation choisie est correcte";
+// 	$contador++;
+// }else{
+// 	$errorAttestation = "Tu dois introduire une attestation";
+// 	$_SESSION['errorAttestation'] = $errorAttestation;
+// 	echo "<br>";
+// 	echo "Tu dois introduire une attestation";
 	
-}
+// }
 
 if (!isset($_POST['police'])) {
 	$police = null;
@@ -110,16 +110,16 @@ if (!isset($_POST['matricule'])) {
 	
 }
 
-if ($matricule != null) {
-	echo "<br>";
-	echo "La matricule choisie est correcte";
-	$contador++;
-}else{
-	$errorMatricule = "Tu dois introduire une matricule";
-	$_SESSION['errorMatricule'] = $errorMatricule;
-	echo "<br>";
-	echo "Tu dois introduire une matricule";
-}
+// if ($matricule != null) {
+// 	echo "<br>";
+// 	echo "La matricule choisie est correcte";
+// 	$contador++;
+// }else{
+// 	$errorMatricule = "Tu dois introduire une matricule";
+// 	$_SESSION['errorMatricule'] = $errorMatricule;
+// 	echo "<br>";
+// 	echo "Tu dois introduire une matricule";
+// }
 
 if (!isset($_POST['produit'])) {
 	$produit = null;
@@ -309,7 +309,7 @@ if (!isset($_POST['date_versement'])) {
 echo "<br>";
 echo $contador;
 
-if ($contador == 9) {
+if ($contador == 7) {
 	
 	$insertar = "INSERT INTO `proyectosis` (`fecha_hoy`, `letype`, `attestation`, `police`, `matricule`, `produit`,`assure`, `du`, `au`, `totale`, `espece` ,  `cheque` , `virement`, `reste` ,  `cree_le`) VALUES ('$fecha_hoy','$leType','$attestation','$police', '$matricule', '$produit','$assure','$du','$au', '$totale', '$espece', '$cheque', '$virement' , '$reste', CURRENT_TIMESTAMP)";
 
