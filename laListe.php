@@ -114,6 +114,52 @@ $array = mysqli_fetch_array($query);
 						?>
 
 					</tbody>
+					<tfoot>
+						<td class="bg-grays-active color-palette"><b></b></td>
+						<td class="bg-teals-active color-palette text-center">
+							<strong id="abiertoEnTiempo"></strong>
+						</td>
+						<td class="bg-teals-active color-palette text-center">
+							<strong></strong>
+						</td>
+						<td class="bg-teals-active color-palette text-center">
+							<strong></strong>
+						</td>
+						<td class="bg-teals-active color-palette text-center">
+							<strong></strong>
+						</td>
+						<td class="bg-teals-active color-palette text-center">
+							<strong></strong>
+						</td>
+						<td class="bg-teals-active color-palette text-center">
+							<strong></strong>
+						</td>
+						<td class="bg-teals-active color-palette text-center">
+							<strong></strong>
+						</td>
+						<td class="bg-teals-active color-palette text-center">
+							<strong></strong>
+						</td>
+						<td class="bg-teals-active color-palette text-center">
+							<strong><b>Total </b></strong>
+						</td>
+						<td class="bg-teals-active color-palette text-center">
+							<strong id="monto">0</strong>
+						</td>
+						</td>
+						<td class="bg-teals-active color-palette text-center">
+							<strong id="monto1">0</strong>
+						</td>
+						<td class="bg-teals-active color-palette text-center">
+							<strong id="monto2">0</strong>
+						</td>
+						<td class="bg-teals-active color-palette text-center">
+							<strong id="monto3">0</strong>
+						</td>
+						<td class="bg-teals-active color-palette text-center">
+							<strong id="monto4">0</strong>
+						</td>
+					</tfoot>
 				</table>
 				<div class="row mt-3 ">
 					<div class="col-3">
@@ -122,7 +168,7 @@ $array = mysqli_fetch_array($query);
 					<div class="col-2">
 						<a class="btn btn-danger" href="laListeExcel.php" role="button">La liste en excel</a>
 					</div>
-						<div class="col-2">
+					<div class="col-2">
 						<a class="btn btn-primary" href="copiaSeguridad.php" role="button">Sauvegarde de securité de la base de données</a>
 					</div>
 					<div class="col-2">
@@ -159,14 +205,41 @@ $array = mysqli_fetch_array($query);
 	<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready( function () {
-			$('#laLista').DataTable();
+			jQuery.fn.dataTable.Api.register( 'sum()', function ( ) {
+				return this.flatten().reduce( function ( a, b ) {
+					if ( typeof a === 'string' ) {
+						a = a.replace(/[^\d.-]/g, '') * 1;
+					}
+					if ( typeof b === 'string' ) {
+						b = b.replace(/[^\d.-]/g, '') * 1;
+					}
+					return a + b;
+				}, 0);
+			});
+			var table = $('#laLista').DataTable(
+			{
+				drawCallback: function () {
+					var api = this.api();
+					var total = api.column( 10, {"filter":"applied"}).data().sum();
+					$('#monto').html(total.toFixed(2));
+					var total1 = api.column( 11, {"filter":"applied"}).data().sum();
+					$('#monto1').html(total1.toFixed(2));
+					var total2 = api.column( 12, {"filter":"applied"}).data().sum();
+					$('#monto2').html(total2.toFixed(2));
+						var total3 = api.column( 13, {"filter":"applied"}).data().sum();
+					$('#monto3').html(total3.toFixed(2));
+						var total4 = api.column( 14, {"filter":"applied"}).data().sum();
+					$('#monto4').html(total4.toFixed(2));
+
+				}
+			});
 		} );
 	</script>
-	
+
 </body>
 </html>
 <?php 
 
 unset($_SESSION['date_versement']);
 
- ?>
+?>
