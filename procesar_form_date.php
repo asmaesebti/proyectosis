@@ -241,7 +241,7 @@ if ($contador == 2) {
 						<a class="btn btn-warning" href="index.php" role="button">Retourner au formulaire</a>
 					</div>
 					<div class="col-2">
-						<a class="btn btn-success" href="form_date.php" role="button">La liste par date</a>
+						<a class="btn btn-success" href="laListe.php" role="button">La liste Generale</a>
 					</div>
 					<div class="col-2">
 						<a class="btn btn-danger" href="laListeExcelDate.php" role="button">La liste en excel</a>

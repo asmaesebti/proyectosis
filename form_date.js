@@ -3,7 +3,7 @@ $( document ).ready(function() {
   function newDatepicker ( e, a, d ) {
 
     $(":input").inputmask({
-      placeholder: 'TT.MM.JJJJ',
+      placeholder: 'JJJJ.MM.TT',
       showMaskOnHover: false,
       showMaskOnFocus: true
     });

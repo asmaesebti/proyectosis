@@ -54,7 +54,7 @@
 					<input 
 					type='text' 
 					class="form-control datepicker date-arrive"
-					data-inputmask="'alias': 'yyyy-mm-dd'" placeholder="07.05.2018" name="date_avant" required 
+					data-inputmask="'alias': 'yyyy-mm-dd'" placeholder="2018.05.07" name="date_avant" required 
 					/>
 				</div>
 				<div class='col-md-6 mt-4'>
@@ -62,7 +62,7 @@
 					<input 
 					type='text' 
 					class="form-control datepicker date-departure"
-					data-inputmask="'alias': 'yyyy-mm-dd'" placeholder="08.05.2018" name="date_apres" required
+					data-inputmask="'alias': 'yyyy-mm-dd'" placeholder="2018.05.08" name="date_apres" required
 					/>  
 				</div>
 			</div>
