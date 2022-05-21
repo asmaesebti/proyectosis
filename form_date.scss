@@ -1,0 +1,249 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:900,700,300);
+
+.row {
+  padding-top: 60px;
+}
+
+h3 {
+  color: white;
+  margin: 0 auto;
+  font-size: 40px;
+}
+
+label {
+  color: white;
+  padding: 0 18px;
+}
+
+.datepicker {
+  font-size: 20px;
+  font-weight: 700;
+  padding: 10px 16px;
+  border: 3px solid darkgray;
+}
+
+$lato:             'Lato', sans-serif;
+
+$bp-small:         400px;
+
+$bg-body:          #2e9efb;
+$bg-gray:          #666;  
+$bg-date-active:   darken($bg-body, 10%);
+$bg-date-border:   #ededed;
+$bg-date-hover:    #eeeeee;
+$bg-date-selected: $bg-body;
+$bg-date-text:     white;
+$bg-input:         #ffffff;
+
+$color-date-lite:  #ccc;
+$color-input:      darken($bg-body, 25%);
+$color-text:       #ffffff;
+
+$margin-element:   12px;
+$margin-form:      36px;
+
+@mixin pos($position: absolute) {
+  position: $position;
+  top: 0; right: 0; bottom: 0; left: 0;
+  margin: auto;
+}
+
+@mixin placeholder {
+  &::-webkit-input-placeholder {@content}
+  &:-moz-placeholder           {@content}
+  &::-moz-placeholder          {@content}
+  &:-ms-input-placeholder      {@content}  
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $lato;
+  line-height: 1.2;
+  background-color: $bg-body;
+  font-size: 16px;
+}
+
+.datepicker-dropdown.datepicker-orient-bottom,
+.datepicker-dropdown.datepicker-orient-left {
+  &:after,
+  &:before {
+    display:none;
+  }
+}
+
+
+.datepicker.dropdown-menu {
+  padding: 0;
+  background-clip: border-box;
+  border: none;
+  border-radius: 0;
+   -webkit-box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.3);  
+  animation: popup .2s ease-out forwards;
+  table {
+    background-color: darken($bg-body, 10%);
+    thead {
+      background-color: darken($bg-body, 10%);
+      tr {
+        border-top: 0;
+      }
+    }
+    tbody {
+      background-color: white;
+    }
+    tr {
+      border-top: 1px solid $bg-date-border;
+      td, th {
+        width: auto;
+        height: 24px;
+        padding: 8px;
+        font-size: 0.9rem;
+        border-radius: 0;
+        transition: background-color .6s ease-out;
+        @media screen and (min-width: $bp-small) {
+          padding: 12px;
+        }
+        &:hover,
+        &.active:hover,
+        &:active:hover {
+          border-color: $bg-date-border;
+          border-radius: 0;
+          transition: background-color .2s ease-out;
+        }
+        &.focused,
+        &.selected {
+          background-color: $bg-date-selected;
+          border-color: $bg-date-border;
+          border-radius: 0;
+        }
+        &.active,
+        &.active:focus,
+        &.active.active:hover,
+        &:active:focus,
+        &.highlighted {
+          background-color: $bg-date-active;
+          border-color: $bg-date-border;
+          background-image: none;
+        }
+      }
+      td.today {
+        background: $bg-gray;
+        color: white;
+        
+        &:hover {
+          background: darken($bg-gray, 10%);
+          color: white;
+        }
+      }
+      td.today.disabled {
+        background: lighten($bg-gray, 25%);
+        
+        &:hover {
+          background: lighten($bg-gray, 25%);
+          border-right: 1px solid $bg-date-border;
+        }
+      }
+      th.datepicker-switch {
+        font-size: 0.8rem;
+        font-weight: bold;
+        line-height: 2;
+        text-transform: uppercase;
+        letter-spacing: .05em;
+        color: $color-text;
+        background-color: inherit;
+        border-radius: 0;
+      }
+      th.prev,
+      th.next {
+        color: $color-text;
+        background-color: darken($bg-body, 15%);
+        border-radius: 0;
+      }
+      th.dow {
+        padding: 2px 12px;
+        font-size: 0.7rem;
+        line-height: 2;
+        color: $color-text;
+        background-color: darken($bg-body, 12%);
+        border-top: 1px solid darken($bg-body, 18%);
+        border-radius: 0;
+      }
+      th.cw {
+        background-color: darken($bg-body, 12%);
+        border-top: 1px solid darken($bg-body, 18%);
+  
+        &:before {
+          content:"\f073";
+          font-family: FontAwesome;
+          color: white;
+        }
+      }
+      td.day {
+        width: 24px;
+        border-right: 1px solid #ededed;
+        &:last-child {
+          border-right-width: 0;
+        }
+      }
+      td.new.highlighted.day,
+      td.old.highlighted.day{
+        background: lighten($bg-body, 10%);
+        
+        &:hover {
+          background: lighten($bg-body, 5%);
+        }
+      }
+      td.highlighted.day{
+        background: $bg-body;
+        color: white;
+        
+        &:hover {
+          background: darken($bg-body, 5%);
+        }
+      }
+      td.active.highlighted.day{
+        background: $bg-gray;
+        color: white;
+        
+        &:hover {
+          background: darken($bg-gray, 5%);
+        }
+      }
+      td.disabled.highlighted.day {
+        background: lighten($bg-body, 25%);
+        color: white;
+        
+        &:hover {
+          background: lighten($bg-body, 25%);
+        }
+      }      
+      td.range {
+        background-color: $bg-date-hover;
+      }
+      td.cw {
+        font-size: 0.7rem;
+        font-weight: bold;
+      }
+    }
+  }
+  .new,
+  .old,
+  .disabled,
+  .disabled:hover {
+    color: $color-date-lite;
+  }
+}
+
+@keyframes popup {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

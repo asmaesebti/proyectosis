@@ -1,17 +1,91 @@
 <?php 
-
 session_start();
 require_once('conexion.php');
+require_once('valorSeguro.php');
+include('funcionesValidacion.php');
 
-$consultar = "select * from proyectosis";
-$query = mysqli_query($connection, $consultar);
-$array = mysqli_fetch_array($query);
+$error_date_avant = $error_date_apres = "";
+$query = "";
+$contador = 0;
 
-//	echo $array["recu"];
+//echo $_POST['date_avant'] . " et ".$_POST['date_apres'];
 
 
-?>
-<!DOCTYPE html>
+if (!isset($_POST['date_avant'])) {
+	$date_avant = null;
+
+}else{
+	$date_avant = $_POST['date_avant'];
+	$date_avant = valorSeguro($date_avant);
+	$_SESSION['date_avant'] = $date_avant;
+	
+}
+
+if ($date_avant != null) {
+	//echo "<br>";
+	//echo "La date  est correcte";
+	$contador++;
+}else{
+	$error_date_avant =  "Tu dois choisir une date fecha_hoy";
+	$_SESSION['error_date_avant'] = $error_date_avant;
+	echo "<br>";
+	echo "Tu dois choisir une date fecha_hoy";
+}
+
+if (!isset($_POST['date_apres'])) {
+	$date_apres = null;
+
+}else{
+	$date_apres = $_POST['date_apres'];
+	$date_apres = valorSeguro($date_apres);
+	$_SESSION['date_apres'] = $date_apres;
+	
+}
+
+if ($date_apres != null) {
+//	echo "<br>";
+//	echo "La date  est correcte";
+	$contador++;
+}else{
+	$error_date_apres =  "Tu dois choisir une date date_apres";
+	$_SESSION['error_date_apres'] = $error_date_apres;
+	echo "<br>";
+	echo "Tu dois choisir une date date_apres";
+}
+
+if ($contador == 2) {
+	//SELECT * FROM `proyectosis` WHERE fecha_hoy BETWEEN "2022-05-10" and "2022-05-11"
+	$consultar = "SELECT * FROM `proyectosis` WHERE fecha_hoy BETWEEN ' $date_avant' AND '$date_apres'";
+
+
+	$query = mysqli_query($connection, $consultar);
+	$array = mysqli_fetch_array($query);
+
+
+} else {
+	
+}
+
+// if ($query) {
+// 	echo "<br>Données Consultées correctement";
+
+
+// 	header("Location: form_date.php?mensaje=ok&respuesta=Données Consultées correctement");
+
+// }else{
+
+// 	echo "<br>Rien n´est trouvées dans la base de données";
+// 	echo "<br>" . mysqli_error($connection);
+
+
+// 	header("Location: form_date.php?mensaje=ok&respuesta=Rien n´est trouvées dans la base de données");
+// }
+
+
+
+ ?>
+
+ <!DOCTYPE html>
 <html lang="en">
 <!--divinectorweb.com-->
 <head>
@@ -54,6 +128,7 @@ $array = mysqli_fetch_array($query);
 		<div class="row">
 			<div class="col">
 				<h1>La liste de tous les reçus</h1>
+				<h3>Les dates selectionèes son: la date avant : <span style="color:red; font-size: 1.3em;"><?php echo $date_avant; ?></span> et la date aprés : <span style="color:red; font-size: 1.3em;"><?php echo $date_apres; ?></span>.</h3>
 				<table class="table table-hover" id="laLista">
 					<thead>
 						<tr>
@@ -169,20 +244,10 @@ $array = mysqli_fetch_array($query);
 						<a class="btn btn-success" href="form_date.php" role="button">La liste par date</a>
 					</div>
 					<div class="col-2">
-						<a class="btn btn-danger" href="laListeExcel.php" role="button">La liste en excel</a>
+						<a class="btn btn-danger" href="laListeExcelDate.php" role="button">La liste en excel</a>
 					</div>
-					<div class="col-2">
-						<a class="btn btn-primary" href="copiaSeguridad.php" role="button">Sauvegarde de securité de la base de données</a>
-					</div>
-					<div class="col-2">
-						<a class="btn btn-success" href="diagram.php"  role="button">Diagram du montant</a>
-					</div>
-
-					<div class="col-1 ">
-						<a class="btn btn-success" href="index.php" role="button">Salir</a>
-					</div>
-					<div class="col-1">
-						<a class="btn btn-danger" href="laListeExcelElimines.php" role="button">La liste des eliminés</a>
+					<div class="col-3 ">
+						<a class="btn btn-success" href="form_date.php" role="button">Retoure au formulaire de date</a>
 					</div>
 				</div>
 			</div>
