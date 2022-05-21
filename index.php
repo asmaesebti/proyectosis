@@ -102,6 +102,8 @@ $array = mysqli_fetch_array($query);
 								<option value="Changement vehicule" <?php echo  (isset($_SESSION['leType']) && $_SESSION['leType']=="Changement vehicule") ? 'selected' : '';?>>Changement vehicule</option>
 								<option value="Duplicata" <?php echo (isset($_SESSION['leType']) && $_SESSION['leType']=="Duplicata") ? 'selected' : '';?>>Duplicata</option>
 								<option value="Resiliation" <?php echo (isset($_SESSION['leType']) && $_SESSION['leType']=="Resiliation") ? 'selected' : '';?>>Resiliation</option>
+								<option value="Autre provisoire" <?php echo (isset($_SESSION['leType']) && $_SESSION['leType']=="Autre provisoire") ? 'selected' : '';?>>Autre provisoire</option>
+								<option value="Attestation définitive" <?php echo (isset($_SESSION['leType']) && $_SESSION['leType']=="Attestation définitive") ? 'selected' : '';?>>Attestation définitive</option>
 								<option value="Autres" <?php echo (isset($_SESSION['leType']) && $_SESSION['leType']=="Autres") ? 'selected' : '';?>>Autres</option>
 							</select>
 							<span class="error" style="color: red;"><?php if(isset($_SESSION['errorLetype'])) echo $_SESSION['errorLetype'] ;  ?></span>
