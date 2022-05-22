@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<USUARIOS>
+  <USUARIO>
+    <ID>1</ID>
+    <NOM>Brook</NOM>
+    <PRENOM>Insall</PRENOM>
+    <EMAIL>binsall0@xing.com</EMAIL>
+    <TELEPHONE>261 493 0059</TELEPHONE>
+  </USUARIO>
+  <USUARIO>
+    <ID>2</ID>
+    <NOM>Crichton</NOM>
+    <PRENOM>Rous</PRENOM>
+    <EMAIL>crous1@howstuffworks.com</EMAIL>
+    <TELEPHONE>545 160 2146</TELEPHONE>
+  </USUARIO>
+  <USUARIO>
+    <ID>3</ID>
+    <NOM>Ronny</NOM>
+    <PRENOM>Revely</PRENOM>
+    <EMAIL>msb.duck@gmail.com</EMAIL>
+    <TELEPHONE>481 582 9924</TELEPHONE>
+  </USUARIO>
+  <USUARIO>
+    <ID>5</ID>
+    <NOM>Iosep</NOM>
+    <PRENOM>Dyte</PRENOM>
+    <EMAIL>idyte4@trellian.com</EMAIL>
+    <TELEPHONE>740 490 9285</TELEPHONE>
+  </USUARIO>
+  <USUARIO>
+    <ID>6</ID>
+    <NOM>Max</NOM>
+    <PRENOM>Houlton</PRENOM>
+    <EMAIL>msb.duck@gmail.com</EMAIL>
+    <TELEPHONE>443 777 8249</TELEPHONE>
+  </USUARIO>
+  <USUARIO>
+    <ID>1006</ID>
+    <NOM>v</NOM>
+    <PRENOM>v</PRENOM>
+    <EMAIL>v</EMAIL>
+    <TELEPHONE>v</TELEPHONE>
+  </USUARIO>
+  <USUARIO>
+    <ID>1007</ID>
+    <NOM>nn</NOM>
+    <PRENOM>nn</PRENOM>
+    <EMAIL>nn</EMAIL>
+    <TELEPHONE>nn</TELEPHONE>
+  </USUARIO>
+  <USUARIO>
+    <ID>1008</ID>
+    <NOM>mm</NOM>
+    <PRENOM>mm</PRENOM>
+    <EMAIL>mm</EMAIL>
+    <TELEPHONE>mm</TELEPHONE>
+  </USUARIO>
+</USUARIOS>

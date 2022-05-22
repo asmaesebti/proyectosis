@@ -55,6 +55,9 @@ $array = mysqli_fetch_array($query);
 			<div class="col">
 				<a href="otro.php" class="btn btn-success pe-2 ps-2 fas fa-save">&nbsp; Enregistrer un client</a>
 			</div>
+			<div class="col">
+				<a href="addmore/addmore.php" class="btn btn-success pe-2 ps-2 fas fa-save">&nbsp; Enregistrer plusieurs clients</a>
+			</div>
 		</div>
 		<div class="row">
 			<div class="col">
