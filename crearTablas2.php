@@ -14,7 +14,7 @@
         $c = $_POST["ColonName$i"];
         $l = $_POST["LengthValues$i"];
         $co = $_POST["Comments$i"];
-        $sql = "CREATE TABLE  `$dbName`.`$tablename` ( '$c' INT ".$l." NOT NULL COMMENT '$co' ) ENGINE = InnoDB";
+        $sql = "CREATE TABLE `".$tablename."` ( `".$c."` VARCHAR(".(int)$_POST["LengthValues$i"]."), age INT, car VARCHAR(30))";
      {
      $save = mysqli_query($con, $sql);
      }

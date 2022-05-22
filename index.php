@@ -53,6 +53,11 @@ $array = mysqli_fetch_array($query);
 	<div class="container">
 		<div class="row">
 			<div class="col">
+				<a href="otro.php" class="btn btn-success pe-2 ps-2 fas fa-save">&nbsp; Enregistrer un client</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
 				<form method="POST" action="enregistrer.php" id="log">
 
 					<div class="row">
