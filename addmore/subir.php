@@ -3,7 +3,7 @@ session_start();
 try {
 	
 
-	$conn = new PDO('mysql:host=localhost;dbname=crud_ajax_php','root','');
+	$conn = new PDO('mysql:host=localhost;dbname=proyectosis','root','');
 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	$msg = '';
 	if (isset($_POST['upload'])) {

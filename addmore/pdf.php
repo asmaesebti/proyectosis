@@ -59,7 +59,7 @@
 
 		foreach ($filas as $fila) {
 			$html .= '<tr>
-				<td>'.$i.'</td>
+				<td>'.$fila['id'].'</td>
 				<td>'.$fila['nombre'].'</td>
 				<td>'.$fila['apellidos'].'</td>
 				<td>'.$fila['email'].'</td>

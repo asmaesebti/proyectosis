@@ -25,7 +25,15 @@
 			<div class="col-lg-12 m-auto">
 				<div class="card shadow">
 					<div class="card-header">
-						<h4>Ajouter les clients</h4>
+						<div class="row">
+							<div class="col">
+								<h4>Ajouter les clients</h4>
+							</div>
+							<div class="col col-2">
+								<a class="btn btn-primary" href="../index.php">Retour au formulaire</a>
+							</div>
+						</div>
+						
 					</div>
 					<div class="card-body p-4">
 						<div id="show_alert"></div>
@@ -53,7 +61,7 @@
 								<input type="submit" value="Ajouter" class="btn btn-primary" id="add_btn">
 								<a href="pdf.php" class="btn btn-warning m-1 float-end " target="_blank"><i class="fas fa-table fa-lg"></i>&nbsp;&nbsp;Imprimir a PDF DOMPDF</a>
 								<a href="indexXML.php" class="btn btn-warning m-1 float-end " target="_blank"><i class="fas fa-table fa-lg"></i>&nbsp;&nbsp;Imprimir XML</a>
-								<a href="carousel.php" class="btn btn-danger m-1 float-end " target="_blank"><i class="fas fa-table fa-lg"></i>&nbsp;&nbsp;CREAR CAROUSSEL CON SUBIDA DE FICHERO</a>
+								<a href="carousel2.php" class="btn btn-danger m-1 float-end " target="_blank"><i class="fas fa-table fa-lg"></i>&nbsp;&nbsp;CREAR CAROUSSEL CON SUBIDA DE FICHERO</a>
 							</div>
 
 						</form>
@@ -72,7 +80,7 @@
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script type="text/javascript" src="addmore.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
-		<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
 </body>
 </html>
