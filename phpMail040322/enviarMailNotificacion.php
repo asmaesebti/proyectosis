@@ -8,6 +8,7 @@ require 'PHPMailer/SMTP.php';
 require('../conexion.php');
 
 
+
 $warning = 60 * 60 * 24 * 3;
 $today = date("U");
 $sql = "SELECT * FROM proyectosis";
@@ -66,9 +67,11 @@ $querydate   =  mysqli_query($connection,$sql) or die (mysqli_error($connection)
                                // echo 'El Mensage se ha enviado a su destinatario';
                                 //echo '<script> alert("El Mensage se ha enviado a su destinatario");
                                    //      location.href="../index.php"; </script>';
+                                
                                 header("Location: ../index.php?mensaje=ok&respuesta=Email envoyé correctement");
 
                             }else{
+
                                 header("Location: ../index.php?mensaje=ok&respuesta=Rien n´est envoyé");
                             }
 

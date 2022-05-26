@@ -1,5 +1,5 @@
 <?php 
-
+header("Content-Type: text/html;charset=utf-8");
 session_start();
 require_once('conexion.php');
 
@@ -16,6 +16,7 @@ $array = mysqli_fetch_array($query);
 <!--divinectorweb.com-->
 <head>
 	<meta charset="UTF-8">
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 	<title>Proyecto SIS</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" type="text/css"/>
@@ -57,6 +58,32 @@ $array = mysqli_fetch_array($query);
 			</div>
 			<div class="col">
 				<a href="phpMail040322/enviarMailNotificacion.php" class="btn btn-success pe-2 ps-2 fas fa-save">&nbsp; Verifier echéance des polices</a>
+			</div>
+			<div class="col">
+				<!-- <a href="phpMail040322/enviarMailNotificacion.php" class="btn btn-success pe-2 ps-2 fas fa-save">&nbsp; Consulter echéance des polices</a> -->
+				<!-- Button trigger modal -->
+				<button type="button" class="btn btn-primary openBtn2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+					Consulter echéance des polices
+				</button>
+
+				<!-- Modal -->
+				<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">Email notification d'echeance </h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								...
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+							<!-- 	<button type="button" class="btn btn-primary">Save changes</button> -->
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 			<div class="col">
 				<a href="addmore/addmore.php" class="btn btn-success pe-2 ps-2 fas fa-save">&nbsp; Enregistrer plusieurs clients</a>
@@ -354,6 +381,13 @@ $array = mysqli_fetch_array($query);
 			$.sum = function(){
 				$("#reste").val((parseFloat($("#totale").val()) - parseFloat($("#espece").val()) -parseFloat($("#cheque").val())).toFixed(2));
 			} 
+		});
+
+		/* Llamando al fichero CargarContenido.php */
+		$('.openBtn2').on('click',function(){
+			$('.modal-body').load('phpMail040322/consultarNotificacion.php?id=2',function(){
+				$('#myModal').modal({show:true});
+			});
 		});
 
 
