@@ -110,6 +110,8 @@ while ($roedate = mysqli_fetch_array($querydate))
    // echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     header("Location: ../index.php?mensaje=ok&respuesta=Rien n´est envoyé");
 }
+}else{
+     header("Location: ../index.php?mensaje=ok&respuesta=Rien n´est envoyé");
 }
 }
 ?>
