@@ -56,6 +56,9 @@ $array = mysqli_fetch_array($query);
 				<a href="otro.php" class="btn btn-success pe-2 ps-2 fas fa-save">&nbsp; Enregistrer un client</a>
 			</div>
 			<div class="col">
+				<a href="phpMail040322/enviarMailNotificacion.php" class="btn btn-success pe-2 ps-2 fas fa-save">&nbsp; Verifier echéance des polices</a>
+			</div>
+			<div class="col">
 				<a href="addmore/addmore.php" class="btn btn-success pe-2 ps-2 fas fa-save">&nbsp; Enregistrer plusieurs clients</a>
 			</div>
 		</div>
