@@ -59,9 +59,10 @@
 							</div>
 							<div class="col-md-4 mb-3 d-grid">
 								<input type="submit" value="Ajouter" class="btn btn-primary" id="add_btn">
-								<a href="pdf.php" class="btn btn-warning m-1 float-end " target="_blank"><i class="fas fa-table fa-lg"></i>&nbsp;&nbsp;Imprimir a PDF DOMPDF</a>
-								<a href="indexXML.php" class="btn btn-warning m-1 float-end " target="_blank"><i class="fas fa-table fa-lg"></i>&nbsp;&nbsp;Imprimir XML</a>
-								<a href="carousel2.php" class="btn btn-danger m-1 float-end " target="_blank"><i class="fas fa-table fa-lg"></i>&nbsp;&nbsp;CREAR CAROUSSEL CON SUBIDA DE FICHERO</a>
+								<a href="pdf.php" class="btn btn-warning m-1 float-end " target="_blank"><i class="fas fa-table fa-lg"></i>&nbsp;&nbsp;Liste des clients en PDF</a>
+								<a href="laListeExcelClients.php" class="btn btn-danger m-1 float-end " target="_blank"><i class="fas fa-table fa-lg"></i>&nbsp;&nbsp;Liste des clients en Excel</a>
+								<a hidden href="indexXML.php" class="btn btn-warning m-1 float-end " target="_blank"><i class="fas fa-table fa-lg"></i>&nbsp;&nbsp;Imprimir XML</a>
+								<a hidden href="carousel2.php" class="btn btn-danger m-1 float-end " target="_blank"><i class="fas fa-table fa-lg"></i>&nbsp;&nbsp;CREAR CAROUSSEL CON SUBIDA DE FICHERO</a>
 							</div>
 
 						</form>

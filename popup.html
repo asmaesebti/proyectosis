@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="popup.css">
+	<title></title>
+</head>
+<body>
+	<div class="container">
+		<div class="content">
+			<h2>Heading...</h2>
+			<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia architecto odio, accusamus, voluptatem consectetur nobis dolore veritatis quibusdam, assumenda animi debitis! Mollitia in dignissimos vel tenetur numquam tempore ducimus nulla!</p>
+		</div>
+		<div class="toggleBtn">
+			
+		</div>
+	</div>
+
+
+<script type="text/javascript">
+	let toggleBtn = document.querySelector('.toggleBtn');
+	let container = document.querySelector('.container');
+	toggleBtn.onclick = function(){
+	container.classList.toggle('active');
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css?family=Oswald: 400,700');
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font: 'Poppins', sans-serif;
+}
+
+body{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	background: #252839;
+	/*border: 1px solid orangered;*/
+
+
+}
+
+ul{
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+}
+
+ul li{
+	position: relative;
+	list-style-type: none;
+
+}
+
+/*colores*/
+.blue{--clr: #3193fa}
+.red{--clr: #ff4000}
+.yellow{--clr: #ffda71}
+.green{--clr: #5bc0be}
+
+.pink{--clr: #d8315b}
+
+ul li a{
+	position: relative;
+	font-size: 4em;
+	text-decoration: none;
+	line-height: 1em;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	color: transparent;
+
+	-webkit-text-stroke:  1px rgba(255,255,255,0.5);
+
+
+}
+
+ul li a::before{
+	content: attr(data-text);
+	position: absolute;
+	color: var(--clr);
+	width: 0;
+	overflow: hidden;
+	border-right: 8px solid var(--clr);
+	-webkit-text-stroke:  1px var(--clr);
+	transition: 0.75s ease-in-out;
+
+}
+
+ul li a:hover::before{
+	width: 100%;
+	/*-webkit-text-stroke:  1px var(--clr);*/
+		filter:  drop-shadow(0 0 20px var(--clr));
+
+
+	}
+
