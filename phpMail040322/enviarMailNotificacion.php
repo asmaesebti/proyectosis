@@ -112,6 +112,7 @@ while ($roedate = mysqli_fetch_array($querydate))
 }
 }else{
      header("Location: ../index.php?mensaje=ok&respuesta=Rien n´est envoyé");
+     // se ha corregido el error
 }
 }
 ?>
