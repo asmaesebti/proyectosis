@@ -81,3 +81,46 @@ ALTER TABLE proyectosis AUTO_INCREMENT = 1;
 ALTER TABLE proyectosis ADD recu int UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST;
 
 
+CREATE VIEW usuarios_recu AS 
+SELECT `nombre`, 
+       `apellidos`, 
+       `email`, 
+       `telefono`,
+       `police`,
+       `au`
+FROM usuarios
+left JOIN proyectosis 
+ON nombre = assure;
+
+CREATE VIEW usuarios_recu5 AS 
+SELECT u.`nombre`, 
+       u.`apellidos`, 
+       u.`email`, 
+       u.`telefono`,
+       p.`police`,
+       p.`au`
+FROM usuarios u
+left JOIN proyectosis p 
+ON nombre = assure;
+
+CREATE VIEW usuarios_recu5 AS 
+SELECT u.`nombre`, 
+       u.`apellidos`, 
+       u.`email`, 
+       u.`telefono`,
+       p.`police`,
+       p.`au`
+FROM usuarios u
+inner JOIN proyectosis p 
+ON concat(nombre,' ',apellidos) = assure;
+
+CREATE VIEW usuarios_recu5 AS 
+SELECT u.`nombre`, 
+       u.`apellidos`, 
+       u.`email`, 
+       u.`telefono`,
+       p.`police`,
+       p.`au`
+FROM usuarios u
+left JOIN proyectosis p 
+ON concat(nombre,' ',apellidos) = assure;
