@@ -124,3 +124,71 @@ SELECT u.`nombre`,
 FROM usuarios u
 left JOIN proyectosis p 
 ON concat(nombre,' ',apellidos) = assure;
+
+//funciona muy bien la 8 si existe los datos en las dos tablas el mismo cliente
+
+CREATE VIEW usuarios_recu8 AS 
+SELECT u.`nombre`, 
+       u.`apellidos`, 
+       u.`email`, 
+       u.`telefono`,
+       p.`letype`,
+       p.`police`,
+       p.`attestation`,
+       p.`matricule`,
+       p.`au`,
+       p.`totale`
+FROM usuarios u
+left JOIN proyectosis p 
+ON concat(nombre,' ',apellidos) = assure;
+
+CREATE FUNCTION SPLIT_STR(
+  x VARCHAR(255),
+  delim VARCHAR(12),
+  pos INT
+)
+RETURNS VARCHAR(255)
+RETURN REPLACE(SUBSTRING(SUBSTRING_INDEX(x, delim, pos),
+       LENGTH(SUBSTRING_INDEX(x, delim, pos -1)) + 1),
+       delim, '');
+
+
+create trigger usuarios_ai_1 after insert on proyectosis for EACH row insert into usuarios (id, nombre,apellidos, email,telefono) VALUES
+(new.recu, new.assure, new.assure, new.produit)
+
+INSERT INTO `usuarios`(`id`, `nombre`, `apellidos`, `email`, `telefono`) VALUES (null, (select  SPLIT_STR(`assure`,' ' , 2) 
+  from proyectosis where `recu` = 22),' ', ' ' , ' ')
+
+
+select SPLIT_STR(`assure`,' ' , 1) as nombre, SPLIT_STR(`assure`,' ' , 2) as apellidos from proyectosis
+
+
+
+
+DELIMITER $$
+create trigger competence_ins after insert on proyectosis
+for each row 
+begin
+ insert into usuarios (nombre,apellidos,email,telefono)
+ VALUES(SPLIT_STR(new.assure,' ' , 1), SPLIT_STR(new.assure,' ' , 2), '','');
+ 
+END$$
+
+delimiter;
+
+CREATE TABLE `usuarios_eliminados` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `apellidos` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `telefono` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1017 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+
+create trigger usuarios_elimines_ad after delete on usuarios for each row insert into usuarios_eliminados 
+     (id, nombre, apellidos,email,telefono)
+     VALUES (old.id, old.nombre, old.apellidos, old.email, old.telefono)
+
+     

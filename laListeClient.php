@@ -6,7 +6,7 @@ require_once('conexion.php');
 mysqli_query($connection,"SET CHARACTER SET 'utf8'");
 mysqli_query($connection,"SET SESSION collation_connection ='utf8_unicode_ci'");
 
-$consultar = "select * from proyectosis";
+$consultar = "select * from usuarios";
 $query = mysqli_query($connection, $consultar);
 $array = mysqli_fetch_array($query);
 
@@ -57,27 +57,16 @@ $array = mysqli_fetch_array($query);
 	<div class="container-fluid conjunto">
 		<div class="row">
 			<div class="col">
-				<h1>La liste de tous les reçus</h1>
+				<h1>La liste de tous les clients</h1>
 				<table class="table table-hover" id="laLista">
 					<thead>
 						<tr>
-							<th scope="col">DATE</th>
-							<th scope="col">REÇU</th>
-							<th scope="col">LE TYPE</th>
-							<th scope="col">ATTESTATION</th>
-							<th scope="col">POLICE</th>
-							<th scope="col">MATRICULE</th>
-							<th scope="col">PRODUIT</th>
-							<th scope="col">ASSURÉ</th>
-							<th scope="col">PERIODE DU</th>
-							<th scope="col">PERIODE AU</th>
-							<th scope="col">PRIME TOTALE</th>
-							<th scope="col">ESPECE</th>
-							<th scope="col">CHEQUE</th>
-							<th scope="col">VIREMENT</th>
-							<th scope="col">RESTE</th>
-							<th scope="col">DATE VERSEMENT</th>
-							<th scope="col">CREE LE</th>
+							<th scope="col">ID</th>
+							<th scope="col">NOM</th>
+							<th scope="col">PRENOM</th>
+							<th scope="col">EMAIL</th>
+							<th scope="col">TELEPHONE</th>
+							
 							<th scope="col">Modificar</th>
 							<th scope="col">Eliminar</th>
 							<th scope="col">Imprimer</th>
@@ -85,108 +74,43 @@ $array = mysqli_fetch_array($query);
 					</thead>
 					<tbody>
 						<?php 
-
 						foreach ($query as $row) {
 							?>
 							<tr>
-								<td><?php echo $row['fecha_hoy']; ?></td>
-								<th scope="row"><?php echo $row['recu']; ?></th>
-								<td><?php echo utf8_decode($row['letype']); ?></td>
-								<td><?php echo $row['attestation']; ?></td>
-								<td><?php echo $row['police']; ?></td>
-								<td><?php echo $row['matricule']; ?></td>
-								<td><?php echo $row['produit']; ?></td>
-								<td><?php echo $row['assure']; ?></td>
-								<td><?php echo $row['du']; ?></td>
-								<td><?php echo $row['au']; ?></td>
-								<td><?php echo $row['totale']; ?></td>
-								<td><?php echo $row['espece']; ?></td>
-								<td><?php echo $row['cheque']; ?></td>
-								<td><?php echo $row['virement']; ?></td>
-								<td><?php echo $row['reste']; ?></td>
-								<td style="color: <?php echo ($row['date_versement'] == '1970-01-01') ? 'beige' : '';  ?>; "><?php echo $row['date_versement']; ?></td>
+								<td><?php echo $row['id']; ?></td>
+								<th scope="row"><?php echo $row['nombre']; ?></th>
+								<td><?php echo utf8_decode($row['apellidos']); ?></td>
+								<td><?php echo $row['email']; ?></td>
+								<td><?php echo $row['telefono']; ?></td>
 								
-								<td><?php echo $row['cree_le']; ?></td>
-								<td class="align-middle"><a class="btn btn-warning" href="modifierRecu.php?recu=<?php echo $row['recu']; ?>">modificar</a> </td>
-								<td class="align-middle"><a class="btn btn-danger" href="eliminerRecu.php?recu=<?php echo $row['recu']; ?>">eliminar</a></td>
-								<td class="align-middle"><a class="btn btn-success" target="_blank" href="generarPDFbyRecu.php?recu=<?php echo $row['recu']; ?>">Imprimer</a></td>
+								<td class="align-middle"><a class="btn btn-warning" href="modifierClient.php?id=<?php echo $row['id']; ?>">modificar</a> </td>
+								<td class="align-middle"><a class="btn btn-danger" href="eliminerClient.php?id=<?php echo $row['id']; ?>">eliminar</a></td>
+								<td class="align-middle"><a class="btn btn-success" target="_blank" href="generarPDFbyIdClient.php?id=<?php echo $row['id']; ?>">Imprimer</a></td>
 							</tr>
 
-							<?php
-						}
-
-						?>
-
+							<?php }	?>
 					</tbody>
 					<tfoot>
-						<td class="bg-grays-active color-palette"><b></b></td>
-						<td class="bg-teals-active color-palette text-center">
-							<strong id="abiertoEnTiempo"></strong>
-						</td>
-						<td class="bg-teals-active color-palette text-center">
-							<strong></strong>
-						</td>
-						<td class="bg-teals-active color-palette text-center">
-							<strong></strong>
-						</td>
-						<td class="bg-teals-active color-palette text-center">
-							<strong></strong>
-						</td>
-						<td class="bg-teals-active color-palette text-center">
-							<strong></strong>
-						</td>
-						<td class="bg-teals-active color-palette text-center">
-							<strong></strong>
-						</td>
-						<td class="bg-teals-active color-palette text-center">
-							<strong></strong>
-						</td>
-						<td class="bg-teals-active color-palette text-center">
-							<strong></strong>
-						</td>
-						<td class="bg-teals-active color-palette text-center">
-							<strong><b>Total </b></strong>
-						</td>
-						<td class="bg-teals-active color-palette text-center">
-							<strong id="monto">0</strong>
-						</td>
-						</td>
-						<td class="bg-teals-active color-palette text-center">
-							<strong id="monto1">0</strong>
-						</td>
-						<td class="bg-teals-active color-palette text-center">
-							<strong id="monto2">0</strong>
-						</td>
-						<td class="bg-teals-active color-palette text-center">
-							<strong id="monto3">0</strong>
-						</td>
-						<td class="bg-teals-active color-palette text-center">
-							<strong id="monto4">0</strong>
-						</td>
+						
 					</tfoot>
 				</table>
 				<div class="row mt-3 ">
 					<div class="col-2">
 						<a class="btn btn-warning" href="index.php" role="button">Retourner au formulaire</a>
 					</div>
+					
 					<div class="col-2">
-						<a class="btn btn-success" href="form_date.php" role="button">La liste par date</a>
-					</div>
-					<div class="col-2">
-						<a class="btn btn-danger" href="laListeExcel.php" role="button">La liste en excel</a>
+						<a class="btn btn-danger" href="laListeClientExcel.php" role="button">La liste en excel</a>
 					</div>
 					<div class="col-2">
 						<a class="btn btn-primary" href="copiaSeguridad.php" role="button">Sauvegarde de securité de la base de données</a>
-					</div>
-					<div class="col-2">
-						<a class="btn btn-success" href="diagram.php"  role="button">Diagram du montant</a>
 					</div>
 
 					<div class="col-1 ">
 						<a class="btn btn-success" href="index.php" role="button">Salir</a>
 					</div>
 					<div class="col-1">
-						<a class="btn btn-danger" href="laListeExcelElimines.php" role="button">La liste des eliminés</a>
+						<a class="btn btn-danger" href="laListeExcelClientsElimines.php" role="button">La liste des eliminés</a>
 					</div>
 				</div>
 			</div>

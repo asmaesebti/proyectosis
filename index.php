@@ -326,6 +326,9 @@ $array = mysqli_fetch_array($query);
 			<div class="col text-center ">
 				<a class="btn btn-success" href="escanear4.php">Scanner du code QR</a>
 			</div>
+			<div class="col text-center ">
+				<a class="btn btn-success" href="laListeClient.php">La liste de tous les clients</a>
+			</div>
 			<div class="col text-center">
 				<span class="firma">Signature Client</span>
 			</div>

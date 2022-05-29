@@ -22,10 +22,12 @@ $virement = $_POST['virement'];
 $reste = $_POST['reste'];
 $date_versement = $_POST['date_versement'];
 
-echo $_POST['leType'] . "<br>";
-echo $_POST['attestation'] . "<br>";
+echo $fecha_hoy . "<br>";
+echo $recu ."<br>";
+echo $leType ."<br>";
 
 $leType = html_entity_decode($leType, ENT_QUOTES | ENT_HTML401, "UTF-8");
+
 
 if (!isset($_POST['date_versement'])) {
 	$date_versement = "1970/01/01";
@@ -62,6 +64,7 @@ if ($query) {
 	// echo "<script> alert('Se han actualizado los cambios correctamente');
 	// location.href = 'laListe.php';</script>";
 		echo $_SESSION['date_versement'];
+		
 	 header("Location: laListe.php?mensaje=ok&respuesta=Données actualiser correctement");
 }else{
 	echo "<br>" . mysqli_error($connection);

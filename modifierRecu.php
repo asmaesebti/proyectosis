@@ -1,7 +1,10 @@
 <?php 
-
+header('Content-Type: text/html; charset=utf8');  
 session_start();
 require_once('conexion.php');
+
+mysqli_query($connection,"SET CHARACTER SET 'utf8'");
+mysqli_query($connection,"SET SESSION collation_connection ='utf8_unicode_ci'");
 
 $recu = $_GET['recu'];
 
@@ -13,12 +16,19 @@ $query = mysqli_query($connection, $consultar);
 
 
 ?>
+<?php 
+
+$consultarDep = "SELECT * FROM letype";
+
+$queryDep = mysqli_query($connection, $consultarDep);
+$array = mysqli_fetch_array($queryDep);  ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <!--divinectorweb.com-->
 <head>
 	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<title>Proyecto SIS</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" type="text/css"/>
@@ -98,222 +108,218 @@ $query = mysqli_query($connection, $consultar);
 							
 						</div>
 
-
 						<div class="row">
 							<div class="col col-3">
 								<label>Type de l'affaire:</label>
 							</div>
 							<div class="col">
-								<select class="form-select" aria-label="Default select example" name="leType">
-									<option selected>Seleccioner une affaire</option>
-									<option value="Affaire nouvelle" <?php if ($row['letype']=="Affaire nouvelle") echo 'selected';?>  > Affaire nouvelle</option>
-									<option value="Renouvellement" <?php if ($row['letype']=="Renouvellement") echo 'selected';?>>Renouvellement</option>
-									<option value="Changement vehicule" <?php if ($row['letype']=="Changement vehicule") echo 'selected';?>>Changement vehicule</option>
-									<option value="Duplicata" <?php if ($row['letype']=="Duplicata") echo 'selected';?>>Duplicata</option>
-									<option value="Resiliation" <?php if ($row['letype']=="Resiliation") echo 'selected';?>>Resiliation</option>
-									<option value="Autre provisoire" <?php if ($row['letype']=="Autre provisoire") echo 'selected';?>>Autre provisoire</option>
-									<option value="Attestation définitive" <?php if ($row['letype']=="Attestation définitive") echo 'selected';?>>Attestation définitive</option>
-									<option value="Autres" <?php if ($row['letype']=="Autres") echo 'selected';?>>Autres</option>
-								</select>
-							</div>
-						</div>
-						
-						<div class="row " hidden>
-							<div class="col">
-								<div class="custom-control custom-control-inline custom-radio">
-									<input type="radio" id="affaire-nouvelle" name="leType"  class="custom-control-input" <?php if ($row['letype']=="Affaire nouvelle") echo 'checked';?> value="Affaire nouvelle" >
-									<label for="affaire-nouvelle" class="custom-control-label">Affaire nouvelle</label>
-								</div>
-							</div>
-							<div class="col">
-								<div class="custom-control custom-control-inline custom-radio">
-									<input type="radio" name="leType" id="renouvellement" value="Renouvellement" class="custom-control-input" <?php if ($row['letype']=="Renouvellement") echo "checked";?>>
-									<label for="renouvellement" class="custom-control-label">Renouvellement</label>
-								</div>
-							</div>
-							<div class="col">
-								<div class="custom-control custom-control-inline custom-radio">
-									<input type="radio" name="leType" id="changement-vehicule" value="Changement vehicule" class="custom-control-input" <?php if ($row['letype']=="Changement vehicule") echo "checked";?>>
-									<label for="changement-vehicule" class="custom-control-label">Changement vehicule</label>
-								</div>
-							</div>
-						</div>
-						<div class="row mt-3" hidden>
-							<div class="col">
-								<div class="custom-control custom-control-inline custom-radio">
-									<input type="radio" name="leType" id="duplicata" value="Duplicata" class="custom-control-input" <?php if ($row['letype']=="Duplicata") echo "checked";?>>
-									<label for="duplicata" class="custom-control-label">Duplicata</label>
-								</div>
-							</div>
-							<div class="col">
-								<div class="custom-control custom-control-inline custom-radio">
-									<input type="radio" name="leType" id="autres" value="Autres" class="custom-control-input" <?php if ($row['letype']=="Autres") echo "checked";?>>
-									<label for="autres" class="custom-control-label">Autres</label>
-									<span class="error" style="color: red;"><?php if(isset($_SESSION['errorLetype'])) echo $_SESSION['errorLetype'] ;  ?></span>
-								</div>
-							</div>
-						</div>
-						<div class="form-group mt-4">
-							<label>Attestation : *</label><span class="error" style="color: red;"><?php if(isset($_SESSION['errorAttestation'])) echo $_SESSION['errorAttestation'] ;  ?></span>
-							<input type="text" class="form-control" name="attestation" value="<?php echo $row['attestation']; ?>" >
-							
-						</div>
-						<div class="form-group mt-4">
-							<label>Nº Police : *</label><span class="error" style="color: red;"><?php if(isset($_SESSION['errorPolice'])) echo $_SESSION['errorPolice'] ;  ?></span>
-							<input type="text" class="form-control" name="police" value="<?php echo $row['police']; ?>" >
-							
-						</div>
-						<div class="form-group mt-4">
-							<label>Matricule : *</label><span class="error" style="color: red;"><?php if(isset($_SESSION['errorMatricule'])) echo $_SESSION['errorMatricule'] ;  ?></span>
-							<input type="text" class="form-control" name="matricule" value="<?php echo $row['matricule']; ?>" >
-							
-						</div>
-						<div class="form-group mt-4">
-							<label>Produit : *</label><span class="error" style="color: red;"><?php if(isset($_SESSION['errorProduit'])) echo $_SESSION['errorProduit'] ;  ?></span>
-							<input type="text" class="form-control" name="produit" value="<?php echo $row['produit']; ?>" >
-							
-						</div>
-						<div class="form-group">
-							<label>Assure : *</label><span class="error" style="color: red;"><?php if(isset($_SESSION['errorAssure'])) echo $_SESSION['errorAssure'] ;  ?></span>
-							<input type="text" class="form-control" name="assure" value="<?php echo $row['assure']; ?>">
-							
-						</div>
-						<div class="form-group">
-							<label>Periode : </label>
-							<div class="row">
-								<div class="col">
-									<label>Du : *</label><span class="error" style="color: red;"><?php if(isset($_SESSION['errorDu'])) echo $_SESSION['errorDu'] ;  ?></span>
-									<input type="date" class="form-control" name="du" value="<?php echo $row['du']; ?>" >
+								<select class="form-select" aria-label="Default select example" name="leType" id="e2">
+
+									<?php foreach ($queryDep as $rowDep) { ?>
+										<option value="<?php echo $rowDep['nombre_letype']; ?>" <?php echo utf8_decode($row['letype']) == $rowDep['nombre_letype'] ? 'selected' : ''; ?> ><?php echo $rowDep['nombre_letype']; ?></option>
+									<?php } ?>
+
 									
+									</select>
+								</div>
+							</div>
+
+					<!-- 		<div class="row " hidden>
+								<div class="col">
+									<div class="custom-control custom-control-inline custom-radio">
+										<input type="radio" id="affaire-nouvelle" name="leType"  class="custom-control-input" <?php if ($row['letype']=="Affaire nouvelle") echo 'checked';?> value="Affaire nouvelle" >
+										<label for="affaire-nouvelle" class="custom-control-label">Affaire nouvelle</label>
+									</div>
 								</div>
 								<div class="col">
-									<label>Au : *</label><span class="error" style="color: red;"><?php if(isset($_SESSION['errorAu'])) echo $_SESSION['errorAu'] ;  ?></span>
-									<input type="date" class="form-control" name="au" value="<?php echo $row['au']; ?>">
-									
+									<div class="custom-control custom-control-inline custom-radio">
+										<input type="radio" name="leType" id="renouvellement" value="Renouvellement" class="custom-control-input" <?php if ($row['letype']=="Renouvellement") echo "checked";?>>
+										<label for="renouvellement" class="custom-control-label">Renouvellement</label>
+									</div>
+								</div>
+								<div class="col">
+									<div class="custom-control custom-control-inline custom-radio">
+										<input type="radio" name="leType" id="changement-vehicule" value="Changement vehicule" class="custom-control-input" <?php if ($row['letype']=="Changement vehicule") echo "checked";?>>
+										<label for="changement-vehicule" class="custom-control-label">Changement vehicule</label>
+									</div>
+								</div>
+							</div> -->
+							<!-- <div class="row mt-3" hidden>
+								<div class="col">
+									<div class="custom-control custom-control-inline custom-radio">
+										<input type="radio" name="leType" id="duplicata" value="Duplicata" class="custom-control-input" <?php if ($row['letype']=="Duplicata") echo "checked";?>>
+										<label for="duplicata" class="custom-control-label">Duplicata</label>
+									</div>
+								</div>
+								<div class="col">
+									<div class="custom-control custom-control-inline custom-radio">
+										<input type="radio" name="leType" id="autres" value="Autres" class="custom-control-input" <?php if ($row['letype']=="Autres") echo "checked";?>>
+										<label for="autres" class="custom-control-label">Autres</label>
+										<span class="error" style="color: red;"><?php if(isset($_SESSION['errorLetype'])) echo $_SESSION['errorLetype'] ;  ?></span>
+									</div>
+								</div>
+							</div> -->
+							<div class="form-group mt-4">
+								<label>Attestation : *</label><span class="error" style="color: red;"><?php if(isset($_SESSION['errorAttestation'])) echo $_SESSION['errorAttestation'] ;  ?></span>
+								<input type="text" class="form-control" name="attestation" value="<?php echo $row['attestation']; ?>" >
+
+							</div>
+							<div class="form-group mt-4">
+								<label>Nº Police : *</label><span class="error" style="color: red;"><?php if(isset($_SESSION['errorPolice'])) echo $_SESSION['errorPolice'] ;  ?></span>
+								<input type="text" class="form-control" name="police" value="<?php echo $row['police']; ?>" >
+
+							</div>
+							<div class="form-group mt-4">
+								<label>Matricule : *</label><span class="error" style="color: red;"><?php if(isset($_SESSION['errorMatricule'])) echo $_SESSION['errorMatricule'] ;  ?></span>
+								<input type="text" class="form-control" name="matricule" value="<?php echo $row['matricule']; ?>" >
+
+							</div>
+							<div class="form-group mt-4">
+								<label>Produit : *</label><span class="error" style="color: red;"><?php if(isset($_SESSION['errorProduit'])) echo $_SESSION['errorProduit'] ;  ?></span>
+								<input type="text" class="form-control" name="produit" value="<?php echo $row['produit']; ?>" >
+
+							</div>
+							<div class="form-group">
+								<label>Assure : *</label><span class="error" style="color: red;"><?php if(isset($_SESSION['errorAssure'])) echo $_SESSION['errorAssure'] ;  ?></span>
+								<input type="text" class="form-control" name="assure" value="<?php echo $row['assure']; ?>">
+
+							</div>
+							<div class="form-group">
+								<label>Periode : </label>
+								<div class="row">
+									<div class="col">
+										<label>Du : *</label><span class="error" style="color: red;"><?php if(isset($_SESSION['errorDu'])) echo $_SESSION['errorDu'] ;  ?></span>
+										<input type="date" class="form-control" name="du" value="<?php echo $row['du']; ?>" >
+
+									</div>
+									<div class="col">
+										<label>Au : *</label><span class="error" style="color: red;"><?php if(isset($_SESSION['errorAu'])) echo $_SESSION['errorAu'] ;  ?></span>
+										<input type="date" class="form-control" name="au" value="<?php echo $row['au']; ?>">
+
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="form-group">
+							<div class="form-group">
+								<div class="row mt-3">
+									<div class="col col-3">
+										<label>Prime totale : *</label><span class="error" style="color: red;"><?php if(isset($_SESSION['errorTotale'])) echo $_SESSION['errorTotale'] ;  ?></span>
+									</div>
+									<div class="col col-7">
+										<input type="number" class="form-control" id="totale" step="0.01" name="totale"  value="<?php echo $row['totale']; ?>" id="totale" >
+									</div>
+								</div>
+
+								<div class="row mt-2">
+									<div class="col col-3">
+										<label>Espece :</label>
+									</div>
+									<div class="col col-7">
+										<input type="number" class="form-control" id="espece" step="0.01" name="espece"  value="<?php echo $row['espece']; ?>" onfocus="if(this.value=='0.00'){ this.value=''; }">
+									</div>
+								</div>
+								<div class="row mt-2">
+									<div class="col col-3">
+										<label>Cheque :</label>
+									</div>
+									<div class="col col-7">
+										<input type="number" class="form-control" id="cheque" step="0.01" name="cheque"  value="<?php echo $row['cheque']; ?>" onfocus="if(this.value=='0.00'){ this.value=''; }">
+									</div>
+								</div>
+								<div class="row mt-1">
+									<div class="col col-3">
+										<label>Virement :</label>
+									</div>
+									<div class="col col-7">
+										<input type="number" class="form-control" id="virement" min="0" step="0.01" name="virement" value="<?php echo $row['virement']; ?>" onfocus="if(this.value=='0.00'){ this.value=''; }" >
+									</div>
+								</div>
+								<div class="row">
+									<div class="col col-3">
+										<label>Reste a regler :</label>
+									</div>
+									<div class="col col-7">
+										<span>El resultado es: </span> <span id="spTotal"></span>
+										<input type="number" class="form-control" id="reste" step="0.01" name="reste"  value="<?php echo $row['reste']; ?>" >
+									</div>
+								</div>
+								<div class="row mt-3">
+									<div class="col col-3 mt-2">
+										<div class="form-group">
+											<label>Date Versement: </label>
+										</div>
+									</div>
+									<div class="col">
+										<div class="form-group">
+											<span class="error" style="color: red;"><?php if(isset($_SESSION['errorDate_versement'])) echo $_SESSION['errorDate_versement'] ;  ?></span>
+											<input type="date" class="form-control" name="date_versement" value="<?php echo ($row['date_versement'] == "1970-01-01") ? "" : $row['date_versement'];  ?>" style="color: <?php if(isset($_SESSION['date_versement']) && $_SESSION['date_versement'] == "1970/01/01") echo "beige" ;  ?>" >
+										</div>
+									</div>
+
+								</div>
+								<div class="row mt-3" hidden>
+									<div class="col col-3 mt-4">
+										<div class="form-group">
+											<label>Mode de paiment: </label>
+										</div>
+									</div>
+									<div class="col">
+										<div class="form-group">
+											<span class="error" style="color: red;"><?php if(isset($_SESSION['errorModePaiment'])) echo $_SESSION['errorModePaiment'] ;  ?></span>
+											<input type="text" class="form-control" name="mode_paiment" value="<?php echo $row['mode_paiment']; ?>" >
+										</div>
+									</div>
+
+								</div>
+							</div>
 							<div class="row mt-3">
-								<div class="col col-3">
-									<label>Prime totale : *</label><span class="error" style="color: red;"><?php if(isset($_SESSION['errorTotale'])) echo $_SESSION['errorTotale'] ;  ?></span>
+								<div class="col">
+									<button type="submit" class="btn btn-success p-3" name="enregistrer" >Modifier</button>
 								</div>
-								<div class="col col-7">
-									<input type="number" class="form-control" id="totale" step="0.01" name="totale"  value="<?php echo $row['totale']; ?>" id="totale" >
+								<div class="col">
+									<a class="btn btn-success" href="laListe.php" >La liste de tous les reçus</a>
 								</div>
-							</div>
-							
-							<div class="row mt-2">
-								<div class="col col-3">
-									<label>Espece :</label>
-								</div>
-								<div class="col col-7">
-									<input type="number" class="form-control" id="espece" step="0.01" name="espece"  value="<?php echo $row['espece']; ?>" onfocus="if(this.value=='0.00'){ this.value=''; }">
-								</div>
-							</div>
-							<div class="row mt-2">
-								<div class="col col-3">
-									<label>Cheque :</label>
-								</div>
-								<div class="col col-7">
-									<input type="number" class="form-control" id="cheque" step="0.01" name="cheque"  value="<?php echo $row['cheque']; ?>" onfocus="if(this.value=='0.00'){ this.value=''; }">
-								</div>
-							</div>
-							<div class="row mt-1">
-								<div class="col col-3">
-									<label>Virement :</label>
-								</div>
-								<div class="col col-7">
-									<input type="number" class="form-control" id="virement" min="0" step="0.01" name="virement" value="<?php echo $row['virement']; ?>" onfocus="if(this.value=='0.00'){ this.value=''; }" >
+								<div class="col">
+									<a class="btn btn-success" href="index.php" >Retourner au formulaire</a>
 								</div>
 							</div>
 							<div class="row">
-								<div class="col col-3">
-									<label>Reste a regler :</label>
-								</div>
-								<div class="col col-7">
-									<span>El resultado es: </span> <span id="spTotal"></span>
-									<input type="number" class="form-control" id="reste" step="0.01" name="reste"  value="<?php echo $row['reste']; ?>" >
-								</div>
+								<p><span class="error">* Champs obligatoires</span></p>
 							</div>
-							<div class="row mt-3">
-								<div class="col col-3 mt-2">
-									<div class="form-group">
-										<label>Date Versement: </label>
-									</div>
-								</div>
-								<div class="col">
-									<div class="form-group">
-										<span class="error" style="color: red;"><?php if(isset($_SESSION['errorDate_versement'])) echo $_SESSION['errorDate_versement'] ;  ?></span>
-										<input type="date" class="form-control" name="date_versement" value="<?php echo ($row['date_versement'] == "1970-01-01") ? "" : $row['date_versement'];  ?>" style="color: <?php if(isset($_SESSION['date_versement']) && $_SESSION['date_versement'] == "1970/01/01") echo "beige" ;  ?>" >
-									</div>
-								</div>
-
-							</div>
-							<div class="row mt-3" hidden>
-								<div class="col col-3 mt-4">
-									<div class="form-group">
-										<label>Mode de paiment: </label>
-									</div>
-								</div>
-								<div class="col">
-									<div class="form-group">
-										<span class="error" style="color: red;"><?php if(isset($_SESSION['errorModePaiment'])) echo $_SESSION['errorModePaiment'] ;  ?></span>
-										<input type="text" class="form-control" name="mode_paiment" value="<?php echo $row['mode_paiment']; ?>" >
-									</div>
-								</div>
-
-							</div>
-						</div>
-						<div class="row mt-3">
-							<div class="col">
-								<button type="submit" class="btn btn-success p-3" name="enregistrer" >Modifier</button>
-							</div>
-							<div class="col">
-								<a class="btn btn-success" href="laListe.php" >La liste de tous les reçus</a>
-							</div>
-							<div class="col">
-								<a class="btn btn-success" href="index.php" >Retourner au formulaire</a>
-							</div>
-						</div>
-						<div class="row">
-							<p><span class="error">* Champs obligatoires</span></p>
-						</div>
-					</form>
+						</form>
+					</div>
 				</div>
+				<div class="row mt-3 mb-5 ">
+					<div class="col text-center ">
+						<span class="firma">Signature Production</span>
+					</div>
+					<div class="col text-center">
+						<span class="firma">Signature Client</span>
+					</div>
+				</div>
+
 			</div>
-			<div class="row mt-3 mb-5 ">
-				<div class="col text-center ">
-					<span class="firma">Signature Production</span>
-				</div>
-				<div class="col text-center">
-					<span class="firma">Signature Client</span>
-				</div>
+			<?php
+		}
+
+		?>
+		<footer class="container text-center">
+			<div class="bord">
+				Intermédiaire d’assurances régi par la loi N° 17-99 portant Code des Assurances - N° Agrément : A 19184541200881001 du 22/10/2008
 			</div>
-
-		</div>
-		<?php
-	}
-
-	?>
-	<footer class="container text-center">
-		<div class="bord">
-			Intermédiaire d’assurances régi par la loi N° 17-99 portant Code des Assurances - N° Agrément : A 19184541200881001 du 22/10/2008
-		</div>
-		<div>
-			Angle Avenue de la Résistance et Rue de Paris - Magasin N° 4 - Océan - Rabat 
-		</div>
-		<div>
-			Tél. : 05 37 73 31 31 – Fax : 05 37 73 70 70
-		</div>
-		<div>
-			R.C. : 81798 – Patente : 26330191 – CNSS : 7040306 – I.F. : 34340738 – ICE : 001695528000088
-		</div>
-	</footer>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js">
-	</script> 
-	<script type="text/javascript">
+			<div>
+				Angle Avenue de la Résistance et Rue de Paris - Magasin N° 4 - Océan - Rabat 
+			</div>
+			<div>
+				Tél. : 05 37 73 31 31 – Fax : 05 37 73 70 70
+			</div>
+			<div>
+				R.C. : 81798 – Patente : 26330191 – CNSS : 7040306 – I.F. : 34340738 – ICE : 001695528000088
+			</div>
+		</footer>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js">
+		</script> 
+		<script type="text/javascript">
 		// esta funcion no se utiliza porque no resta bien pero si suma muy bien
 		function restar (valor) {
 			var total = 0;	
@@ -349,11 +355,16 @@ $query = mysqli_query($connection, $consultar);
 			} 
 		});
 
+		// $('#e2').change(function(){
+		// 	var opt = $("#e2 option:selected" ).val();
+  //           console.log(opt); //output console log
+  //       });
 
 
 
-	</script>
-	
+
+</script>
+
 </body>
 </html>
 

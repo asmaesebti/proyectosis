@@ -1,11 +1,34 @@
 <?php 
-
+header('Content-Type: text/html; charset=utf8');  
 session_start();
 require_once('conexion.php');
 
-$recu = $_GET['recu'];
+mysqli_query($connection,"SET CHARACTER SET 'utf8'");
+mysqli_query($connection,"SET SESSION collation_connection ='utf8_unicode_ci'");
 
-$consultar = "SELECT * FROM proyectosis WHERE recu = '$recu'";
+//$recu = $_GET['recu'];
+
+$laCookie = $_COOKIE["codigo"];
+$parteCookie = explode("_", $laCookie);
+//echo $parteCookie[0];
+
+$assure = $parteCookie[0];
+$leType = $parteCookie[1];
+$attestation = $parteCookie[2];
+$police = $parteCookie[3];
+$matricule = $parteCookie[4];
+$produit = $parteCookie[5];
+$du = $parteCookie[6];
+$au = $parteCookie[7];
+$totale = $parteCookie[8];
+$espece = $parteCookie[9];
+$cheque = $parteCookie[10];
+$virement = $parteCookie[11];
+$reste = $parteCookie[12];
+
+
+
+$consultar = "SELECT * FROM proyectosis WHERE assure = '$assure'";
 $query = mysqli_query($connection, $consultar);
 
 
@@ -13,6 +36,11 @@ $query = mysqli_query($connection, $consultar);
 
 
 ?>
+<?php 
+$consultarDep = "SELECT * FROM letype";
+$queryDep = mysqli_query($connection, $consultarDep);
+$array = mysqli_fetch_array($queryDep);  ?>
+
 <?php echo $_COOKIE["codigo"]; 
 // pendiente hacer split a la cookie para recuperar todos los campos y colocarlos en los input para modificar si hace falta
 // pendiente compbrobar que el usuario existe en la base de datos con el $recu
@@ -22,6 +50,7 @@ $query = mysqli_query($connection, $consultar);
 <!--divinectorweb.com-->
 <head>
 	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<title>Proyecto SIS</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" type="text/css"/>
@@ -63,7 +92,7 @@ $query = mysqli_query($connection, $consultar);
 		<div class="container">
 			<div class="row">
 				<div class="col">
-					<form method="POST" action="procesar_modifierRecu.php" id="log">
+					<form method="POST" action="procesar_modifierRecuApartirCookie.php" id="log">
 						
 						<div class="row">
 							<div class="col">
@@ -108,20 +137,14 @@ $query = mysqli_query($connection, $consultar);
 							</div>
 							<div class="col">
 								<select class="form-select" aria-label="Default select example" name="leType">
-									<option selected>Seleccioner une affaire</option>
-									<option value="Affaire nouvelle" <?php if ($row['letype']=="Affaire nouvelle") echo 'selected';?>  > Affaire nouvelle</option>
-									<option value="Renouvellement" <?php if ($row['letype']=="Renouvellement") echo 'selected';?>>Renouvellement</option>
-									<option value="Changement vehicule" <?php if ($row['letype']=="Changement vehicule") echo 'selected';?>>Changement vehicule</option>
-									<option value="Duplicata" <?php if ($row['letype']=="Duplicata") echo 'selected';?>>Duplicata</option>
-									<option value="Resiliation" <?php if ($row['letype']=="Resiliation") echo 'selected';?>>Resiliation</option>
-									<option value="Autre provisoire" <?php if ($row['letype']=="Autre provisoire") echo 'selected';?>>Autre provisoire</option>
-									<option value="Attestation définitive" <?php if ($row['letype']=="Attestation définitive") echo 'selected';?>>Attestation définitive</option>
-									<option value="Autres" <?php if ($row['letype']=="Autres") echo 'selected';?>>Autres</option>
+											<?php foreach ($queryDep as $rowDep) { ?>
+										<option value="<?php echo $rowDep['nombre_letype']; ?>" <?php echo utf8_decode($row['letype']) == $rowDep['nombre_letype'] ? 'selected' : ''; ?> ><?php echo $rowDep['nombre_letype']; ?></option>
+									<?php } ?>
 								</select>
 							</div>
 						</div>
 						
-						<div class="row " hidden>
+						<!-- <div class="row " hidden>
 							<div class="col">
 								<div class="custom-control custom-control-inline custom-radio">
 									<input type="radio" id="affaire-nouvelle" name="leType"  class="custom-control-input" <?php if ($row['letype']=="Affaire nouvelle") echo 'checked';?> value="Affaire nouvelle" >
@@ -140,8 +163,8 @@ $query = mysqli_query($connection, $consultar);
 									<label for="changement-vehicule" class="custom-control-label">Changement vehicule</label>
 								</div>
 							</div>
-						</div>
-						<div class="row mt-3" hidden>
+						</div> -->
+						<!-- <div class="row mt-3" hidden>
 							<div class="col">
 								<div class="custom-control custom-control-inline custom-radio">
 									<input type="radio" name="leType" id="duplicata" value="Duplicata" class="custom-control-input" <?php if ($row['letype']=="Duplicata") echo "checked";?>>
@@ -155,7 +178,7 @@ $query = mysqli_query($connection, $consultar);
 									<span class="error" style="color: red;"><?php if(isset($_SESSION['errorLetype'])) echo $_SESSION['errorLetype'] ;  ?></span>
 								</div>
 							</div>
-						</div>
+						</div> -->
 						<div class="form-group mt-4">
 							<label>Attestation : *</label><span class="error" style="color: red;"><?php if(isset($_SESSION['errorAttestation'])) echo $_SESSION['errorAttestation'] ;  ?></span>
 							<input type="text" class="form-control" name="attestation" value="<?php echo $row['attestation']; ?>" >

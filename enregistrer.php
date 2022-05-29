@@ -307,7 +307,8 @@ if (!isset($_POST['date_versement'])) {
 // 	echo "Tu dois introduire un mode paiment";
 // }
 
-$codigoQr = $assure . "_" . $leType . "_" . $police . "_" . $du . "_" . $au . "_" .$totale;
+$codigoQr = $assure . "_" . $leType . "_" . $attestation . "_" . $police . "_" . $matricule . "_" . $produit . "_"
+  . $du . "_" . $au . "_" .$totale . "_" . $espece . "_" . $cheque . "_" . $virement . "_" . $reste;
 $folder="images/";
 // $file_name="qr1".date('m-d-Y-His A e').".png";
 $file_name=$codigoQr.".png";
