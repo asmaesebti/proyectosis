@@ -41,7 +41,7 @@ $consultarDep = "SELECT * FROM letype";
 $queryDep = mysqli_query($connection, $consultarDep);
 $array = mysqli_fetch_array($queryDep);  ?>
 
-<?php echo $_COOKIE["codigo"]; 
+<?php //echo $_COOKIE["codigo"]; 
 // pendiente hacer split a la cookie para recuperar todos los campos y colocarlos en los input para modificar si hace falta
 // pendiente compbrobar que el usuario existe en la base de datos con el $recu
 ?>
