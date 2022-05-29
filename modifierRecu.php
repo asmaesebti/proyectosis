@@ -13,6 +13,7 @@ $query = mysqli_query($connection, $consultar);
 
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <!--divinectorweb.com-->

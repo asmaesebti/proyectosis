@@ -5,6 +5,7 @@ session_start();
 require_once('conexion.php');
 require_once('valorSeguro.php');
 include('funcionesValidacion.php');
+include('phpqrcode2/phpqrcode/qrlib.php'); 
 
 $errorLetype = $errorPolice = $errorAssure = $errorDu = $errorAu = $errorTotale = $errorEspece = $errorCheque = $errorAutre = $errorReste = $errorFecha_hoy = 
 $errorAttestation = $errorMatricule = $errorProduit = $errorDate_versement = $errorModePaiment = "";
@@ -75,7 +76,7 @@ if (!isset($_POST['attestation'])) {
 // 	$_SESSION['errorAttestation'] = $errorAttestation;
 // 	echo "<br>";
 // 	echo "Tu dois introduire une attestation";
-	
+
 // }
 
 if (!isset($_POST['police'])) {
@@ -277,7 +278,7 @@ if (!isset($_POST['date_versement'])) {
 // if ($date_versement != null) {
 // 	echo "<br>";
 // 	echo "La date_versement choisie est correcte";
-	
+
 // }else{
 // 	$errorDate_versement =  "Tu dois choisir une date versement";
 // 	$_SESSION['errorDate_versement'] = $errorDate_versement;
@@ -292,19 +293,28 @@ if (!isset($_POST['date_versement'])) {
 // 	$mode_paiment = $_POST['mode_paiment'];
 // 	$mode_paiment = valorSeguro($mode_paiment);
 // 	$_SESSION['mode_paiment'] = $mode_paiment;
-	
+
 // }
 
 // if ($mode_paiment != null) {
 // 	echo "<br>";
 // 	echo "Le mode paiment choisie est correcte";
-	
+
 // }else{
 // 	$errorModePaiment = "Tu dois introduire un mode paiment";
 // 	$_SESSION['errorModePaiment'] = $errorModePaiment;
 // 	echo "<br>";
 // 	echo "Tu dois introduire un mode paiment";
 // }
+
+$codigoQr = $assure . "_" . $leType . "_" . $police . "_" . $du . "_" . $au . "_" .$totale;
+$folder="images/";
+// $file_name="qr1".date('m-d-Y-His A e').".png";
+$file_name=$codigoQr.".png";
+$file_name=$folder.$file_name;
+QRcode::png($codigoQr,$file_name);
+QRcode::png($codigoQr);
+
 
 echo "<br>";
 echo $contador;
