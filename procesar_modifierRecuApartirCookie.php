@@ -13,6 +13,7 @@ $police = $_POST['police'];
 $matricule = $_POST['matricule'];
 $produit = $_POST['produit'];
 $assure = $_POST['assure'];
+$prenom = $_POST['prenom'];
 $du = $_POST['du'];
 $au = $_POST['au'];
 $totale = $_POST['totale'];
@@ -21,6 +22,8 @@ $cheque = $_POST['cheque'];
 $virement = $_POST['virement'];
 $reste = $_POST['reste'];
 $date_versement = $_POST['date_versement'];
+$telefono = $_POST['telefono'];
+$email = $_POST['email'];
 
 echo $fecha_hoy . "<br>";
 echo $recu ."<br>";
@@ -55,7 +58,7 @@ if ($date_versement != null) {
 
 //Actualizar los datos 
 
-$actualizar = "UPDATE proyectosis SET fecha_hoy = '$fecha_hoy', letype = '$leType', attestation = '$attestation', police = '$police', matricule = '$matricule', produit = '$produit',  assure = '$assure',du = '$du' , au = '$au',totale = '$totale' ,  espece = '$espece' , cheque = '$cheque' , virement = '$virement' , reste = '$reste', date_versement = '$date_versement'   WHERE recu = '$recu'";
+$actualizar = "UPDATE proyectosis SET fecha_hoy = '$fecha_hoy', letype = '$leType', attestation = '$attestation', police = '$police', matricule = '$matricule', produit = '$produit',  assure = '$assure' , prenom = '$prenom',du = '$du' , au = '$au',totale = '$totale' ,  espece = '$espece' , cheque = '$cheque' , virement = '$virement' , reste = '$reste', date_versement = '$date_versement' , telefono = '$telefono',email = '$email'  WHERE recu = '$recu'";
 
 
 $query = mysqli_query($connection, $actualizar);

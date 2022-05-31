@@ -79,7 +79,7 @@ $array = mysqli_fetch_array($query);
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-							<!-- 	<button type="button" class="btn btn-primary">Save changes</button> -->
+								<!-- 	<button type="button" class="btn btn-primary">Save changes</button> -->
 							</div>
 						</div>
 					</div>
@@ -193,21 +193,57 @@ $array = mysqli_fetch_array($query);
 						<input type="text" class="form-control" name="police" value="<?php echo (isset($_SESSION['police'])) ?  $_SESSION['police'] :  "" ;  ?>" >
 						
 					</div>
-					<div class="form-group mt-4">
-						<label>Matricule : *</label><span class="error" style="color: red;"><?php if(isset($_SESSION['errorMatricule'])) echo $_SESSION['errorMatricule'] ;  ?></span>
-						<input type="text" class="form-control" name="matricule" value="<?php echo (isset($_SESSION['matricule'])) ?  $_SESSION['matricule'] :  "" ;  ?>" >
-						
+					
+					<div class="row">
+						<div class="col">
+							<div class="form-group mt-4">
+								<label>Matricule : *</label><span class="error" style="color: red;"><?php if(isset($_SESSION['errorMatricule'])) echo $_SESSION['errorMatricule'] ;  ?></span>
+								<input type="text" class="form-control" name="matricule" value="<?php echo (isset($_SESSION['matricule'])) ?  $_SESSION['matricule'] :  "" ;  ?>" >
+
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-group mt-4">
+								<label>Produit : *</label><span class="error" style="color: red;"><?php if(isset($_SESSION['errorProduit'])) echo $_SESSION['errorProduit'] ;  ?></span>
+								<input type="text" class="form-control" name="produit" value="<?php echo (isset($_SESSION['produit'])) ?  $_SESSION['produit'] :  "" ;  ?>" >
+								
+							</div>
+						</div>
 					</div>
-					<div class="form-group mt-4">
-						<label>Produit : *</label><span class="error" style="color: red;"><?php if(isset($_SESSION['errorProduit'])) echo $_SESSION['errorProduit'] ;  ?></span>
-						<input type="text" class="form-control" name="produit" value="<?php echo (isset($_SESSION['produit'])) ?  $_SESSION['produit'] :  "" ;  ?>" >
-						
+					<div class="row">
+						<div class="col">
+							<div class="form-group">
+								<label>Numéro de telephone : </label><span class="error" style="color: red;"><?php if(isset($_SESSION['errorTelefono'])) echo $_SESSION['errorTelefono'] ;  ?></span>
+								<input type="text" class="form-control" name="telefono" value="<?php echo (isset($_SESSION['telefono'])) ? $_SESSION['telefono'] : "";  ?>">
+								
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-group">
+								<label>Email : *</label><span class="error" style="color: red;"><?php if(isset($_SESSION['error_email'])) echo $_SESSION['error_email'] ;  ?></span>
+								<input type="text" class="form-control" name="email" value="<?php echo (isset($_SESSION['email'])) ?  $_SESSION['email'] :  "" ;  ?>" >
+
+							</div>
+						</div>
 					</div>
-					<div class="form-group">
-						<label>Assure : *</label><span class="error" style="color: red;"><?php if(isset($_SESSION['errorAssure'])) echo $_SESSION['errorAssure'] ;  ?></span>
-						<input type="text" class="form-control" name="assure" value="<?php echo (isset($_SESSION['assure'])) ? $_SESSION['assure'] : "";  ?>">
-						
+					
+					<div class="row">
+						<div class="col">
+							<div class="form-group">
+								<label>Nom Assure : *</label><span class="error" style="color: red;"><?php if(isset($_SESSION['errorAssure'])) echo $_SESSION['errorAssure'] ;  ?></span>
+								<input type="text" class="form-control" name="assure" value="<?php echo (isset($_SESSION['assure'])) ? $_SESSION['assure'] : "";  ?>">
+
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-group">
+								<label>Prenom Assure : *</label><span class="error" style="color: red;"><?php if(isset($_SESSION['error_prenom'])) echo $_SESSION['error_prenom'] ;  ?></span>
+								<input type="text" class="form-control" name="prenom" value="<?php echo (isset($_SESSION['prenom'])) ? $_SESSION['prenom'] : "";  ?>">
+								
+							</div>
+						</div>
 					</div>
+					
 					<div class="form-group">
 						<label>Periode : </label>
 						<div class="row">
@@ -418,6 +454,9 @@ unset($_SESSION['errorAttestation']);
 unset($_SESSION['errorMatricule']);
 unset($_SESSION['errorProduit']);
 unset($_SESSION['errorDate_versement']);
+unset($_SESSION['errorTelefono']);
+unset($_SESSION['error_email']);
+unset($_SESSION['error_prenom']);
 // unset($_SESSION['errorModePaiment']);
 
 unset($_SESSION['leType']);
@@ -436,6 +475,9 @@ unset($_SESSION['attestation']);
 unset($_SESSION['matricule']);
 unset($_SESSION['produit']);
 unset($_SESSION['date_versement']);
+unset($_SESSION['telefono']);
+unset($_SESSION['email']);
+unset($_SESSION['prenom']);
 // unset($_SESSION['mode_paiment']);
 
 ?>

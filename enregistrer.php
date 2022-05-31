@@ -8,7 +8,7 @@ include('funcionesValidacion.php');
 include('phpqrcode2/phpqrcode/qrlib.php'); 
 
 $errorLetype = $errorPolice = $errorAssure = $errorDu = $errorAu = $errorTotale = $errorEspece = $errorCheque = $errorAutre = $errorReste = $errorFecha_hoy = 
-$errorAttestation = $errorMatricule = $errorProduit = $errorDate_versement = $errorModePaiment = "";
+$errorAttestation = $errorMatricule = $errorProduit = $errorDate_versement = $errorModePaiment = $errorTelefono = $error_email = $error_prenom = "";
 $query = "";
 $contador = 0;
 
@@ -143,6 +143,16 @@ if ($produit != null) {
 	echo "Tu dois introduir un produit";
 }
 
+if (!isset($_POST['email'])) {
+	$email = null;
+
+}else{
+	$email = $_POST['email'];
+	$email = valorSeguro($email);
+	$_SESSION['email'] = $email;
+	
+}
+
 
 if (!isset($_POST['assure'])) {
 	$assure = null;
@@ -163,6 +173,37 @@ if ($assure != null) {
 	$_SESSION['errorAssure'] = $errorAssure;
 	echo "<br>";
 	echo "Tu dois introduire un assuré";
+}
+
+if (!isset($_POST['prenom'])) {
+	$prenom = null;
+
+}else{
+	$prenom = $_POST['prenom'];
+	$prenom = valorSeguro($prenom);
+	$_SESSION['prenom'] = $prenom;
+	
+}
+
+if ($prenom != null) {
+	echo "<br>";
+	echo "Le prenom de L'assuré choisie est correcte";
+	$contador++;
+}else{
+	$error_prenom = "Tu dois introduire un prenom assuré";
+	$_SESSION['error_prenom'] = $error_prenom;
+	echo "<br>";
+	echo "Tu dois introduire un prenom de l'assuré";
+}
+
+if (!isset($_POST['telefono'])) {
+	$telefono = null;
+
+}else{
+	$telefono = $_POST['telefono'];
+	$telefono = valorSeguro($telefono);
+	$_SESSION['telefono'] = $telefono;
+	
 }
 
 if (!isset($_POST['du'])) {
@@ -307,8 +348,8 @@ if (!isset($_POST['date_versement'])) {
 // 	echo "Tu dois introduire un mode paiment";
 // }
 
-$codigoQr = $assure . "_" . $leType . "_" . $attestation . "_" . $police . "_" . $matricule . "_" . $produit . "_"
-  . $du . "_" . $au . "_" .$totale . "_" . $espece . "_" . $cheque . "_" . $virement . "_" . $reste;
+$codigoQr = $assure . "_" . $prenom . "_" . $leType . "_" . $attestation . "_" . $police . "_" . $matricule . "_" . $produit . "_"
+  . $du . "_" . $au . "_" .$totale . "_" . $espece . "_" . $cheque . "_" . $virement . "_" . $reste . "_" . $telefono . "_" . $email ;
 $folder="images/";
 // $file_name="qr1".date('m-d-Y-His A e').".png";
 $file_name=$codigoQr.".png";
@@ -320,12 +361,16 @@ QRcode::png($codigoQr);
 echo "<br>";
 echo $contador;
 
-if ($contador == 7) {
+if ($contador == 8) {
 	
-	$insertar = "INSERT INTO `proyectosis` (`fecha_hoy`, `letype`, `attestation`, `police`, `matricule`, `produit`,`assure`, `du`, `au`, `totale`, `espece` ,  `cheque` , `virement`, `reste` ,  `cree_le`) VALUES ('$fecha_hoy','$leType','$attestation','$police', '$matricule', '$produit','$assure','$du','$au', '$totale', '$espece', '$cheque', '$virement' , '$reste', CURRENT_TIMESTAMP)";
+	$insertar = "INSERT INTO `proyectosis` (`fecha_hoy`, `letype`, `attestation`, `police`, `matricule`, `produit`,`assure`, `prenom`, `du`, `au`, `totale`, `espece` ,  `cheque` , `virement`, `reste` ,  `cree_le`, `telefono`, `email`) VALUES ('$fecha_hoy','$leType','$attestation','$police', '$matricule', '$produit','$assure', '$prenom' ,'$du','$au', '$totale', '$espece', '$cheque', '$virement' , '$reste', CURRENT_TIMESTAMP, '$telefono', '$email')";
+
+	// $insertarTelefono = "INSERT INTO `usuarios`(`telefono`) VALUES ('$telefono')";
+
+	// $queryTellefono = mysqli_query($connection, $insertarTelefono);
 
 
-	$query = mysqli_query($connection, $insertar);
+	 $query = mysqli_query($connection, $insertar);
 } else {
 	
 }

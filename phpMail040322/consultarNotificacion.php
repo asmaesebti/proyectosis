@@ -20,8 +20,8 @@ while ($roedate = mysqli_fetch_array($querydate))
                 if ($date==$today) {
 
 
-                    $texto .= "<h4 style='color:green;'>" . utf8_decode("Email notification d'echeance de la police d'assurance de client assuré :  " . $roedate['assure'] . 
-                        " dans laquelle sa police d'assurance est : " . $roedate['police'] . " et sa date d'echeance est : " . $roedate['au']) . "</h4>";
+                    $texto .= "<h4 style='color:green;'>" . utf8_decode("Email notification d'echeance de la police d'assurance de client assuré :  " . $roedate['assure'] . " " . $roedate['prenom'] .
+                        " dans laquelle sa police d'assurance est : " . $roedate['police'] . " et sa date d'echeance est : " . $roedate['au'] . " est son telephone est le : " . $roedate['telefono'] . " et son email est le : " . $roedate['email']  ) . "</h4>";
 
                     $texto .= "<br>";      
                 }

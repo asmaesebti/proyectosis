@@ -21,7 +21,7 @@ header("Expires: 0");
 
 
 echo '<table border="1">';
-echo '<tr><th>'.utf8_decode("Date").'</th><th>'.utf8_decode("Reçu").'</th><th>Le Type</th><th>'.utf8_decode("Attestation").'</th><th>Police</th><th>'.utf8_decode("Matricule").'</th><th>'.utf8_decode("Produit").'</th><th>'.utf8_decode("Assuré").'</th><th>Date du</th><th>Date au</th><th>Prime Totale</th><th>'.utf8_decode("Espèce").'</th><th>'.utf8_decode("Chéque").'</th><th>'.utf8_decode("Virement").'</th><th>Reste</th><th>'.utf8_decode("Date versement").'</th><th>'.utf8_decode("Crée le").'</th></tr>';
+echo '<tr><th>'.utf8_decode("Date").'</th><th>'.utf8_decode("Reçu").'</th><th>Le Type</th><th>'.utf8_decode("Attestation").'</th><th>Police</th><th>'.utf8_decode("Matricule").'</th><th>'.utf8_decode("Produit").'</th><th>'.utf8_decode("Nom Assuré").'</th><th>'.utf8_decode("Prenom Assuré").'</th><th>Date du</th><th>Date au</th><th>Prime Totale</th><th>'.utf8_decode("Espèce").'</th><th>'.utf8_decode("Chéque").'</th><th>'.utf8_decode("Virement").'</th><th>Reste</th><th>'.utf8_decode("Date versement").'</th><th>'.utf8_decode("Telephone").'</th><th>'.utf8_decode("Email").'</th><th>'.utf8_decode("Crée le").'</th></tr>';
 
 foreach ($queryA as $fila) {
 	echo '<tr><td>' . utf8_decode($fila['fecha_hoy']) . '</td>
@@ -32,6 +32,7 @@ foreach ($queryA as $fila) {
 	'. utf8_decode($fila['matricule']) . '</td><td>
 	'. utf8_decode($fila['produit']) . '</td><td>
 	' . utf8_decode($fila['assure']) . '</td><td>
+	' . utf8_decode($fila['prenom']) . '</td><td>
 	' . utf8_decode($fila['du']) . '</td><td>
 	' . utf8_decode($fila['au']) . '</td><td >
 	' . str_replace('.',',',utf8_decode($fila['totale'])) . '</td><td>
@@ -40,7 +41,8 @@ foreach ($queryA as $fila) {
 	' . str_replace('.',',',utf8_decode($fila['virement'])) . '</td><td>
 	' . str_replace('.',',',utf8_decode($fila['reste'])) . '</td><td>
 	'. utf8_decode($fila['date_versement']) . '</td><td>
-	
+	' . utf8_decode($fila['telefono']) . '</td><td>
+	' . utf8_decode($fila['email']) . '</td><td>
 	' . utf8_decode($fila['cree_le']) . '</td></tr>';
 	$total = $total + $fila['totale'];
 	$totales = $totales + $fila['espece'];
@@ -48,7 +50,7 @@ foreach ($queryA as $fila) {
 	$totalvi = $totalvi + $fila['virement'];
 	$totalre = $totalre + $fila['reste'];
 }
-echo '<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>total:</td><td>'. str_replace('.',',',utf8_decode($total)) . '</td><td>'. str_replace('.',',',utf8_decode($totales)) . '</td><td>'. str_replace('.',',',utf8_decode($totalch)) . '</td><td>'. str_replace('.',',',utf8_decode($totalvi)) . '</td><td>'. str_replace('.',',',utf8_decode($totalre)) . '</td></tr>';
+echo '<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>total:</td><td>'. str_replace('.',',',utf8_decode($total)) . '</td><td>'. str_replace('.',',',utf8_decode($totales)) . '</td><td>'. str_replace('.',',',utf8_decode($totalch)) . '</td><td>'. str_replace('.',',',utf8_decode($totalvi)) . '</td><td>'. str_replace('.',',',utf8_decode($totalre)) . '</td></tr>';
 echo '</table>';
 
 function formatDollars($dollars)

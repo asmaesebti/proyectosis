@@ -77,7 +77,7 @@ $pdf->SetXY(15, 48);
 $pdf->MultiCell(0, 7, utf8_decode('Nº Police      :      ' .$array["police"]), 0, 1);
 
 $pdf->SetXY(15, 55);
-$pdf->MultiCell(0, 7, utf8_decode('Assure         :      ' .$array["assure"]), 0, 1);
+$pdf->MultiCell(0, 7, utf8_decode('Assure         :      ' .$array["assure"] . ' ' . $array["prenom"]), 0, 1);
 
 $pdf->SetXY(15, 62);
 $pdf->MultiCell(0, 7, utf8_decode('Periode        : Du :     ' .$array["du"] . '                   Au :      ' . $array["au"]), 0, 1);
@@ -154,7 +154,7 @@ $pdf->SetXY(15, (149+48));
 $pdf->MultiCell(0, 7, utf8_decode('Nº Police      :      ' .$array["police"]), 0, 1);
 
 $pdf->SetXY(15, (149+55));
-$pdf->MultiCell(0, 7, utf8_decode('Assure         :      ' .$array["assure"]), 0, 1);
+$pdf->MultiCell(0, 7, utf8_decode('Assure         :      ' .$array["assure"] . ' ' . $array["prenom"]), 0, 1);
 
 $pdf->SetXY(15, (149+62));
 $pdf->MultiCell(0, 7, utf8_decode('Periode        : Du :     ' .$array["du"] . '                   Au :      ' . $array["au"]), 0, 1);

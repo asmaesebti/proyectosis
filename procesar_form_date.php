@@ -139,7 +139,8 @@ if ($contador == 2) {
 							<th scope="col">POLICE</th>
 							<th scope="col">MATRICULE</th>
 							<th scope="col">PRODUIT</th>
-							<th scope="col">ASSURÉ</th>
+							<th scope="col">NOM ASSURÉ</th>
+							<th scope="col">PRENOM ASSURÉ</th>
 							<th scope="col">PERIODE DU</th>
 							<th scope="col">PERIODE AU</th>
 							<th scope="col">PRIME TOTALE</th>
@@ -149,6 +150,8 @@ if ($contador == 2) {
 							<th scope="col">RESTE</th>
 							<th scope="col">DATE VERSEMENT</th>
 							<th scope="col">CREE LE</th>
+							<th scope="col">TELEPHONE</th>
+							<th scope="col">EMAIL</th>
 							<th scope="col">Modificar</th>
 							<th scope="col">Eliminar</th>
 							<th scope="col">Imprimer</th>
@@ -168,6 +171,7 @@ if ($contador == 2) {
 								<td><?php echo $row['matricule']; ?></td>
 								<td><?php echo $row['produit']; ?></td>
 								<td><?php echo $row['assure']; ?></td>
+								<td><?php echo $row['prenom']; ?></td>
 								<td><?php echo $row['du']; ?></td>
 								<td><?php echo $row['au']; ?></td>
 								<td><?php echo $row['totale']; ?></td>
@@ -178,6 +182,8 @@ if ($contador == 2) {
 								<td style="color: <?php echo ($row['date_versement'] == '1970-01-01') ? 'beige' : '';  ?>;"><?php echo $row['date_versement']; ?></td>
 								
 								<td><?php echo $row['cree_le']; ?></td>
+								<td><?php echo $row['telefono']; ?></td>
+								<td><?php echo $row['email']; ?></td>
 								<td class="align-middle"><a class="btn btn-warning" href="modifierRecu.php?recu=<?php echo $row['recu']; ?>">modificar</a> </td>
 								<td class="align-middle"><a class="btn btn-danger" href="eliminerRecu.php?recu=<?php echo $row['recu']; ?>">eliminar</a></td>
 								<td class="align-middle"><a class="btn btn-success" target="_blank" href="generarPDFbyRecu.php?recu=<?php echo $row['recu']; ?>">Imprimer</a></td>

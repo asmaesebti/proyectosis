@@ -56,7 +56,7 @@ $querydate   =  mysqli_query($connection,$sql) or die (mysqli_error($connection)
                                 $mail->isHTML(true);                                  //Set email format to HTML
                                 $mail->Subject = utf8_decode("Email notification d´echeance de la police d´assurance");
                                 $mail->Body = utf8_decode("Email notification d´echeance de la police d´assurance de client assuré :  " . $roedate['assure'] . 
-                                    " dans laquelle sa police d´assurance est : " . $roedate['police'] . " et sa date d´echeance est : " . $roedate['au']);
+                                     " " . $roedate['prenom']  . " dans laquelle sa police d´assurance est : " . $roedate['police'] . " et sa date d´echeance est : " . $roedate['au'] . " et son numero de telephone est le : " . $roedate['telefono'] . " et son email est le : " . $roedate['email']  );
                                 $mail->AltBody = utf8_decode("Email notification d´echeance de la police d´assurance");
 
                                 //  $mail->Subject = 'Here is the subject';
