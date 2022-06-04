@@ -1,0 +1,9 @@
+.treeview span:hover {
+    cursor: pointer;
+}
+.treeview-folder {
+    list-style-image: url('../images/icon_folder.png');
+}
+.treeview-file {
+    list-style-image: url('../images/icon_file.png');
+}
