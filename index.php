@@ -30,6 +30,7 @@ $array = mysqli_fetch_array($query);
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.0/sweetalert2.js"></script>
 	<link href="index.css" rel="stylesheet">
 	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="botoncss.css">
 </head>
 <body>
 
@@ -334,7 +335,7 @@ $array = mysqli_fetch_array($query);
 					</div>
 					<div class="row mt-3">
 						<div class="col">
-							<button type="submit" class="btn btn-success p-3" name="enregistrer" >Enregistrer</button>
+							<button type="submit" class="btn btn-success p-3 elboton" name="enregistrer" >Enregistrer</button>
 						</div>
 						<div class="col">
 							<a class="btn btn-success" href="laListe.php">La liste de tous les reçus</a>

@@ -1,0 +1,122 @@
+.upload-button {
+	 font-family: "Poppins", Arial;
+	 font-size: 16px;
+	 font-weight: 600;
+	 appearance: none;
+	 color: #fff;
+	 background: none;
+	 border: none;
+	 outline: none;
+	 cursor: pointer;
+	 width: 128px;
+	 padding: 0;
+	 margin: 0;
+	 text-align: center;
+	 line-height: 20px;
+	 position: relative;
+	 filter: drop-shadow(0px 4px 12px rgba(118, 70, 215, 0.1));
+	 transform: translateZ(0);
+}
+ .upload-button > svg {
+	 display: block;
+	 width: 132px;
+	 height: 52px;
+	 fill: #7646d7;
+	 pointer-events: none;
+	 margin: -4px -2px;
+	 transition: fill 0.2s, transform 0.1s;
+	 transform: translateZ(0);
+}
+ .upload-button:hover > svg {
+	 fill: #6f3bda;
+}
+ .upload-button:active > svg {
+	 transform: scale(0.975) translateZ(0);
+}
+ .upload-button .default, .upload-button .success {
+	 top: 12px;
+	 bottom: 12px;
+	 left: 0;
+	 right: 0;
+	 position: absolute;
+	 display: block;
+	 z-index: 1;
+}
+ .upload-button .default > div, .upload-button .success > div {
+	 display: inline-block;
+	 vertical-align: top;
+}
+ .upload-button .default > div > div span, .upload-button .success > div > div span {
+	 display: inline-block;
+	 vertical-align: top;
+	 transform-origin: 50% 100%;
+	 transform: translateZ(0);
+}
+ .upload-button .success svg {
+	 width: 13px;
+	 height: 10px;
+	 fill: none;
+	 stroke: currentColor;
+	 stroke-linejoin: round;
+	 stroke-linecap: round;
+	 stroke-width: 2;
+	 display: inline-block;
+	 vertical-align: top;
+	 margin: 5px 4px 5px 0;
+	 stroke-dasharray: 17px;
+	 stroke-dashoffset: 17px;
+	 transform: translateZ(0);
+}
+ .upload-button .success > div > div span {
+	 opacity: 0;
+	 transform: scale(0.25) translateZ(0);
+}
+ .upload-button .dots {
+	 top: 19px;
+	 bottom: 19px;
+	 left: 0;
+	 right: 0;
+	 position: absolute;
+	 display: flex;
+	 justify-content: center;
+	 z-index: 1;
+}
+ .upload-button .dots span {
+	 display: block;
+	 width: 6px;
+	 height: 6px;
+	 border-radius: 50%;
+	 background-color: currentColor;
+	 margin: 0 3px;
+	 transform: translateY(6px) scale(0);
+}
+ html {
+	 box-sizing: border-box;
+	 -webkit-font-smoothing: antialiased;
+}
+ * {
+	 box-sizing: inherit;
+}
+ *:before, *:after {
+	 box-sizing: inherit;
+}
+ body {
+	 min-height: 100vh;
+	 display: flex;
+	 font-family: 'Poppins', Arial;
+	 justify-content: center;
+	 align-items: center;
+	 background-color: #fdf9f7;
+}
+ body .twitter {
+	 position: fixed;
+	 display: block;
+	 right: 12px;
+	 bottom: 12px;
+}
+ body .twitter svg {
+	 width: 32px;
+	 height: 32px;
+	 fill: #1da1f2;
+}
+ 
