@@ -27,20 +27,20 @@ $querydate   =  mysqli_query($connection,$sql) or die (mysqli_error($connection)
 //Create an instance; passing `true` enables exceptions
 
                     $mail = new PHPMailer(true);
-                    $to = "assurance.mca@gmail.com";
+                    $to = "msb.tesla@gmail.com";
 
                                 //Server settings
                                 $mail->SMTPDebug = 0;                      //Enable verbose debug output
                                 $mail->isSMTP();                                            //Send using SMTP
                                 $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
                                 $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-                                $mail->Username   = 'assurance.mca@gmail.com';                     //SMTP username
-                                $mail->Password   = 'ocmhtyvxbxqeuqji';                               //SMTP password
+                                $mail->Username   = 'msb.caixa@gmail.com';                     //SMTP username
+                                $mail->Password   = 'abxiqabjudlpxcmk';                               //SMTP password
                                 $mail->SMTPSecure = 'tls';            //Enable implicit TLS encryption
                                 $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
                                 //Recipients
-                                $mail->setFrom('assurance.mca@gmail.com', 'sebti asmae');
+                                $mail->setFrom('msb.caixa@gmail.com', 'mohammed');
                                 $mail->addAddress($to, 'sebti');     //Add a recipient
                                 //$mail->addAddress('msb.tesla@gmail.com');               //Name is optional
                                // $mail->addReplyTo('msb.duck@gmail.com', 'Information');
