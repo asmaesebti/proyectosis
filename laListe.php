@@ -32,6 +32,9 @@ $array = mysqli_fetch_array($query);
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.css"/>
 	<link rel="stylesheet" href="style.css">
 	<link rel="stylesheet" href="laListe.css">
+	
+
+
 </head>
 <body class="fondo" style="background-color: beige;">
 
@@ -69,7 +72,7 @@ $array = mysqli_fetch_array($query);
 							<th scope="col">MATRICULE</th>
 							<th scope="col">PRODUIT</th>
 							<th scope="col">NOM ASSURÉ</th>
-							<th scope="col">PRENOM ASSURÉ</th>
+							<!-- <th scope="col">PRENOM ASSURÉ</th> -->
 							<th scope="col">PERIODE DU</th>
 							<th scope="col">PERIODE AU</th>
 							<th scope="col">PRIME TOTALE</th>
@@ -100,7 +103,7 @@ $array = mysqli_fetch_array($query);
 								<td><?php echo $row['matricule']; ?></td>
 								<td><?php echo $row['produit']; ?></td>
 								<td><?php echo $row['assure']; ?></td>
-								<td><?php echo $row['prenom']; ?></td>
+								<!-- <td><?php echo $row['prenom']; ?></td> -->
 								<td><?php echo $row['du']; ?></td>
 								<td><?php echo $row['au']; ?></td>
 								<td><?php echo $row['totale']; ?></td>
@@ -150,12 +153,12 @@ $array = mysqli_fetch_array($query);
 						<td class="bg-teals-active color-palette text-center">
 							<strong></strong>
 						</td>
+						
 						<td class="bg-teals-active color-palette text-center">
 							<strong><b>Total </b></strong>
 						</td>
 						<td class="bg-teals-active color-palette text-center">
 							<strong id="monto">0</strong>
-						</td>
 						</td>
 						<td class="bg-teals-active color-palette text-center">
 							<strong id="monto1">0</strong>
@@ -216,6 +219,14 @@ $array = mysqli_fetch_array($query);
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js">
 	</script> 
 	<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.js"></script>
+
+	<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+
 	<script type="text/javascript">
 		$(document).ready( function () {
 			jQuery.fn.dataTable.Api.register( 'sum()', function ( ) {
@@ -231,6 +242,10 @@ $array = mysqli_fetch_array($query);
 			});
 			var table = $('#laLista').DataTable(
 			{
+				 dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
 				drawCallback: function () {
 					var api = this.api();
 					var total = api.column( 10, {"filter":"applied"}).data().sum();
@@ -248,6 +263,10 @@ $array = mysqli_fetch_array($query);
 			});
 		} );
 	</script>
+
+	
+
+	
 
 </body>
 </html>

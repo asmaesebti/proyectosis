@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Recortar imagen con PHP - By Parzibyte</title>
+	<script src="js/cropper.min.js"></script>
+	<link rel="stylesheet" href="css/cropper.min.css">
+	<link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+	<div style="text-align: center;">
+		<h1>Recortar imagen con PHP</h1>
+		<div>
+			<input type="file" id="i_file" value=""> 
+		<!-- 	<input type="button" id="i_submit" value="Submit" class="mt-2"> -->
+		<p><a type="button" href="index.html">refresh</a> </p>
+			<!--   <img src="" width="200" style="display:none;" id="imagen" /> -->
+			<div id="disp_tmp_path"></div>
+		</div>
+		<br>
+		<button id="subir">Subir recorte a PHP</button>
+		<br>
+		<br>
+		<img src="video-game-2234745_1920.jpg" id="imagen">
+	</div>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script type="text/javascript">
+		$('#i_file').change( function(event) {
+			var tmppath = URL.createObjectURL(event.target.files[0]);
+			$("img").fadeIn("fast").attr('src',URL.createObjectURL(event.target.files[0]));
+
+			$("#disp_tmp_path").html("Temporary Path(Copy it and try pasting it in browser address bar) --> <strong>["+tmppath+"]</strong>");
+		});
+	</script>
+	<script src="js/script.js"></script>
+
+
+</body>
+
+</html>
