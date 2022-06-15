@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+
+	<h2 id="serverResponse"></h2>
+	<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+</style>
+<table class="tg table" id="rankings-table">
+<thead>
+  <tr>
+    <th class="tg-0lax">uno</th>
+    <th class="tg-0lax">dos</th>
+    <th class="tg-0lax">tres</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+  </tr>
+</tbody>
+</table>
+
+<script type="text/javascript">
+	const xhr = new XMLHttpRequest();
+
+	xhr.onload = function(){
+		const serverResponse = document.getElementById("serverResponse");
+		serverResponse.innerHTML = this.responseText;
+
+	};
+
+	xhr.open("POST" , "dom.php");
+xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+xhr.send("name=domenic&message=how's it going");
+
+</script>
+
+<script type="text/javascript">
+	const xhr1 = new XMLHttpRequest();
+	xhr1.onload = function(){
+		if (this.status === 200) {
+			try {
+				const resObj = JSON.parse(this.responseText);
+				for (var i = 0; i < resObj.length; i++) {
+					//alert(resObj[i].age + " " + resObj[i].about);
+				}
+				console.log(resObj);	
+			} catch(e) {
+				
+				console.warn(e + " hay un error en el archivo json fisico");
+			}
+			
+		}else{
+				console.warn("error no existe el json");
+		}
+	
+	};
+
+
+	xhr1.open("GET", 'generated.json');
+	xhr1.send();
+</script>
+
+<script type="text/javascript">
+	const rankingsBody = document.querySelector("#rankings-table > tbody");
+
+	console.log(rankingsBody);
+
+	function loadRankings(){
+		const request = new XMLHttpRequest();
+
+		request.open("GET", "rankings.json");
+		request.onload = () => {
+			try {
+					const json = JSON.parse(request.responseText);
+					populateRankings(json);
+			} catch(e) {
+				
+				console.warn( " error grave " + e);
+			}
+		
+
+		};
+		request.send();
+	}
+
+	function populateRankings(json){
+		console.log(json);
+//Clear out the html existing data para cargar dinamicamente losdatos
+		while (rankingsBody.firstChild) {
+			rankingsBody.removeChild(rankingsBody.firstChild);
+		}
+
+		//llenar la tableLayout = 'inherit'
+		json.forEach((row) => {
+			console.log(row);
+			const tr = document.createElement("tr");
+			row.forEach((cell) => {
+				console.log(cell);
+				const td = document.createElement("td");
+				td.textContent = cell;
+				tr.appendChild(td);
+			});
+			rankingsBody.appendChild(tr);
+		});
+
+	}
+
+	document.addEventListener("DOMContentLoaded", () => {loadRankings();});
+</script>
+</body>
+</html>

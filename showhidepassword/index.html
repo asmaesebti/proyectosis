@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+	<title></title>
+</head>
+<style type="text/css">
+	@import url('https://fonts.googleapis.com/css?family=Contrail+One');
+	input[type='text'],
+	input[type='password']{
+		border:  1px solid #cccccc;
+		color: #555555;
+		font-weight: bold;
+		margin-bottom: 10px;
+		max-width: 250px;
+		outline: none;
+		padding: 10px;
+		transition: border-color 0.2s;
+		width: 100%;
+
+	}
+	input[type='text']:focus,
+	input[type='password']:focus{
+		border-color:  #009879;
+	}
+	.btn-show-hide-pwd{
+		color: #222c6a;
+		cursor: pointer;
+		margin-left: 10px;
+		opacity: 0.5;
+	}
+	.btn-show-hide-pwd:hover{
+		opacity: 1;
+	}
+	.btn-show-hide-pwd:active{
+		transform: scale(0.9);
+	}
+
+	#clock{
+		width: 300px;
+		height: 100px;
+		background-color: black;
+		border-radius: 5px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		color: greenyellow;
+		font-family: "Contrail One" ,sans-serif;
+		font-size: 3em;
+
+	}
+
+</style>
+<body>
+<h1>show hide</h1>
+
+<input type="password" id="inp-password" >
+<i class="fas fa-eye btn-show-hide-pwd" data-for="inp-password"></i> 
+
+
+<div id="clock">8:23 PM</div>
+
+<script type="text/javascript">
+	const allBtnSHP = document.querySelectorAll(".btn-show-hide-pwd");
+
+
+	allBtnSHP.forEach((button) => {
+		const forElement = document.getElementById(button.dataset.for);
+
+		if (forElement && forElement instanceof HTMLInputElement) {
+			["mousedown", "touchstart"].forEach((eventName) => {
+				button.addEventListener(eventName, () => {
+					forElement.setAttribute("type", "text");
+				});
+			});
+
+			["mouseup", "mouseleave", "touchend", "touchcancel"].forEach((eventName) => {
+				button.addEventListener(eventName, (e) => {
+					e.preventDefault();
+
+					forElement.setAttribute("type", "password");
+				});
+			});
+		}
+	});
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script>
+<script type="text/javascript">
+	const clock = document.getElementById('clock');
+
+
+	// setInterval(() => {
+
+	// 	const now = moment();
+
+	// 	const humanReadable = now.format('hh:mm:ss A');
+	// 	// console.log(humanReadable)
+
+	// 	clock.textContent = humanReadable
+
+	// 	// console.log("time");
+	// }, 1000);
+	// 
+		setInterval(updateTime, 1000);
+
+	function updateTime(){
+				const now = moment();
+
+		const humanReadable = now.format('hh:mm:ss A');
+		// console.log(humanReadable)
+
+		clock.textContent = humanReadable;
+	}
+
+
+	updateTime();
+</script>
+</body>
+</html>

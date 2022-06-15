@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ajax</title>
+</head>
+<style>
+	#form-messages{
+		background-color: rgba(255, 232, 232, 1.0);
+		border: 1px solid red;
+		color: red;
+		display: none;
+		font-size: 12px;
+		font-weight: bold;
+		margin-bottom: 10px;
+		padding: 10px 25px;
+		max-width: 250px;
+
+	}
+</style>
+<body>
+
+<h1>ajax forms</h1>
+<div class="form">
+
+	<ul id="form-messages">
+		<!-- <li>Generix Error 1</li> -->
+	</ul>
+	<label for="username">Username</label>
+	<input type="text" id="username" spellcheck="false" name="username">
+	<br><br>
+		<label for="username">password</label>
+	<input type="text" id="password" spellcheck="false" name="password">
+	<br><br>
+	<button type="submit" id="btn-submit">Login</button>
+</div>
+	
+
+	<script type="text/javascript">
+		const form = {
+			username: document.getElementById('username'),
+			password: document.getElementById('password'),
+			submit: document.getElementById('btn-submit'),
+			messages: document.getElementById('form-messages')
+		};
+
+console.log(form);
+form.submit.addEventListener('click', () => {
+	console.log('button pressed');
+
+	const request =  new XMLHttpRequest();
+
+
+	request.onload = () => {
+		console.log(request.responseText);
+		let responseObject = null;
+
+		try {
+			responseObject = JSON.parse(request.responseText);
+
+		} catch(e) {
+			// statements
+			console.error("ERORRRRRRR"  + e);
+		}
+
+		if (responseObject) {
+			handleResponse(responseObject);
+		}
+	};
+
+		const requestData = `username=${form.username.value}&password=${form.password.value}`;
+		console.log(requestData);
+
+	request.open('post' ,'check-login.php');
+	request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	request.send(requestData);
+
+});
+
+function handleResponse(responseObject){
+	console.log(responseObject);
+
+	if (responseObject.ok) {
+		location.href = 'dashbord.html';
+
+	}else{
+		while (form.messages.firstChild) {
+			form.messages.removeChild(form.messages.firstChild);
+		}
+
+		responseObject.messages.forEach((message) => {
+			const li = document.createElement('li');
+			li.textContent = message;
+			form.messages.appendChild(li);
+
+		});
+		form.messages.style.display = "block";
+	}
+}
+
+	</script>
+
+	<script type="text/javascript">
+		const toSend = {
+			name:"moha",
+			age: 33,
+			ocupation: "web dev"
+		};
+
+		const jsonString = JSON.stringify(toSend);
+		console.log(jsonString);
+
+		const xhr = new XMLHttpRequest();
+		xhr.open('POST', 'receive.php');
+
+		xhr.setRequestHeader("Content-type", "application/json");
+		xhr.send(jsonString);
+		
+
+
+	</script>
+</body>
+</html>
