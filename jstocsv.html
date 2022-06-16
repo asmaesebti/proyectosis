@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+<h1>export to csv</h1>
+<style>
+	.demo {
+		border:1px solid #C0C0C0;
+		border-collapse:collapse;
+		padding:5px;
+	}
+	.demo th {
+		border:1px solid #C0C0C0;
+		padding:5px;
+		background:#F0F0F0;
+	}
+	.demo td {
+		border:1px solid #C0C0C0;
+		padding:5px;
+	}
+</style>
+<table class="demo" id="dataTable">
+	<caption>Table 1</caption>
+	<thead>
+	<tr>
+		<th>Header 1</th>
+		<th>Header 2</th>
+		<th>Header 3</th>
+		<th>Header 4</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>&nbsp;a</td>
+		<td>&nbsp;a</td>
+		<td>&nbsp;a</td>
+		<td>&nbsp;a</td>
+	</tr>
+	<tr>
+		<td>&nbsp;a</td>
+		<td>&nbsp;a</td>
+		<td>&nbsp;a</td>
+		<td>&nbsp;a</td>
+	</tr>
+	<tr>
+		<td>&nbsp;a</td>
+		<td>&nbsp;a</td>
+		<td>&nbsp;"ann"</td>
+		<td>&nbsp;a</td>
+	</tr>
+	<tr>
+		<td>&nbsp;a</td>
+		<td>&nbsp;1,987</td>
+		<td>&nbsp;a</td>
+		<td>&nbsp;a</td>
+
+	</tr>
+	</tbody>
+</table>
+<br><br>
+<button id="btnExportToCsv" type="button" class="button">Export to csv</button>
+<br><br>
+<h1 id="h1">the json method</h1>
+
+<script type="text/javascript" src="jstocsv.js"></script>
+<script type="text/javascript">
+	const dataTable = document.getElementById("dataTable");
+
+	// console.log(new TableCSVExporter(dataTable, false).convertToCSV());
+
+	// console.log(TableCSVExporter.parseCell(`dom" double quotes`));
+
+	const btnExportToCsv = document.getElementById("btnExportToCsv");
+	btnExportToCsv.addEventListener("click", () => {
+		//false sin el header de la tabla
+		const exporter = new TableCSVExporter(dataTable, true);
+		const csvOutput = exporter.convertToCSV();
+		const csvBlob = new Blob([csvOutput], {type: "text/csv"});
+
+		const blobUrl = URL.createObjectURL(csvBlob);
+
+		console.log(blobUrl);
+
+		const anchorElement = document.createElement("a");
+
+		anchorElement.href = blobUrl;
+		anchorElement.download = "table-export.csv";
+		anchorElement.click();
+
+		setTimeout(() => {
+			URL.revokeObjectURL(blobUrl);
+		}, 500);
+
+
+	});
+
+</script>
+
+<script type="text/javascript">
+	HTMLElement.prototype.toJSON = function(){
+		// return '<' + this.tagName.toLowerCase() + '>';
+		return this.outerHTML;
+	};
+	const h1 = document.querySelectorAll("h1");
+
+	const dataObj2 = {
+		data : h1
+	}
+
+	console.log(JSON.stringify(dataObj2));
+
+	class Person {
+		constructor(name, age){
+			this.name = name;
+			this.age = age;
+		}
+		toJSON(){
+			return `this is ${this.name} and his age is ${this.age}`;
+		}
+	}
+	const person = {
+		name: "moha",
+		age: 46,
+		toJSON(){
+			return `this is ${this.name} and his age is ${this.age}`;
+		}
+	};
+
+	const dataObj = {
+		data: person
+	};
+
+	const dataObj1 = {
+		data: new Person("simon mohammed", 45)
+	};
+	console.log(JSON.stringify(dataObj1));
+</script>
+
+<script type="text/javascript">
+	const bc = new BroadcastChannel("dcode");
+
+//handle incoming messages
+	bc.addEventListener("message", e => {
+		console.log(e.data);
+	});
+
+	//send messages
+	bc.postMessage("hola que tal");
+	bc.postMessage([40,50,60,70]);
+	bc.postMessage({name : 'mohammed', age: 'sebti'});
+	bc.postMessage(new Blob(["sambole text"], {
+		type: "text/plain"
+	} ));
+</script>
+</body>
+</html>

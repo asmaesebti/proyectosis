@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ajax bar</title>
+	<style type="text/css">
+		.progress-bar{
+			height: 35px;
+			width: 250px;
+			border: 2px solid darkblue;
+		}
+
+		.progress-bar-fill{
+			height: 100%;
+			width: 0%;
+			background: lightblue;
+			display: flex;
+			align-items: center;
+			transition: width 0.25s;
+		}
+
+		.progress-bar-text{
+			margin-left: 10px;
+			font-weight: bold;
+		}
+	</style>
+</head>
+<body>
+<h1>Ajax progress bar</h1>
+<form class="form" id="uploadForm">
+	<input type="file" name="inpFile" id="inpFile"><br><br>
+	<input type="submit" class="button" value="Upload" name=""><br><br>
+</form>
+
+<div class="progress-bar" id="progressBar">
+	<div class="progress-bar-fill">
+		<span class="progress-bar-text">0%</span>
+	</div>
+</div>
+<br><br>
+<form class="form" id="myForm">
+	<input type="file"  id="inpFile1"><br><br>
+	<button type="submit">Upload File</button><br><br>
+</form>
+
+<br><br>
+	<input type="file"  id="inpFile2" multiple><br><br>
+	<button id="btnUpload">Upload Files</button><br><br>
+
+<br><br>
+	<input type="file"  id="inpFile3" multiple><br><br>
+	<button id="btnUpload3">Upload Files</button><br><br>
+
+<br><br>
+<form class="form"  action="" method="post" enctype="multipart/form-data" >
+	<input type="file"  id="inpFile4" name="inpFile4" multiple><br><br>
+	<button type="submit">Upload File</button><br><br>
+</form>
+
+<script type="text/javascript">
+	const uploadForm = document.getElementById("uploadForm");
+	const inpFile = document.getElementById("inpFile");
+	const progressBarFill = document.querySelector("#progressBar > .progress-bar-fill");
+	const progressBarText = progressBarFill.querySelector(".progress-bar-text");
+
+	uploadForm.addEventListener("submit", uploadFile);
+
+	function uploadFile(e){
+		e.preventDefault();
+
+		const xhr = new XMLHttpRequest();
+
+		xhr.open("POST" , "ajaxprogressbar.php");
+		xhr.upload.addEventListener("progress", e => {
+			console.log(e);
+
+			const percent = e.lengthComputable ? (e.loaded / e.total) * 100 : 0;
+
+			progressBarFill.style.width = percent.toFixed(2) + "%";
+			progressBarText.textContent = percent.toFixed(2) + "%";
+		});
+
+		xhr.setRequestHeader("Content-Type", "multipart/form-data");
+
+		xhr.send(new FormData(uploadForm));
+
+
+	}
+
+</script>
+
+<script type="text/javascript">
+	const myForm = document.getElementById("myForm");
+	const inpFile1 = document.getElementById("inpFile1");
+
+	myForm.addEventListener("submit", e => {
+		e.preventDefault();
+
+		const endpoint = "ajaxprogressbar.php";
+		const formData = new FormData();
+
+		console.log(inpFile1.files);
+
+		formData.append("inpFile1" , inpFile1.files[0]);
+
+		fetch(endpoint, {
+			method: "post",
+			body: formData
+		}).catch(console.error);
+	});
+</script>
+
+<script type="text/javascript">
+	
+	const inpFile2 = document.getElementById("inpFile2");
+	const btnUpload = document.getElementById("btnUpload");
+
+	btnUpload.addEventListener("click", function (){
+		const formData = new FormData();
+
+		console.log(inpFile2.files);
+
+		for ( const file of inpFile2.files){
+			formData.append("myFiles[]", file);
+
+		}
+
+		for(const [key, value] of formData){
+			console.log(`Key: ${key}`);
+			console.log(`value: ${value}`);
+		}
+
+		fetch("ajaxprogressbarMulti.php", {
+			method: "post",
+			body: formData
+		}).catch(console.error);
+	});
+</script>
+
+<script type="text/javascript">
+	
+	const inpFile3 = document.getElementById("inpFile3");
+	const btnUpload3 = document.getElementById("btnUpload3");
+
+	btnUpload3.addEventListener("click", function(){
+		const xhr = new XMLHttpRequest();
+
+		const formData = new FormData();
+
+		console.log(inpFile3.files);
+
+		for (const file of inpFile3.files){
+			formData.append("myFiles[]", file);
+		}
+
+		xhr.open("post", "ajaxprogressbarMulti.php");
+		xhr.send(formData);
+
+
+
+	});
+</script>
+<script type="text/javascript">
+	const inpFile4 = document.getElementById("inpFile4");
+
+
+	inpFile4.addEventListener("change", function(){
+		//console.log(inpFile4.files);
+
+		for(const file of inpFile4.files){
+			if (file.size > 300000) {
+				alert(`${file.name} is too big max 300kb`);
+			}
+		}
+
+	});
+</script>
+</body>
+</html>
