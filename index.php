@@ -27,7 +27,10 @@ $array = mysqli_fetch_array($query);
 	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.0/sweetalert2.css"/>
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.0/sweetalert2.js"></script>
+<!-- 	<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.0/sweetalert2.js"></script> -->
+	<!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>  -->
+<!-- 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script> -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<link href="index.css" rel="stylesheet">
 	<link rel="stylesheet" href="style.css">
 	<link rel="stylesheet" href="botoncss.css">
@@ -58,7 +61,8 @@ $array = mysqli_fetch_array($query);
 				<a href="otro.php" class="btn btn-success pe-2 ps-2 fas fa-save">&nbsp; Enregistrer un client</a>
 			</div>
 			<div class="col">
-				<a href="phpMail040322/enviarMailNotificacion.php" class="btn btn-success pe-2 ps-2 fas fa-save">&nbsp; Verifier echéance des polices</a>
+				<a href="phpMail040322/enviarMailNotificacion.php" class="btn btn-success pe-2 ps-2 fas fa-save" id="verifier" 
+				>&nbsp; Verifier echéance des polices</a>
 			</div>
 			<div class="col">
 				<!-- <a href="phpMail040322/enviarMailNotificacion.php" class="btn btn-success pe-2 ps-2 fas fa-save">&nbsp; Consulter echéance des polices</a> -->
@@ -387,8 +391,8 @@ $array = mysqli_fetch_array($query);
 		</div>
 	</footer>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js">
-	</script> 
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
 
 	<script type="text/javascript">
 		// esta funcion no se utiliza porque no resta bien pero si suma muy bien
@@ -433,10 +437,39 @@ $array = mysqli_fetch_array($query);
 			});
 		});
 
-
-
-
 	</script>
+
+	<script type="text/javascript">
+
+		$(document).ready(function() {
+
+			let timerInterval
+			swal({
+				title: 'Rappel de verifier l´echeance des polices on cliquant su le button. Cette fenêtre se fermeras automatiquement.',
+				html: 'I will close in <b></b> milliseconds.',
+				timer: 5000,
+				timerProgressBar: true,
+				didOpen: () => {
+					Swal.showLoading()
+					const b = Swal.getHtmlContainer().querySelector('b')
+					timerInterval = setInterval(() => {
+						b.textContent = Swal.getTimerLeft()
+					}, 100)
+				},
+				willClose: () => {
+					clearInterval(timerInterval)
+				}
+			}).then((result) => {
+				/* Read more about handling dismissals below */
+				if (result.dismiss === Swal.DismissReason.timer) {
+					console.log('I was closed by the timer')
+				}
+			})
+
+});
+
+</script>
+
 
 </body>
 </html>

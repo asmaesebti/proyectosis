@@ -7,25 +7,40 @@ $consultar = "select * from escuela";
 $query = mysqli_query($connection, $consultar);
 $array = mysqli_fetch_array($query); 
 
+if ($result = mysqli_query($connection, $consultar)) {
+
+    // Return the number of rows in result set
+    $rowcountE = mysqli_num_rows( $result );
+    
+}
+
 $consultarA = "select * from alumnos";
 $queryA = mysqli_query($connection, $consultarA);
 $arrayA = mysqli_fetch_array($queryA); 
 
-$consultarP = "select * from profesores";
-$queryP = mysqli_query($connection, $consultarP);
-$arrayP = mysqli_fetch_array($queryP); 
-
-$consultarAN = "select *  from alumnos";
-$queryAN = mysqli_query($connection, $consultarAN);
-if ($result = mysqli_query($connection, $consultarAN)) {
+if ($result = mysqli_query($connection, $consultarA)) {
 
     // Return the number of rows in result set
     $rowcount = mysqli_num_rows( $result );
     
- }
+}
+
+$consultarP = "SELECT p.sueldo as sueldo, p.nombre as nombre_p, e.nombre as nombre_e FROM `profesores` p inner join escuela e where p.id_escuela = e.id";
+$queryP = mysqli_query($connection, $consultarP);
+$arrayP = mysqli_fetch_array($queryP); 
+
+$consultarPr = "select * from profesores";
+if ($resultP = mysqli_query($connection, $consultarPr)) {
+
+    // Return the number of rows in result set
+    $rowcountP = mysqli_num_rows( $resultP );
+    
+}
 
 
- ?>
+
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -44,11 +59,12 @@ if ($result = mysqli_query($connection, $consultarAN)) {
             <h1>Brand</h1>
         </div>
         <ul>
-            <li><img src="dashboard (2).png" alt="">&nbsp; <span>Dashboard</span> </li>
-            <li><img src="reading-book (1).png" alt="">&nbsp;<span>Students</span> </li>
-            <li><img src="teacher2.png" alt="">&nbsp;<span>Teachers</span> </li>
-            <li><img src="school.png" alt="">&nbsp;<span>Schools</span> </li>
-            <li><img src="payment.png" alt="">&nbsp;<span>Income</span> </li>
+            <li><img src="dashboard (2).png" alt="">&nbsp; <span>Menu</span> </li>
+            <li><img src="reading-book (1).png" alt="">&nbsp;<span>Alumnos</span> </li>
+            <li><img src="teacher2.png" alt="">&nbsp;<span>Profesores</span> </li>
+            <li><img src="school.png" alt="">&nbsp;<span>Escuelas</span> </li>
+            <li><img src="payment.png" alt="">&nbsp;<span>Sueldos</span> </li>
+            <li><a href="form.php"><img src="teacher2.png" alt="">&nbsp; <span>Formulario contacto</span></a></li>
             <li><img src="help-web-button.png" alt="">&nbsp; <span>Help</span></li>
             <li><img src="settings.png" alt="">&nbsp;<span>Settings</span> </li>
         </ul>
@@ -74,7 +90,7 @@ if ($result = mysqli_query($connection, $consultarAN)) {
                 <div class="card">
                     <div class="box">
                         <h1><?php echo $rowcount; ?></h1>
-                        <h3>Students</h3>
+                        <h3>Alumnos</h3>
                     </div>
                     <div class="icon-case">
                         <img src="students.png" alt="">
@@ -82,8 +98,8 @@ if ($result = mysqli_query($connection, $consultarAN)) {
                 </div>
                 <div class="card">
                     <div class="box">
-                        <h1>53</h1>
-                        <h3>Teachers</h3>
+                        <h1><?php echo $rowcountP; ?></h1>
+                        <h3>Profesores</h3>
                     </div>
                     <div class="icon-case">
                         <img src="teachers.png" alt="">
@@ -91,8 +107,8 @@ if ($result = mysqli_query($connection, $consultarAN)) {
                 </div>
                 <div class="card">
                     <div class="box">
-                        <h1>5</h1>
-                        <h3>Schools</h3>
+                        <h1><?php echo $rowcountE; ?></h1>
+                        <h3>Escuelas</h3>
                     </div>
                     <div class="icon-case">
                         <img src="schools.png" alt="">
@@ -100,7 +116,12 @@ if ($result = mysqli_query($connection, $consultarAN)) {
                 </div>
                 <div class="card">
                     <div class="box">
-                        <h1>350000</h1>
+                        <?php 
+                        $consultarSueldo = "SELECT sum(sueldo) as total FROM `profesores` ";
+                        $queryS = mysqli_query($connection, $consultarSueldo);
+                        while ($a = mysqli_fetch_assoc($queryS)){ ?>
+                            <h1><?php echo $a['total']; ?></h1>
+                        <?php  }  ?>
                         <h3>Income</h3>
                     </div>
                     <div class="icon-case">
@@ -111,49 +132,49 @@ if ($result = mysqli_query($connection, $consultarAN)) {
             <div class="content-2">
                 <div class="recent-payments">
                     <div class="title">
-                        <h2>Recent Payments</h2>
+                        <h2>Pagos recientes</h2>
                         <a href="#" class="btn">View All</a>
                     </div>
                     <table>
                         <tr>
-                            <th>Name</th>
-                            <th>School</th>
-                            <th>Amount</th>
-                            <th>Option</th>
+                            <th>Nombre Profesor</th>
+                            <th>Escuela</th>
+                            <th>Cantidad</th>
+                            <th>Opciones</th>
                         </tr>
                         
                         <?php 
                         foreach ($queryP as $row) {
                             ?>
-                        <tr>
-                            <td><?php echo $row['nombre'] ?></td>
-                            <td><?php echo $row['id_escuela'] ?></td>
-                            <td><?php echo $row['sueldo'] ?></td>
-                            <td><a href="#" class="btn">View</a></td>
-                        </tr>
-                    <?php } ?>
+                            <tr>
+                                <td><?php echo $row['nombre_p'] ?></td>
+                                <td><?php echo $row['nombre_e'] ?></td>
+                                <td><?php echo $row['sueldo'] ?></td>
+                                <td><a href="#" class="btn">View</a></td>
+                            </tr>
+                        <?php } ?>
                     </table>
                 </div>
                 <div class="new-students">
                     <div class="title">
-                        <h2>New Students</h2>
+                        <h2>Nuevos estudiantes</h2>
                         <a href="#" class="btn">View All</a>
                     </div>
                     <table>
                         <tr>
-                            <th>Profile</th>
-                            <th>Name</th>
-                            <th>option</th>
+                            <th>Perfil</th>
+                            <th>Nombre</th>
+                            <th>Opcion</th>
                         </tr>
                         <?php 
                         foreach ($queryA as $row) {
                             ?>
-                        <tr>
-                            <td><img src="<?php echo $row['perfil'] ?>" alt=""></td>
-                            <td><?php echo $row['nombre'] ?></td>
-                            <td><img src="info.png" alt=""></td>
-                        </tr>
-                         <?php } ?>
+                            <tr>
+                                <td><img src="<?php echo $row['perfil'] ?>" alt=""></td>
+                                <td><?php echo $row['nombre'] ?></td>
+                                <td><img src="info.png" alt=""></td>
+                            </tr>
+                        <?php } ?>
                     </table>
                 </div>
             </div>

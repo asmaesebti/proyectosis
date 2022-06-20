@@ -243,9 +243,12 @@ $array = mysqli_fetch_array($query);
 			var table = $('#laLista').DataTable(
 			{
 				 dom: 'Bfrtip',
-        buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
-        ],
+			     buttons: [
+			             { extend: 'csv', className: 'btn btn-success' },
+            			 { extend: 'excel', className: 'btn btn-warning' },
+            			 { extend: 'pdf', className: 'btn btn-danger' },
+			        ],
+
 				drawCallback: function () {
 					var api = this.api();
 					var total = api.column( 10, {"filter":"applied"}).data().sum();
@@ -261,6 +264,7 @@ $array = mysqli_fetch_array($query);
 
 				}
 			});
+
 		} );
 	</script>
 
