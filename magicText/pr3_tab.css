@@ -1,0 +1,74 @@
+
+
+/* Style the tab */
+.tab {
+ /* float: left;*/
+/*  border: 1px solid #ccc;*/
+  /*background-color: #f1f1f1;*/
+/*  width: 30%;
+  height: 300px;*/
+}
+
+/* Style the buttons inside the tab */
+/*.tab a {
+  display: block;
+  background-color: inherit;
+  color: black;
+  padding: 22px 16px;
+  width: 100%;
+  border: none;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 17px;
+}*/
+
+/* Change background color of buttons on hover */
+.tab a:hover {
+ /* background-color: #ddd;*/
+}
+
+/* Create an active/current "tab button" class */
+.tab a.active {
+  /*background-color: #ccc;*/
+}
+
+/* Style the tab content */
+/*.tabcontent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  position: relative;
+  top: 100px;
+  left: 130px;
+  padding: 0px 12px;
+  border: 1px solid #ccc;
+  width: 70%;
+  border-left: none;
+  height: 400px;
+  background-color: orange;
+}*/
+
+/*.demo{
+  background-color: yellow;
+}
+
+*/
+*
+.bg_red
+{
+  background-color: red;
+}
+
+.strip1{
+  color: brown;
+}
+.strip2{
+  color: blueviolet;
+}
+.strip3{
+  color: pink;
+}
