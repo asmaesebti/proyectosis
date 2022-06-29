@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	<title></title>
 </head>
 <body>
@@ -147,20 +148,9 @@
 	<div id="Messages" class="tabcontent">
 		<h3>Messages</h3>
 		<p>Messages is the capital of Japan.</p>
-		<html>
-<head>
-	<meta charset="UTF-8">
-	<meta http-qpuiv="X-UA-Compatible" content="ID=edge">
-	<meta name="viewport" content="width=device-width, inticial-scale=1">
-	<title>Pure CSS3 Tab</title>
-	<link rel="stylesheet" href="style.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-</head>
-<body>
+
 	<div class="container">
-		<header>
-			<h1>Pure CSS3 Tab</h1>
-		</header>
+		
 		<div class="tabs effect-1">
 			<!-- tab-title -->
 			<input type="radio" id="tab-1" name="tab-effect-1" checked="checked">
@@ -375,18 +365,6 @@
 			</div>
 		</div>
 	</div>
-	<footer class="footer">
-		<div class="container">
-			<div class="copyright">
-				<span>Designed By</span>
-				<a href="http://www.weibo.com/518501269" target="_blank">@Clear</a>
-				<a href="https://github.com/SoClear" target="_blank">Github</a>
-				<a href="http://www.cleardesign.me" target="_blank">WebSite</a>
-			</div>
-		</div>
-	</footer>
-</body>
-</html>
 	
 	</div>
 
@@ -481,8 +459,35 @@
   <path class="path" d="M834.3,34.5h28.1v67.2l59.2-67.2h33.4l-48.9,56.7l52.3,92.8h-32.5l-39.5-69.9l-23.9,27.1V184h-28.1V34.5z"/>
 </g>
 </svg>
+<br><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 
+<form accept-charset="UTF-8" action="https://formsubmit.co/msb.motive@gmail.com" method="POST" autocomplete="off" class="form-control">
+	<fieldset>
+	<legend>Title:</legend>
+	<label for="name">Name</label><br /> 
+	<input class="form-control" name="name" type="text" value="Frank" /> <br /> 
+	<label for="tel">tel</label><br /> 
+	<input class="form-control" name="tel" type="text" value="tel" /> <br /> 
+	<label for="age">age</label><br /> 
+	<input class="form-control" name="age" type="text" value="age" /> <br /> 
+	<label for="email">email</label><br /> 
+	<input class="form-control" name="email" type="text" value="email" /> <br /> 
+	<label for="subject">subject</label><br /> 
+	<textarea class="form-control" cols="30" rows="2" name="subject">Long text.</textarea><br /> 
+	
+	<input class="form-control" type="submit" value="Enviar">
+	<input type="hidden" name="_next" value="http://localhost/PROYECTOsIS/magicText/pr3.php">
+	<input type="hidden" name="_captcha" value="false">
+
+	</fieldset>
+</form>
 
 
 
