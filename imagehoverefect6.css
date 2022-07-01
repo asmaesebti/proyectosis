@@ -1,0 +1,95 @@
+body{
+margin: 0;
+	padding: 0;
+	background: darksalmon;
+	font-family: poppins;
+}
+
+.menu-area{
+	margin: 0 auto;
+	width: 1000px;
+
+}
+
+.a{
+	color: inherit;
+	text-decoration: none;
+
+}
+
+.menu-area ul ul {
+	transition: all 300ms ease-in-out 300ms;
+	transform: rotateX(-90deg);
+	transform-origin: 0% 0%;
+	backface-visibility: hidden;
+
+}
+
+.menu-area ul li:hover > ul{
+	transition: all 700ms ease-in-out 0ms;
+	transform: rotateX(0deg);
+}
+
+.menu-area ul{
+	padding: 0;
+	color: #fff;
+	background: #333;
+	perspective: 300px;
+	transform-style: preserve-3d;
+	display: inline-block;
+	list-style: none;
+}
+
+.menu-area ul:after{
+	content: '';
+	clear: both;
+	display: block;
+
+}
+
+.menu-area ul li{
+	float: left;
+	transform-style: preserve-3d;
+	perspective: 300px;
+	border-right: 1px solid #fff;
+
+}
+
+.menu-area ul > li:last-of-type{
+	border-right: none;
+}
+
+.menu-area ul li:hover{
+	background: #fff;
+
+}
+
+.menu-area ul li:hover >a{
+	color: #000;
+}
+
+.menu-area ul li a{
+	display: block;
+	padding: 10px 65px;
+	text-transform: uppercase;
+}
+
+.menu-area ul ul{
+	position: absolute;
+	top: 100%;
+	padding: 0;
+	background: #333;
+}
+
+.menu-area ul ul li{
+	float: none;
+	position: relative;
+	border: none;
+
+}
+
+.menu-area ul ul li a{
+	padding: 10px 45px;
+
+
+}

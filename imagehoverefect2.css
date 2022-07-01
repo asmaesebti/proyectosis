@@ -1,0 +1,20 @@
+body{
+margin: 0;
+	padding: 0;
+	background: darksalmon;
+	font-family: poppins;
+}
+
+.carousel{
+	height: 600px;
+	perspective: 250px;
+}
+
+.carousel .carousel-item{
+	width: 450px;
+
+}
+
+.carousel .carousel-item img{
+	width: 100%;
+}

@@ -1,0 +1,92 @@
+body{
+margin: 0;
+	padding: 0;
+	background: darksalmon;
+	font-family: poppins;
+}
+
+.wrapper{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	/*font-family: russo one;
+	background: url(https://images.pexels.com/photos/1292115/pexels-photo-1292115.jpeg?auto=compress&cs=tinysrgb&w1260&h=750&dpr=1);
+	background-size: cover;
+	background-position: center center;
+	position: relative;*/
+	height: 100vh;
+
+}
+
+.photo-wrap{
+	width: 300px;
+	height: 300px;
+	border-radius: 50%;
+	position: relative;
+	cursor: pointer;
+	box-shadow: 0 30px 15px rgba(0, 0, 0, 0.2);
+}
+
+.inside-text{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	overflow: hidden;
+	background: #333;
+	color: #fff;
+
+}
+
+.inside-text p{
+	width: 70%;
+	margin: auto;
+	text-align: center;
+	font-size: 11px;
+	line-height: 1.5;
+
+}
+
+.inside-text h3{
+	text-transform: capitalize;
+	position: relative;
+	text-align: center;
+	font-size: 30px;
+	margin: 0 auto;
+	padding: 70px 0 0 0 ;
+	font-weight: 400;
+	text-shadow: 0 0 1px #fff, 0 1px 2px rgba(0, 0, 0, 0.2);
+
+}
+
+.socials{
+	padding-top: 45px;
+}
+
+.socials a{
+	text-decoration: none;
+	color: #fff;
+	font-size: 15px;
+	margin: 0 7px;
+}
+
+.imgBox{
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	overflow: hidden;
+	position: absolute;
+
+	box-shadow: inset 0 0 0 15px rgba(255, 255, 255, 0.5);
+	transform-origin: 95% 40%;
+	transition:  all 1s ease-in-out;
+	transform: translate3d(0, 0, 0);
+	background-image: url(mohammed.jpg);
+	z-index: 12;
+	background-size: cover;
+	background-position: center center;
+}
+
+.photo-wrap:hover .imgBox{
+	transform: rotate(-160deg);
+}

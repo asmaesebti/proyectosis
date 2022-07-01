@@ -1,0 +1,85 @@
+
+body{
+	background: yellowgreen;
+}
+
+.wrapper{
+	margin: 150px 300px;
+	perspective: 1500px;
+	padding-left: 180px;
+
+
+}
+.num-area{
+	animation:  animate 7s linear infinite;
+	transform-style: preserve-3d;
+	transform-origin: 180px;
+
+}
+
+.num-area div{
+	position: absolute;
+	height: 250px;
+	width: 200px;
+	background: #262626;
+
+}
+
+.span{
+	display: inline-block;
+	height: 200px;
+	width: 200px;
+	background: #fff;
+	border-radius: 50%;
+	margin-top: 20px;
+	margin-left: -70px;
+
+}
+
+.p{
+	color: #000;
+	font-size: 160px;
+	margin-top: 10px;
+	margin-left: 60px;
+
+}
+
+.num-area div:nth-child(1){
+	transform: rotateY(0deg) translateX(180px);
+	padding: 0 0 0 150px;
+
+}
+.num-area div:nth-child(2){
+	transform: rotateY(-72deg) translateX(180px);
+	padding: 0 0 0 150px;
+	
+}
+.num-area div:nth-child(3){
+	transform: rotateY(-144deg) translateX(180px);
+	padding: 0 0 0 150px;
+	
+}
+.num-area div:nth-child(4){
+	transform: rotateY(-216deg) translateX(180px);
+	padding: 0 0 0 150px;
+	
+}
+.num-area div:nth-child(5){
+	transform: rotateY(-288deg) translateX(180px);
+	padding: 0 0 0 150px;
+	
+}
+
+@keyframes animate{
+	from{
+		transform: rotateY(0deg);
+	}
+	to{
+		transform: rotateY(-360deg);
+	}
+}
+
+.img-area:hover{
+	animation-play-state: paused;
+}
+

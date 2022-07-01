@@ -1,0 +1,60 @@
+
+.swiper-container{
+	width: 300px;
+	height: 300px;
+	position: absolute;
+	left: 20%;
+	top: 3150px;
+	margin-left: -150px;
+	margin-top: -150px;
+}
+
+.swiper-slide{
+	background-image: url(mohammed.jpg);
+	background-position: center;
+	background-size: cover;
+	position: relative;
+}
+
+.slide-text{
+	position: relative;
+	left: 0;
+	top: 20%;
+	text-align: center;
+}
+
+.slide-text h2{
+	color: #fff;
+	font-size: 30px;
+	margin: 0 0 15px;
+
+}
+
+.slide-text p{
+	color: #fff;
+	font-size: 12px;
+	width: 80%;
+	margin: auto;
+
+}
+
+.slide-text a{
+	text-decoration: none;
+	background: tomato;
+	padding: 5px 15px;
+	text-transform: uppercase;
+	color: #fff;
+	display: inline-block;
+	margin-top: 15px;
+
+}
+.swiper-pagination-bullet{
+	width: 15px;
+	height: 15px;
+	background: #fff;
+	opacity: 1;
+}
+
+.swiper-pagination-bullet-active{
+	background: blue;
+}
