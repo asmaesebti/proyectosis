@@ -21,7 +21,8 @@ body{
 	animation: animate1 40s steps(10000, end) infinite;
 }
 
-.single-img{position: absolute;
+.single-img{
+	position: absolute;
 top: 10px;
 left: 10px;
 width: 300px;
