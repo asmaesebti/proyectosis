@@ -27,10 +27,10 @@ $array = mysqli_fetch_array($query);
 	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.0/sweetalert2.css"/>
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<!-- 	<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.0/sweetalert2.js"></script> -->
+	<!-- 	<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.0/sweetalert2.js"></script> -->
 	<!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>  -->
-<!-- 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script> -->
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<!-- 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script> -->
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<link href="index.css" rel="stylesheet">
 	<link rel="stylesheet" href="style.css">
 	<link rel="stylesheet" href="botoncss.css">
@@ -198,6 +198,12 @@ $array = mysqli_fetch_array($query);
 						<input type="text" class="form-control" name="police" value="<?php echo (isset($_SESSION['police'])) ?  $_SESSION['police'] :  "" ;  ?>" >
 						
 					</div>
+
+					<div class="form-group mt-4">
+						<label>Désignation : </label><span class="error" style="color: red;"><?php if(isset($_SESSION['error_designation'])) echo $_SESSION['error_designation'] ;  ?></span>
+						<input type="text" class="form-control" name="designation" value="<?php echo (isset($_SESSION['designation'])) ?  $_SESSION['designation'] :  "" ;  ?>" >
+						
+					</div>
 					
 					<div class="row">
 						<div class="col">
@@ -248,7 +254,16 @@ $array = mysqli_fetch_array($query);
 							</div>
 						</div>
 					</div>
-					
+					<div class="row">
+						<div class="col">
+							<div class="form-group">
+								<label>Addresse Assure : </label><span class="error" style="color: red;"><?php if(isset($_SESSION['error_address_client'])) echo $_SESSION['error_address_client'] ;  ?></span>
+								
+								<textarea rows="6" cols="40" name="address_client"><?php echo (isset($_SESSION['address_client'])) ? $_SESSION['address_client'] : "";  ?></textarea>
+							</div>
+						</div>
+						
+					</div>
 					<div class="form-group">
 						<label>Periode : </label>
 						<div class="row">
@@ -265,6 +280,39 @@ $array = mysqli_fetch_array($query);
 						</div>
 					</div>
 					<div class="form-group">
+						<div class="row mt-3">
+							<div class="col col-3">
+								<label>Prime Nette : </label><span class="error" style="color: red;"><?php if(isset($_SESSION['error_prime_net'])) echo $_SESSION['error_prime_net'] ;  ?></span>
+							</div>
+							<div class="col col-7">
+								<input type="number" class="form-control" id="prime_net" step="0.01" name="prime_net"  value="<?php echo (isset($_SESSION['prime_net'])) ? $_SESSION['prime_net'] : "" ;  ?>"   >
+							</div>
+						</div>
+						<div class="row mt-3">
+							<div class="col col-3">
+								<label>Taxes : </label><span class="error" style="color: red;"><?php if(isset($_SESSION['error_taxes'])) echo $_SESSION['error_taxes'] ;  ?></span>
+							</div>
+							<div class="col col-7">
+								<input type="number" class="form-control" id="taxes" step="0.01" name="taxes"  value="<?php echo (isset($_SESSION['taxes'])) ? $_SESSION['taxes'] : "" ;  ?>"   >
+							</div>
+						</div>
+						<div class="row mt-3">
+							<div class="col col-3">
+								<label>T.P : </label><span class="error" style="color: red;"><?php if(isset($_SESSION['error_tp'])) echo $_SESSION['error_tp'] ;  ?></span>
+							</div>
+							<div class="col col-7">
+								<input type="number" class="form-control" id="tp" step="0.01" name="tp"  value="<?php echo (isset($_SESSION['tp'])) ? $_SESSION['tp'] : "" ;  ?>"   >
+							</div>
+						</div>
+						<div class="row mt-3">
+							<div class="col col-3">
+								<label>ACCESOIRES : </label><span class="error" style="color: red;"><?php if(isset($_SESSION['error_accesoires'])) echo $_SESSION['error_accesoires'] ;  ?></span>
+							</div>
+							<div class="col col-7">
+								<input type="number" class="form-control" id="accesoires" step="0.01" name="accesoires"  value="<?php echo (isset($_SESSION['accesoires'])) ? $_SESSION['accesoires'] : "" ;  ?>"   >
+							</div>
+						</div>
+
 						<div class="row mt-3">
 							<div class="col col-3">
 								<label>Prime totale : *</label><span class="error" style="color: red;"><?php if(isset($_SESSION['errorTotale'])) echo $_SESSION['errorTotale'] ;  ?></span>
@@ -365,6 +413,9 @@ $array = mysqli_fetch_array($query);
 				<span class="firma">Signature Production</span>
 			</div>
 			<div class="col text-center ">
+				<a class="btn btn-success" href="generarFactura.php">Generer Une Facture</a>
+			</div>
+			<div class="col text-center ">
 				<a class="btn btn-success" href="escanear4.php">Scanner du code QR</a>
 			</div>
 			<div class="col text-center ">
@@ -417,6 +468,8 @@ $array = mysqli_fetch_array($query);
 			if($("#log").length){
 				$( "#totale" ).keyup(function() {
 					$.sum();          
+				}).change(function(){
+					$.sum();
 				}); 
 				$( "#espece" ).keyup(function() {
 					$.sum();          
@@ -427,6 +480,27 @@ $array = mysqli_fetch_array($query);
 			}   
 			$.sum = function(){
 				$("#reste").val((parseFloat($("#totale").val()) - parseFloat($("#espece").val()) -parseFloat($("#cheque").val())).toFixed(2));
+			} 
+		});
+
+		
+		$(document).ready(function() {
+			if($("#log").length){
+				$( "#prime_net" ).keyup(function() {
+					$.sum1();          
+				}); 
+				$( "#taxes" ).keyup(function() {
+					$.sum1();          
+				});
+				$( "#tp" ).keyup(function() {
+					$.sum1();          
+				}); 
+				$( "#accesoires" ).keyup(function() {
+					$.sum1();          
+				}); 
+			}   
+			$.sum1 = function(){
+				$("#totale").val((parseFloat($("#prime_net").val()) + parseFloat($("#taxes").val()) + parseFloat($("#tp").val()) + parseFloat($("#accesoires").val())).toFixed(2));
 			} 
 		});
 
@@ -466,9 +540,9 @@ $array = mysqli_fetch_array($query);
 				}
 			})
 
-});
+		});
 
-</script>
+	</script>
 
 
 </body>
@@ -504,6 +578,7 @@ unset($_SESSION['espece']);
 unset($_SESSION['reste']);
 unset($_SESSION['virement']);
 
+unset($_SESSION['address_client']);
 unset($_SESSION['fecha_hoy']);
 unset($_SESSION['attestation']);
 unset($_SESSION['matricule']);
@@ -513,5 +588,11 @@ unset($_SESSION['telefono']);
 unset($_SESSION['email']);
 unset($_SESSION['prenom']);
 // unset($_SESSION['mode_paiment']);
+
+unset($_SESSION['prime_net']);
+unset($_SESSION['taxes']);
+unset($_SESSION['tp']);
+unset($_SESSION['accesoires']);
+unset($_SESSION['designation']);
 
 ?>

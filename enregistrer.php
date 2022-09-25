@@ -8,7 +8,7 @@ include('funcionesValidacion.php');
 include('phpqrcode2/phpqrcode/qrlib.php'); 
 
 $errorLetype = $errorPolice = $errorAssure = $errorDu = $errorAu = $errorTotale = $errorEspece = $errorCheque = $errorAutre = $errorReste = $errorFecha_hoy = 
-$errorAttestation = $errorMatricule = $errorProduit = $errorDate_versement = $errorModePaiment = $errorTelefono = $error_email = $error_prenom = "";
+$errorAttestation = $errorMatricule = $errorProduit = $errorDate_versement = $errorModePaiment = $errorTelefono = $error_email = $error_prenom = $error_address_client = "";
 $query = "";
 $contador = 0;
 
@@ -99,6 +99,16 @@ if ($police != null) {
 	echo "<br>";
 	echo "Tu dois introduire une police";
 
+}
+
+if (!isset($_POST['designation'])) {
+	$designation = null;
+
+}else{
+	$designation = $_POST['designation'];
+	$designation = valorSeguro($designation);
+	$_SESSION['designation'] = $designation;
+	
 }
 
 if (!isset($_POST['matricule'])) {
@@ -206,6 +216,16 @@ if (!isset($_POST['telefono'])) {
 	
 }
 
+if (!isset($_POST['address_client'])) {
+	$address_client = null;
+
+}else{
+	$address_client = $_POST['address_client'];
+	$address_client = valorSeguro($address_client);
+	$_SESSION['address_client'] = $address_client;
+	
+}
+
 if (!isset($_POST['du'])) {
 	$du = null;
 
@@ -248,6 +268,47 @@ if ($au != null) {
 	echo "<br>";
 	echo "Tu dois choisir une date au";
 }
+
+if (!isset($_POST['prime_net'])) {
+	$prime_net = null;
+
+}else{
+	$prime_net = $_POST['prime_net'];
+	$prime_net = valorSeguro($prime_net);
+	$_SESSION['prime_net'] = $prime_net;
+	
+}
+
+if (!isset($_POST['taxes'])) {
+	$taxes = null;
+
+}else{
+	$taxes = $_POST['taxes'];
+	$taxes = valorSeguro($taxes);
+	$_SESSION['taxes'] = $taxes;
+	
+}
+
+if (!isset($_POST['tp'])) {
+	$tp = null;
+
+}else{
+	$tp = $_POST['tp'];
+	$tp = valorSeguro($tp);
+	$_SESSION['tp'] = $tp;
+	
+}
+
+if (!isset($_POST['accesoires'])) {
+	$accesoires = null;
+
+}else{
+	$accesoires = $_POST['accesoires'];
+	$accesoires = valorSeguro($accesoires);
+	$_SESSION['accesoires'] = $accesoires;
+	
+}
+
 
 
 if (!isset($_POST['totale'])) {
@@ -363,7 +424,7 @@ echo $contador;
 
 if ($contador == 8) {
 	
-	$insertar = "INSERT INTO `proyectosis` (`fecha_hoy`, `letype`, `attestation`, `police`, `matricule`, `produit`,`assure`, `prenom`, `du`, `au`, `totale`, `espece` ,  `cheque` , `virement`, `reste` ,  `cree_le`, `telefono`, `email`) VALUES ('$fecha_hoy','$leType','$attestation','$police', '$matricule', '$produit','$assure', '$prenom' ,'$du','$au', '$totale', '$espece', '$cheque', '$virement' , '$reste', CURRENT_TIMESTAMP, '$telefono', '$email')";
+	$insertar = "INSERT INTO `proyectosis` (`fecha_hoy`, `letype`, `attestation`, `police`, `designation`, `matricule`, `produit`,`assure`, `prenom`, `du`, `au` , `prime_net`, `taxes`, `tp`, `accesoires`, `totale`, `espece` ,  `cheque` , `virement`, `reste` ,  `cree_le`, `telefono`, `email` , `address_client`) VALUES ('$fecha_hoy','$leType','$attestation','$police', '$designation', '$matricule', '$produit','$assure', '$prenom' ,'$du','$au', '$prime_net', '$taxes', '$tp', '$accesoires', '$totale', '$espece', '$cheque', '$virement' , '$reste', CURRENT_TIMESTAMP, '$telefono', '$email' , '$address_client')";
 
 	// $insertarTelefono = "INSERT INTO `usuarios`(`telefono`) VALUES ('$telefono')";
 
@@ -377,6 +438,7 @@ if ($contador == 8) {
 
 if ($query) {
 	echo "<br>Données enregistrer correctement";
+	//echo $query;
 	// unset($_SESSION['leType']);
 	// unset($_SESSION['police']);
 	// unset($_SESSION['assure']);
@@ -388,6 +450,7 @@ if ($query) {
 	// location.href = 'formularioRegistrarPersonalNoDocente.php';</script>";
 
 	header("Location: index.php?mensaje=ok&respuesta=Données enregistrer correctement");
+	
 
 }else{
 

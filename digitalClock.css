@@ -1,0 +1,513 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,300i,400,500,600,700,800,900&display=swap');
+
+*{
+	margin: 0;
+	padding: 0;
+	font-family: 'Poppins', sans-serif;
+	border-style: border-box;
+}
+
+body{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	background: brown;	
+
+}
+
+#time{
+	display: flex;
+	gap:  40px;
+	color: #fff;
+
+}
+
+#time .circle{
+	position: relative;
+	width: 150px;
+	height: 150px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+}
+
+#time .circle svg{
+	position: relative;
+	width: 150px;
+	height: 150px;
+	transform: rotate(270deg);
+}
+
+#time .circle svg circle{
+	
+	width: 100%;
+	height: 100%;
+	fill: transparent;
+	stroke: #191919;
+	stroke-width:  4;
+	transform: translate(5px, 5px);
+
+}
+
+#time .circle svg circle:nth-child(2){
+	
+	
+	stroke: var(--clr);
+    stroke-dasharray: 440;
+
+	
+}
+
+#time div{
+	position: absolute;
+	text-align: center;
+	font-weight: 500;
+	font-size: 1.5em;
+
+}
+
+#time div span{
+	position: absolute;
+	transform: translateX(-50%) translateY(-10px);
+	letter-spacing: 0.1em;
+	
+	font-weight: 300;
+	font-size: 0.35em;
+	text-transform: uppercase;
+}
+
+#time .ap{
+	position: relative;
+	font-size: 1em;
+	transform: translateX(-20px);
+}
+
+.dots{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 10;
+	display: flex;
+	justify-content: center;
+
+}
+
+.dots::before{
+	content: '';
+	position: absolute;
+	top: -3px;
+	width: 15px;
+	height: 15px;
+	background: var(--clr);
+	border-radius: 50%;
+	box-shadow: 0 0 20px var(--clr), 0 0 60px var(--clr);
+}
+
+.circle1{
+	height: 200px;
+	width: 200px;
+	border: 10px solid blue;
+	position: relative;
+	left: 100px;
+	border-radius: 50%;
+	box-shadow: 1px 1px 5px black,
+				-1px -1px 5px black,
+				inset 1px 1px 5px black,
+				inset -1px -1px 5px black;
+	background: yellow;
+
+}
+
+.circle1 .fa-arrow-up{
+	display: block;
+	text-align: center;
+	font-size: 100px;
+	color: red;
+	text-shadow: 1px 1px 5px black,
+				-1px -1px 5px black;
+	animation:clock 12s steps(12) infinite;
+	transform-origin: bottom;
+}
+
+
+@keyframes clock{
+	from{
+		transform: rotateZ(0deg) scaleX(.6);
+	}
+	to{
+		transform: rotateZ(360deg) scaleX(.6);
+	}
+}
+
+/*body::before{
+	content: '';
+	position: absolute;
+	inset:  0;
+	background: linear-gradient(#08ff12, #0791ff);
+	z-index: 10;
+	pointer-events: none;
+	mix-blend-mode: multiply;
+}
+*/
+
+.circle2{
+	position: relative;
+	top: 400px;
+	right: 400px;
+	width: 500px;
+	height: 500px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: rgba(255, 255, 255, 0.5);
+	border-radius: 50%;
+	box-shadow: 0 0 0 2px #fff5,
+				0 0 0 20px #333,
+				0 0 0 22px #fff,
+				0 0 50px #fff,
+				0 0 450px #fff;
+
+}
+
+.circle2::before{
+	content: '';
+	position: absolute;
+	width: 2px;
+	height: 170px;
+	border-radius: 2px;
+	background: linear-gradient(0deg, transparent, #fff);
+	transform-origin: bottom;
+	animation: animationNiddles 20s steps(60) infinite;
+}
+
+.circle2::after{
+	content: '';
+	position: absolute;
+	width: 4px;
+	height: 130px;
+	border-radius: 2px;
+	background: linear-gradient(0deg, transparent, #fff);
+	transform-origin: bottom;
+	animation: animationNiddles 120s steps(60) infinite;
+}
+
+@keyframes animationNiddles{
+	0%{
+
+		transform: translate(-50%, -50%)  rotate(0deg);
+	}
+	100%{
+		transform: translate(-50%, -50%) rotate(360deg);
+	}
+}
+
+ul li{
+	position: absolute;
+	top: 10px;
+	list-style: none;
+	transform-origin: 0 240px;
+	transform: rotate(calc(21deg * var(--i)));
+	font-size: 2.5em;
+	font-weight: bold;
+	text-transform: uppercase;
+	font-family: consolas;
+
+}
+
+ul li span{
+	display: inline-block;
+	color: #fff;
+	transform: rotate(calc(-21deg * var(--i)));
+	text-shadow: 0 0 15px #fff,
+				0 0 35px #fff,
+				0 0 75px #fff,
+				0 0 150px #fff;
+				
+
+}
+
+.elboton{
+	position: relative;
+	top: -200px;
+	right: 700px;
+	width: 1000px;
+	position: relative;
+	display: inline-block;
+	padding: 15px 30px;
+	color: #2196f3;
+	text-transform: uppercase;
+	letter-spacing: 4px;
+	text-decoration: none;
+	font-size: 24px;
+	overflow: hidden;
+	transition: 0.2s;
+
+}
+.elboton:hover{
+	color: #255784;
+	background: #2196f3;
+	box-shadow: 0 0 10px #2196f3,
+				0 0 40px #2196f3,
+				0 0 80px #2196f3;
+	transition-delay: 1s;
+	border-radius: 10px;
+
+}
+
+.elboton span{
+	position: absolute;
+	display: block;
+}
+
+.elboton span:nth-child(1){
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 2px;
+	background: linear-gradient(90deg, transparent, #2196f3);
+}
+
+.elboton:hover span:nth-child(1){
+	
+	left: 100%;
+	transition: 1s;
+}
+
+.elboton span:nth-child(3){
+	bottom: 0;
+	right: -100%;
+	width: 100%;
+	height: 2px;
+	background: linear-gradient(270deg, transparent, #2196f3);
+}
+
+.elboton:hover span:nth-child(3){
+	
+	right: 100%;
+	transition: 1s;
+	transition-delay: .5s;
+}
+
+.elboton span:nth-child(2){
+	top: -100%;
+	right: 0;
+	width: 2px;
+	height: 100%;
+	background: linear-gradient(180deg, transparent, #2196f3);
+}
+
+.elboton:hover span:nth-child(2){
+	
+	top: 100%;
+	transition: 1s;
+	transition-delay: .25s;
+}
+
+.elboton span:nth-child(4){
+	bottom: -100%;
+	left: 0;
+	width: 2px;
+	height: 100%;
+	background: linear-gradient(360deg, transparent, #2196f3);
+}
+
+.elboton:hover span:nth-child(4){
+	
+	bottom: 100%;
+	transition: 1s;
+	transition-delay: .75s;
+}
+
+.elboton1{
+	position: relative;
+	top: 900px;
+	right: 300px;
+	width: 700px;
+	position: relative;
+	display: inline-block;
+	padding: 15px 30px;
+	color: #03e9f4;
+	text-transform: uppercase;
+	letter-spacing: 4px;
+	text-decoration: none;
+	font-size: 24px;
+	overflow: hidden;
+	transition: 0.5s;
+	margin: 40px 0;
+	-webkit-box-reflect: below 1px linear-gradient(transparent, #0005);
+}
+
+.elboton1:nth-child(1){
+	filter: hue-rotate(290deg);
+}
+.elboton1:nth-child(3){
+	filter: hue-rotate(110deg);
+}
+.elboton1:hover{
+	
+	color: #050801;
+	background: #03e9f4;
+	box-shadow: 0 0 5px #03e9f4,
+				0 0 25px #03e9f4,
+				0 0 50px #03e9f4,
+				0 0 200px #03e9f4;
+	transition-delay: 1s;
+	border-radius: 10px;
+
+}
+
+
+.elboton1 span{
+	position: absolute;
+	display: block;
+}
+
+.elboton1 span:nth-child(1){
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 2px;
+	background: linear-gradient(90deg, transparent, #03e9f4);
+	animation: animate1 1s linear infinite;
+}
+@keyframes animate1{
+	0%{
+		left: -100%;
+	}
+	50%,100%{
+		left: 100%;
+	}
+}
+
+.elboton1 span:nth-child(2){
+	top: -100%;
+	right: 0;
+	width: 2px;
+	height: 100%;
+	background: linear-gradient(180deg, transparent, #03e9f4);
+	animation: animate2 1s linear infinite;
+	animation-delay: 0.25s;
+}
+@keyframes animate2{
+	0%{
+		top: -100%;
+	}
+	50%,100%{
+		top: 100%;
+	}
+}
+
+.elboton1 span:nth-child(3){
+	bottom: 0;
+	right: -100%;
+	width: 100%;
+	height: 2px;
+	background: linear-gradient(270deg, transparent, #03e9f4);
+	animation: animate3 1s linear infinite;
+	animation-delay: 0.5s;
+}
+@keyframes animate3{
+	0%{
+		right: -100%;
+	}
+	50%,100%{
+		right: 100%;
+	}
+}
+
+.elboton1 span:nth-child(4){
+	bottom: 100%;
+	left: 0;
+	width: 2px;
+	height: 100%;
+	background: linear-gradient(360deg, transparent, #03e9f4);
+	animation: animate4 1s linear infinite;
+	animation-delay: 0.75s;
+}
+@keyframes animate4{
+	0%{
+		bottom: -100%;
+	}
+	50%,100%{
+		bottom: 100%;
+	}
+}
+
+
+.center{
+
+	position: relative;
+	top: -200px;
+	left: 800px;
+}
+
+input[type="checkbox"]{
+	position: relative;
+	width: 120px;
+	height: 40px;
+	appearance:  none;
+	background: linear-gradient(0deg, #333, yellow);
+	outline: none;
+	border-radius: 20px;
+	box-shadow: 0 0 0 4px #353535,
+				0 0 0 5px #3e3e3e,
+				inset 0 0 10px rgba(0,0,0,1),
+				0 5px 20px rgba(0,0,0,.5),
+				inset 0 0 15px rgba(0,0,0,.2);
+
+}
+
+input:checked[type="checkbox"]{
+	background: linear-gradient(0deg, #6dd1ff, #20b7ff);
+	box-shadow:0 0 2px #6dd1ff, 0 0 0 4px #353535,
+				0 0 0 5px #3e3e3e,
+				inset 0 0 10px rgba(0,0,0,1),
+				0 5px 20px rgba(0,0,0,.5),
+				inset 0 0 15px rgba(0,0,0,.2);
+}
+
+input[type="checkbox"]:before{
+	content: '';
+	position: absolute;
+	width: 80px;
+	height: 40px;
+	top: 0;
+	left: 0;
+	background: linear-gradient(0deg, green, #6b6b6b);
+	
+	border-radius: 20px;
+	box-shadow:  0 0 0 1px #232323;
+	transform: scale(.98, .96);
+	transition: .5s;
+}
+
+input:checked[type="checkbox"]:before{
+	left: 40px;
+
+	}
+
+	input[type="checkbox"]:after{
+	content: '';
+	position: absolute;
+	width: 4px;
+	height: 4px;
+	top: calc(50% - 2px);
+	left: 70px;
+	background: linear-gradient(0deg, #6b6b6b, orange);
+	border-radius: 50%;
+	transition: .5s;
+}
+
+input:checked[type="checkbox"]:after{
+	left: 110px;
+background: #63cdff;
+box-shadow: 0 0  5px #13b3ff,
+				0 0 15px #13b3ff,
+	}
+/*
+	#pdf{
+		width: 85%;
+		height: 975px;
+	}*/

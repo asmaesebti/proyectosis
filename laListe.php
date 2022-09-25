@@ -1,5 +1,5 @@
 <?php 
- 
+
 session_start();
 require_once('conexion.php');
 
@@ -33,7 +33,7 @@ $array = mysqli_fetch_array($query);
 	<link rel="stylesheet" href="style.css">
 	<link rel="stylesheet" href="laListe.css">
 	
-
+	<!-- SELECT * FROM `proyectosis` WHERE assure like '%ddd%' and prenom like '%ddd%' -->
 
 </head>
 <body class="fondo" style="background-color: beige;">
@@ -57,10 +57,42 @@ $array = mysqli_fetch_array($query);
 	<header class="container">
 		<img src="logo.png" width="100%" alt="">
 	</header>
+	
 	<div class="container-fluid conjunto">
 		<div class="row">
 			<div class="col">
-				<h1>La liste de tous les reçus</h1>
+				<h1 class= "">La liste de tous les reçus </h1>
+				<section>
+
+					<!-- Example single danger button -->
+					<?php 
+
+					
+
+						$consultarClient = "SELECT recu, assure, prenom FROM `proyectosis`";
+						$queryClient = mysqli_query($connection, $consultarClient);
+						$arrayClient = mysqli_fetch_array($queryClient);
+
+// href="generarFacturebyRecu.php?recu=<?php echo $row['recu'];
+
+					 ?>
+					<div class="btn-group m-3">
+						<button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+							Selectionner un client pour imprimer ses factures
+						</button>
+						<ul class="dropdown-menu">
+							<?php foreach ($queryClient as $row) { ?>
+							<li><a class="dropdown-item" href="generarFacturebyClient.php?client=<?php echo $row['assure']; ?>"><?php echo $row['assure'] . " " . $row['prenom']; ?></a></li>
+							
+						<?php } ?>
+						</ul>
+						<button type="button" class="btn btn-primary dropdown-toggle ms-5 me-5" data-bs-toggle="dropdown" aria-expanded="false" target="_blank" href="">
+							Imprimer toutes les factures par client
+						</button>
+					</div>
+
+
+				</section>
 				<table class="table table-hover" id="laLista">
 					<thead>
 						<tr>
@@ -87,6 +119,7 @@ $array = mysqli_fetch_array($query);
 							<th scope="col">Modificar</th>
 							<th scope="col">Eliminar</th>
 							<th scope="col">Imprimer</th>
+							<th scope="col">Imprimer Facture</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -119,7 +152,9 @@ $array = mysqli_fetch_array($query);
 								<td class="align-middle"><a class="btn btn-warning" href="modifierRecu.php?recu=<?php echo $row['recu']; ?>">modificar</a> </td>
 								<td class="align-middle"><a class="btn btn-danger" href="eliminerRecu.php?recu=<?php echo $row['recu']; ?>">eliminar</a></td>
 								<td class="align-middle"><a class="btn btn-success" target="_blank" href="generarPDFbyRecu.php?recu=<?php echo $row['recu']; ?>">Imprimer</a></td>
+								<td class="align-middle"><a class="btn btn-warning" target="_blank" href="generarFacturebyRecu.php?recu=<?php echo $row['recu']; ?>">Imprimer Facture</a></td>
 							</tr>
+
 
 							<?php
 						}
@@ -242,12 +277,12 @@ $array = mysqli_fetch_array($query);
 			});
 			var table = $('#laLista').DataTable(
 			{
-				 dom: 'Bfrtip',
-			     buttons: [
-			             { extend: 'csv', className: 'btn btn-success' },
-            			 { extend: 'excel', className: 'btn btn-warning' },
-            			 { extend: 'pdf', className: 'btn btn-danger' },
-			        ],
+				dom: 'Bfrtip',
+				buttons: [
+				{ extend: 'csv', className: 'btn btn-success' },
+				{ extend: 'excel', className: 'btn btn-warning' },
+				{ extend: 'pdf', className: 'btn btn-danger' },
+				],
 
 				drawCallback: function () {
 					var api = this.api();
@@ -257,9 +292,9 @@ $array = mysqli_fetch_array($query);
 					$('#monto1').html(total1.toFixed(2));
 					var total2 = api.column( 12, {"filter":"applied"}).data().sum();
 					$('#monto2').html(total2.toFixed(2));
-						var total3 = api.column( 13, {"filter":"applied"}).data().sum();
+					var total3 = api.column( 13, {"filter":"applied"}).data().sum();
 					$('#monto3').html(total3.toFixed(2));
-						var total4 = api.column( 14, {"filter":"applied"}).data().sum();
+					var total4 = api.column( 14, {"filter":"applied"}).data().sum();
 					$('#monto4').html(total4.toFixed(2));
 
 				}
