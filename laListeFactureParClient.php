@@ -152,7 +152,7 @@ $rowcount=mysqli_num_rows($queryClient);
 					<label for="le_client" class="btn btn-primary me-3"><?php echo utf8_decode('Rabat, le : '.date("d/m/Y")); ?></label>
 				<div>
 					
-					<label for="le_client" class="btn btn-primary me-3 mt-3"><?php echo utf8_decode($client); ?></label>
+					<label for="le_client" class="btn btn-primary me-3 mt-3"><?php echo utf8_decode($client) . " " . utf8_decode($_GET["prenom"]); ?></label>
 					
 				</div>
 				<div>

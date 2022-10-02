@@ -14,6 +14,17 @@ $array = mysqli_fetch_array($query);
 
 
 ?>
+<?php 
+
+
+
+$consultarClient = "SELECT recu, assure, prenom, address_client FROM `proyectosis`";
+$queryClient = mysqli_query($connection, $consultarClient);
+$arrayClient = mysqli_fetch_array($queryClient);
+
+// href="generarFacturebyRecu.php?recu=<?php echo $row['recu'];
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <!--divinectorweb.com-->
@@ -59,23 +70,67 @@ $array = mysqli_fetch_array($query);
 	</header>
 	
 	<div class="container-fluid conjunto">
+		<h1 class= "" style= "text-align: center;">La liste de tous les reçus </h1>
+		<div class="row">
+			<!-- <button type="button" class="btn btn-primary dropdown-toggle ms-5 me-5" data-bs-toggle="dropdown" aria-expanded="false" target="_blank" href="">
+				Imprimer toutes les factures par client
+			</button>  -->
+
+			<!-- Button trigger modal -->
+			<button type="button" class="btn btn-success ms-5 w-50" data-bs-toggle="modal" data-bs-target="#exampleModal">
+				Clicker içi pour imprimer toutes les factures en seleccionant un client
+			</button>
+
+			<!-- Modal -->
+			<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Selectionner un client pour imprimer ses factures</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<table class="table table-hover" id="laListaClientes">
+								<thead>
+									<tr>
+										<th scope="col">REÇU</th>
+										<th scope="col">NOM ASSURÉ</th>
+										<!-- <th scope="col">PRENOM ASSURÉ</th> -->
+
+									</tr>
+								</thead>
+								<tbody>
+									<?php 
+
+									foreach ($queryClient as $row) {
+										?>
+										<tr>
+											<td scope="row"><?php echo $row['recu']; ?></td>
+											<td><a class="dropdown-item cliente" id=""  target="_blank" href="laListeFactureParClient.php?client=<?php echo $row['assure']; ?>&prenom=<?php echo $row['prenom']; ?>&address=<?php echo $row['address_client']; ?>"><?php echo $row['assure'] . " " . $row['prenom']; ?></a></td>
+											<!-- <td><?php echo $row['prenom']; ?></td> -->
+
+										</tr>
+									<?php }	?>
+
+								</tbody>
+
+							</table>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+							<!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="row">
 			<div class="col">
-				<h1 class= "">La liste de tous les reçus </h1>
+				
 				<section>
 
 					<!-- Example single danger button -->
-					<?php 
-
 					
-
-					$consultarClient = "SELECT recu, assure, prenom, address_client FROM `proyectosis`";
-					$queryClient = mysqli_query($connection, $consultarClient);
-					$arrayClient = mysqli_fetch_array($queryClient);
-
-// href="generarFacturebyRecu.php?recu=<?php echo $row['recu'];
-
-					?>
 					<div class="btn-group m-3">
 						<button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 							Selectionner un client pour imprimer ses factures
@@ -97,9 +152,9 @@ $array = mysqli_fetch_array($query);
 						</script>
 
 						
-					<!-- 	<button type="button" class="btn btn-primary dropdown-toggle ms-5 me-5" data-bs-toggle="dropdown" aria-expanded="false" target="_blank" href="">
+					<!-- <button type="button" class="btn btn-primary dropdown-toggle ms-5 me-5" data-bs-toggle="dropdown" aria-expanded="false" target="_blank" href="">
 							Imprimer toutes les factures par client
-						</button> -->
+						</button>  -->
 
 					<!-- 	<label for="le_client" class="btn btn-primary me-3">Selectionner un client pour imprimer ses factures :</label>
 
