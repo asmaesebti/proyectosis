@@ -151,14 +151,21 @@ $arrayClient = mysqli_fetch_array($queryClient);
 							}
 						</script>
 
-						
-					<!-- <button type="button" class="btn btn-primary dropdown-toggle ms-5 me-5" data-bs-toggle="dropdown" aria-expanded="false" target="_blank" href="">
+						<!-- boton de prueba  -->
+
+					<button hidden type="button" class="btn btn-primary dropdown-toggle ms-5 me-5" data-bs-toggle="dropdown" aria-expanded="false" target="_blank" href="">
 							Imprimer toutes les factures par client
-						</button>  -->
+						</button> 
+						<ul class="dropdown-menu">
+							<?php foreach ($queryClient as $row) { ?>
+								<li><a class="dropdown-item cliente" id=""  target="_blank" href="generarFacturebyClient.php?client=<?php echo $row['assure']; ?>&prenom=<?php echo $row['prenom']; ?>&address=<?php echo $row['address_client']; ?>"><?php echo $row['assure'] . " " . $row['prenom']; ?></a></li>
 
-					<!-- 	<label for="le_client" class="btn btn-primary me-3">Selectionner un client pour imprimer ses factures :</label>
+							<?php } ?>
+						</ul> 
 
-						<select name="le_client" id="le_client">
+						<!-- <label for="le_client" class="btn btn-primary me-3">Selectionner un client pour imprimer ses factures :</label> -->
+
+					<!-- 	<select name="le_client" id="le_client">
 							<option value="" >Selectionner un client</option>
 							<?php foreach ($queryClient as $row) { ?>
 								<option value="<?php echo $row['assure']; ?>" ><?php echo $row['assure'] . " " . $row['prenom']; ?></option>

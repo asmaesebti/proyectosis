@@ -46,7 +46,7 @@ $arrayClient = mysqli_fetch_array($queryClient);
 $rowcount=mysqli_num_rows($queryClient);
 
 //	echo $array["recu"];
-
+//https://medium.com/@ramamity94/creating-customisable-beautiful-pdfs-using-jspdf-api-aem-and-angular-991dcc988bbd
 
 ?>
 <!DOCTYPE html>
@@ -268,13 +268,15 @@ $rowcount=mysqli_num_rows($queryClient);
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js">
 	</script> 
 	<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.js"></script>
-
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
 	<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 	<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
 	<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
+
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('#le_client').change(function() {
@@ -336,7 +338,13 @@ $rowcount=mysqli_num_rows($queryClient);
 		} );
 	</script>
 
-	
+	<script>
+		// este codigo crear la tabla pero los datos de la suma no se muestran
+		// var doc = new jsPDF();
+		// doc.autoTable({html:"#laLista"}); 
+		// doc.save('mipdf.pdf');
+
+	</script>
 
 	
 
