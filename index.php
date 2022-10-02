@@ -413,7 +413,7 @@ $array = mysqli_fetch_array($query);
 				<span class="firma">Signature Production</span>
 			</div>
 			<div class="col text-center ">
-				<a class="btn btn-success" href="generarFactura.php">Generer Une Facture</a>
+				<a class="btn btn-success" target="_blank" href="generarFactura.php">Generer Une Facture</a>
 			</div>
 			<div class="col text-center ">
 				<a class="btn btn-success" href="escanear4.php">Scanner du code QR</a>

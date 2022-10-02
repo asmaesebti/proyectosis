@@ -10,13 +10,21 @@ $recu = $_POST['recu'];
 $leType = $_POST['leType'];
 $attestation = $_POST['attestation'];
 $police = $_POST['police'];
+$designation = $_POST['designation'];
 $matricule = $_POST['matricule'];
 $produit = $_POST['produit'];
 $assure = $_POST['assure'];
 $prenom = $_POST['prenom'];
+$address_client = $_POST['address_client'];
 $du = $_POST['du'];
 $au = $_POST['au'];
+$prime_net = $_POST['prime_net'];
+
+$taxes = $_POST['taxes'];
+$tp = $_POST['tp'];
+$accesoires = $_POST['accesoires'];
 $totale = $_POST['totale'];
+
 $espece = $_POST['espece'];
 $cheque = $_POST['cheque'];
 $virement = $_POST['virement'];
@@ -56,7 +64,7 @@ if ($date_versement != null) {
 
 //Actualizar los datos 
 
-$actualizar = "UPDATE proyectosis SET fecha_hoy = '$fecha_hoy', letype = '$leType', attestation = '$attestation', police = '$police', matricule = '$matricule', produit = '$produit',  assure = '$assure', prenom = '$prenom', du = '$du' , au = '$au',totale = '$totale' ,  espece = '$espece' , cheque = '$cheque' , virement = '$virement' , reste = '$reste', date_versement = '$date_versement' ,telefono = '$telefono',email = '$email'   WHERE recu = '$recu'";
+$actualizar = "UPDATE proyectosis SET fecha_hoy = '$fecha_hoy', letype = '$leType', attestation = '$attestation', police = '$police', designation = '$designation', matricule = '$matricule', produit = '$produit',  assure = '$assure', prenom = '$prenom', du = '$du' , au = '$au',prime_net = '$prime_net', taxes = '$taxes', tp = '$tp', accesoires = '$accesoires', totale = '$totale' ,  espece = '$espece' , cheque = '$cheque' , virement = '$virement' , reste = '$reste', date_versement = '$date_versement' ,telefono = '$telefono',email = '$email', address_client = '$address_client'   WHERE recu = '$recu'";
 
 
 $query = mysqli_query($connection, $actualizar);

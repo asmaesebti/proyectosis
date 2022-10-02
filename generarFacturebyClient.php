@@ -2,9 +2,28 @@
 // include class
 require('fpdf/fpdf.php');
 
+
 require_once('conexion.php');
 
 // create document
+// no se utiliza el PDO
+if(isset($_GET['le_client'])) {
+        $dsn = 'mysql:dbname=proyectosis;host=localhost';
+        $user = 'root';
+        $password = '';
+
+        $dbh = new PDO($dsn, $user, $password);
+        
+        $consultar = "SELECT * FROM proyectosis WHERE assure like :le_client; ";
+        $stmt = $dbh->prepare($consultar);
+        $stmt->bindValue(':le_client', $_GET['le_client'], PDO::PARAM_INT);
+        $stmt->execute();
+
+        $output = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($output);
+
+}
 
 $client = $_GET['client'];
 
@@ -124,16 +143,19 @@ $pdf->Cell($celda_30,7, utf8_decode("ACCESOIRES"),1, 0 , 'C', false);
 $pdf->Cell($celda_20,7, utf8_decode("Total TTC"),1, 0 , 'C', false);
 $pdf->Ln();
 
+
 foreach ($query as $row) {
 
-$x = 12;
-$pdf->SetXY(15, 95);
-while($pdf->GetStringWidth(utf8_decode($row['police'])) > $celda_35 ){
-    $x--;   // Decrease the variable which holds the font size
-    $pdf->SetFont( 'Arial', 'B', $x );  // Set the new font size
+        $x = 12;
+        $pdf->SetXY(15, 95);
+        while($pdf->GetStringWidth(utf8_decode($row['police'])) > $celda_35 ){
+         $x--;   // Decrease the variable which holds the font size
+        $pdf->SetFont( 'Arial', 'B', $x );  // Set the new font size
 }
 /* Output the string at the required font size */
+
 $pdf->Cell( $celda_35 , 21, utf8_decode( $row[ 'police' ]) , 1, 0, 'L' );
+
 /* Return the font size to itś original */
 $pdf->SetFont( 'Arial', 'B', $x );
 
@@ -224,6 +246,7 @@ while($pdf->GetStringWidth(utf8_decode($array["totale"])) > $celda_20 ){
 $pdf->Cell( $celda_20, 21, utf8_decode( $array["totale"]) , 1, 0, 'R' );
 /* Return the font size to itś original */
 $pdf->SetFont( 'Arial', 'B', $k );
+
 
 }
 

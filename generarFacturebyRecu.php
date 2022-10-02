@@ -27,7 +27,7 @@ $pdf->SetFont('Arial', 'B', 24);
 // $pdf->Cell(0, 10, 'Listado de profesores ', 0,1,'C');
 // $pdf->Ln();
 // Inserta un logo en la esquina superior izquierda a 300 ppp
-$pdf->Image('logo.png',5,5,-150);
+//$pdf->Image('logo.png',5,5,-150);
 
 // add image
 //$pdf->Image('mifoto.jpg', 180,12,13);
@@ -48,7 +48,7 @@ $pdf->Image('logo.png',5,5,-150);
 // $array = mysqli_fetch_array($query);
 
 $pdf->SetFont('Arial', '', 12);
-$pdf->SetXY(60, 30);
+$pdf->SetXY(60, 50);
 $pdf->MultiCell(0, 7, utf8_decode('Rabat, le                                                   '.date("d/m/Y")), 0, 1);
 $pdf->Ln();
 // $pdf->Rect(62, 44, 5, 5, 'D');
@@ -56,7 +56,7 @@ $pdf->Ln();
 
 
 $pdf->SetFont('Arial', '', 12);
-$pdf->SetXY(60, 40);
+$pdf->SetXY(60, 60);
 //$pdf->Cell(5,5,'',1,0,'C');
 $pdf->MultiCell(0, 7, utf8_decode($array["assure"] . ' ' . $array["prenom"]), 0, 1);
 
@@ -81,11 +81,11 @@ $pdf->MultiCell(0, 7, utf8_decode($array["assure"] . ' ' . $array["prenom"]), 0,
 // $pdf->Cell(5,5,'',1,0,'C');
 // $pdf->MultiCell(0, 7, utf8_decode('Autres'), 0, 1);
 
-$pdf->SetXY(60, 48);
+$pdf->SetXY(60, 68);
 $pdf->setFillColor(230,230,230);
 $pdf->MultiCell(100, 7, utf8_decode($array["address_client"]), 0, 1, true);
 
-$pdf->SetXY(65, 75);
+$pdf->SetXY(65, 95);
 $pdf->SetFont('Arial', 'B', 14);
 $pdf->SetFont('Arial','BU');
 $pdf->MultiCell(0, 7, utf8_decode("QUITTANCE DE PRIME"), 0, 1);
@@ -104,7 +104,7 @@ $celda_15 = 10;
 $altura_arriba = 7;
 $altura_abajo = 21;
 
-$pdf->SetXY(15, 95);
+$pdf->SetXY(15, 115);
 $pdf->SetFont('Arial', '', 10);
 $pdf->Cell($celda_35,7, utf8_decode("N° Police"),1, 0 , 'C', false);
 $pdf->Cell($celda_35,7, utf8_decode("Période"),1, 0 , 'C', false);
@@ -121,7 +121,7 @@ $pdf->Cell($celda_20,7, utf8_decode("Total TTC"),1, 0 , 'C', false);
 $pdf->Ln();
 
 $x = 12;
-$pdf->SetXY(15, 95);
+$pdf->SetXY(15, 115);
 while($pdf->GetStringWidth(utf8_decode($array['police'])) > $celda_35 ){
     $x--;   // Decrease the variable which holds the font size
     $pdf->SetFont( 'Arial', 'B', $x );  // Set the new font size
@@ -222,7 +222,7 @@ $pdf->SetFont( 'Arial', 'B', $k );
 
 $pdf->Ln();
 
-$pdf->SetXY(75, 116);
+$pdf->SetXY(75, 136);
 
 $celda_75 = 96;
 
@@ -252,7 +252,7 @@ $pdf->SetFont( 'Arial', 'B', $h );
 
 $pdf->Ln();
 
-$pdf->SetXY(75, 123);
+$pdf->SetXY(75, 143);
 
 $celda_75 = 96;
 
@@ -281,7 +281,7 @@ $pdf->SetFont( 'Arial', 'B', $h1 );
 
 $pdf->Ln();
 
-$pdf->SetXY(75, 130);
+$pdf->SetXY(75, 150);
 
 $celda_75 = 96;
 
@@ -310,7 +310,7 @@ $pdf->SetFont( 'Arial', 'B', $h11 );
 
 $pdf->Ln();
 
-$pdf->SetXY(75, 137);
+$pdf->SetXY(75, 157);
 
 $celda_75 = 96;
 
@@ -345,7 +345,7 @@ $pdf->SetFont( 'Arial', 'B', $h11 );
 // $pdf->SetXY(115, 105);
 // $pdf->MultiCell(0, 7, utf8_decode('Signature Client'), 0, 1);
 
-$pdf->Image('footer.GIF',3,260,-130);
+//$pdf->Image('footer.GIF',3,260,-130);
 
 
 //---------------------------------------------------------------------------------------------------------

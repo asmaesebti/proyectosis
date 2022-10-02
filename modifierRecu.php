@@ -169,6 +169,11 @@ $array = mysqli_fetch_array($queryDep);  ?>
 								<input type="text" class="form-control" name="police" value="<?php echo $row['police']; ?>" >
 
 							</div>
+							<div class="form-group mt-4">
+								<label>Désignation : </label><span class="error" style="color: red;"><?php if(isset($_SESSION['error_designation'])) echo $_SESSION['error_designation'] ;  ?></span>
+								<input type="text" class="form-control" name="designation" value="<?php echo $row['designation']; ?>" >
+
+							</div>
 							<div class="row">
 								<div class="col">
 									<div class="form-group mt-4">
@@ -217,7 +222,16 @@ $array = mysqli_fetch_array($queryDep);  ?>
 									</div>
 								</div>
 							</div>
-							
+							<div class="row">
+								<div class="col">
+									<div class="form-group">
+										<label>Addresse Assure : </label><span class="error" style="color: red;"><?php if(isset($_SESSION['error_address_client'])) echo $_SESSION['error_address_client'] ;  ?></span>
+
+										<textarea rows="6" cols="40" name="address_client"><?php echo $row['address_client'];  ?></textarea>
+									</div>
+								</div>
+
+							</div>
 							<div class="form-group">
 								<label>Periode : </label>
 								<div class="row">
@@ -236,10 +250,42 @@ $array = mysqli_fetch_array($queryDep);  ?>
 							<div class="form-group">
 								<div class="row mt-3">
 									<div class="col col-3">
+										<label>Prime Nette : *</label><span class="error" style="color: red;"><?php if(isset($_SESSION['error_prime_net'])) echo $_SESSION['error_prime_net'] ;  ?></span>
+									</div>
+									<div class="col col-7">
+										<input type="number" class="form-control" id="prime_net" step="0.01" name="prime_net"  value="<?php echo $row['prime_net']; ?>"  >
+									</div>
+								</div>
+								<div class="row mt-3">
+									<div class="col col-3">
+										<label>Taxes : </label><span class="error" style="color: red;"><?php if(isset($_SESSION['error_taxes'])) echo $_SESSION['error_taxes'] ;  ?></span>
+									</div>
+									<div class="col col-7">
+										<input type="number" class="form-control" id="taxes" step="0.01" name="taxes"  value="<?php echo $row['taxes'];  ?>"   >
+									</div>
+								</div>
+								<div class="row mt-3">
+									<div class="col col-3">
+										<label>T.P : </label><span class="error" style="color: red;"><?php if(isset($_SESSION['error_tp'])) echo $_SESSION['error_tp'] ;  ?></span>
+									</div>
+									<div class="col col-7">
+										<input type="number" class="form-control" id="tp" step="0.01" name="tp"  value="<?php echo $row['tp'];  ?>"   >
+									</div>
+								</div>
+								<div class="row mt-3">
+									<div class="col col-3">
+										<label>ACCESOIRES : </label><span class="error" style="color: red;"><?php if(isset($_SESSION['error_accesoires'])) echo $_SESSION['error_accesoires'] ;  ?></span>
+									</div>
+									<div class="col col-7">
+										<input type="number" class="form-control" id="accesoires" step="0.01" name="accesoires"  value="<?php echo $row['accesoires'];  ?>"   >
+									</div>
+								</div>
+								<div class="row mt-3">
+									<div class="col col-3">
 										<label>Prime totale : *</label><span class="error" style="color: red;"><?php if(isset($_SESSION['errorTotale'])) echo $_SESSION['errorTotale'] ;  ?></span>
 									</div>
 									<div class="col col-7">
-										<input type="number" class="form-control" id="totale" step="0.01" name="totale"  value="<?php echo $row['totale']; ?>" id="totale" >
+										<input type="number" class="form-control" id="totale" step="0.01" name="totale"  value="<?php echo $row['totale'];  ?>"   ><!-- onchange="sumar(this.value);" -->
 									</div>
 								</div>
 

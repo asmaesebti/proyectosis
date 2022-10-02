@@ -6,9 +6,44 @@ require_once('conexion.php');
 mysqli_query($connection,"SET CHARACTER SET 'utf8'");
 mysqli_query($connection,"SET SESSION collation_connection ='utf8_unicode_ci'");
 
-$consultar = "select * from proyectosis";
-$query = mysqli_query($connection, $consultar);
-$array = mysqli_fetch_array($query);
+// $consultar = "select * from proyectosis";
+// $query = mysqli_query($connection, $consultar);
+// $array = mysqli_fetch_array($query);
+
+$client = $_GET['client'];
+$prenom = $_GET['prenom'];
+$address = $_GET['address'];
+
+if (!isset($_GET['client'])) {
+	$client_sesion = null;
+
+}else{
+	$client = $_GET['client'];
+	$_SESSION['client'] = $client;
+	
+}
+if (!isset($_GET['prenom'])) {
+	$prenom_sesion = null;
+
+}else{
+	$prenom = $_GET['prenom'];
+	$_SESSION['prenom'] = $prenom;
+	
+}
+if (!isset($_GET['address'])) {
+	$address_sesion = null;
+
+}else{
+	$address = $_GET['address'];
+	$_SESSION['address'] = $address;
+	
+}
+
+
+$consultarClient = "SELECT * FROM proyectosis WHERE assure like '$client' and prenom like '$prenom' ";
+$queryClient = mysqli_query($connection, $consultarClient);
+$arrayClient = mysqli_fetch_array($queryClient);
+$rowcount=mysqli_num_rows($queryClient);
 
 //	echo $array["recu"];
 
@@ -61,7 +96,7 @@ $array = mysqli_fetch_array($query);
 	<div class="container-fluid conjunto">
 		<div class="row">
 			<div class="col">
-				<h1 class= "">La liste de tous les reçus </h1>
+				<h1 class= ""> </h1>
 				<section>
 
 					<!-- Example single danger button -->
@@ -69,32 +104,32 @@ $array = mysqli_fetch_array($query);
 
 					
 
-					$consultarClient = "SELECT recu, assure, prenom, address_client FROM `proyectosis`";
-					$queryClient = mysqli_query($connection, $consultarClient);
-					$arrayClient = mysqli_fetch_array($queryClient);
+					// $consultarClient = "SELECT recu, assure, prenom FROM `proyectosis`";
+					// $queryClient = mysqli_query($connection, $consultarClient);
+					// $arrayClient = mysqli_fetch_array($queryClient);
 
 // href="generarFacturebyRecu.php?recu=<?php echo $row['recu'];
 
 					?>
 					<div class="btn-group m-3">
-						<button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+					<!-- 	<button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 							Selectionner un client pour imprimer ses factures
 						</button>
 						<ul class="dropdown-menu">
 							<?php foreach ($queryClient as $row) { ?>
-								<li><a class="dropdown-item cliente" id=""  target="_blank" href="laListeFactureParClient.php?client=<?php echo $row['assure']; ?>&prenom=<?php echo $row['prenom']; ?>&address=<?php echo $row['address_client']; ?>"><?php echo $row['assure'] . " " . $row['prenom']; ?></a></li>
+								<li><a class="dropdown-item cliente" id=""  target="_blank" href="generarFacturebyClient.php?client=<?php echo $row['assure']; ?>"><?php echo $row['assure'] . " " . $row['prenom']; ?></a></li>
 
 							<?php } ?>
 						</ul> 
-						<label for="le_client" class="btn btn-primary ms-3" id="mostrar_cliente"></label>
-						<script>
+						<label for="le_client" class="btn btn-primary ms-3" id="mostrar_cliente"></label> -->
+					<!-- 	<script>
 							var btn = document.getElementsByClassName('cliente');
 							for (var i = 0; i < btn.length; i++) {
 								btn[i].addEventListener("click", function() {
 									document.getElementById("mostrar_cliente").innerHTML = "Le client seleccioner est : " + this.innerHTML;
 								});
 							}
-						</script>
+						</script> -->
 
 						
 					<!-- 	<button type="button" class="btn btn-primary dropdown-toggle ms-5 me-5" data-bs-toggle="dropdown" aria-expanded="false" target="_blank" href="">
@@ -113,95 +148,54 @@ $array = mysqli_fetch_array($query);
 
 
 				</section>
+				<div>
+					<label for="le_client" class="btn btn-primary me-3"><?php echo utf8_decode('Rabat, le : '.date("d/m/Y")); ?></label>
+				<div>
+					
+					<label for="le_client" class="btn btn-primary me-3 mt-3"><?php echo utf8_decode($client); ?></label>
+					
+				</div>
+				<div>
+					
+					<label for="le_client" class="btn btn-primary me-3 mt-3"><?php echo  utf8_decode($_GET["address"]); ?></label>
+					
+				</div>
+					<h2 class= "" style="text-align: center; color: red; "><u> <?php echo utf8_decode("QUITTANCE DE PRIME"); ?></u></h2>
+
+
 				<table class="table table-hover" id="laLista">
 					<thead>
 						<tr>
-							<th scope="col">DATE</th>
-							<th scope="col">REÇU</th>
-							<th scope="col">LE TYPE</th>
-							<th scope="col">ATTESTATION</th>
-							<th scope="col">POLICE</th>
-							<th scope="col">MATRICULE</th>
-							<th scope="col">PRODUIT</th>
-							<th scope="col">NOM ASSURÉ</th>
-							<!-- <th scope="col">PRENOM ASSURÉ</th> -->
-							<th scope="col">PERIODE DU</th>
-							<th scope="col">PERIODE AU</th>
-							<th scope="col">PRIME TOTALE</th>
-							<th scope="col">ESPECE</th>
-							<th scope="col">CHEQUE</th>
-							<th scope="col">VIREMENT</th>
-							<th scope="col">RESTE</th>
-							<th scope="col">DATE VERSEMENT</th>
-							<th scope="col">CREE LE</th>
-							<th scope="col">TELEPHONE</th>
-							<th scope="col">EMAIL</th>
-							<th scope="col">Modificar</th>
-							<th scope="col">Eliminar</th>
-							<th scope="col">Imprimer</th>
-							<th scope="col">Imprimer Facture</th>
+							<th scope="col">N° Police</th>
+							<th scope="col">Période</th>
+							<th scope="col">Désignation</th>
+							<th scope="col">Prime Nette</th>
+							<th scope="col">Taxes</th>
+							<th scope="col">T.P</th>
+							<th scope="col">ACCESOIRES</th>
+							<th scope="col">Total TTC</th>
 						</tr>
 					</thead>
 					<tbody>
 						<?php 
-
-						foreach ($query as $row) {
+						foreach ($queryClient as $row) {
 							?>
 							<tr>
-								<td><?php echo $row['fecha_hoy']; ?></td>
-								<th scope="row"><?php echo $row['recu']; ?></th>
-								<td><?php echo utf8_decode($row['letype']); ?></td>
-								<td><?php echo $row['attestation']; ?></td>
-								<td><?php echo $row['police']; ?></td>
-								<td><?php echo $row['matricule']; ?></td>
-								<td><?php echo $row['produit']; ?></td>
-								<td><?php echo $row['assure']; ?></td>
-								<!-- <td><?php echo $row['prenom']; ?></td> -->
-								<td><?php echo $row['du']; ?></td>
-								<td><?php echo $row['au']; ?></td>
-								<td><?php echo $row['totale']; ?></td>
-								<td><?php echo $row['espece']; ?></td>
-								<td><?php echo $row['cheque']; ?></td>
-								<td><?php echo $row['virement']; ?></td>
-								<td><?php echo $row['reste']; ?></td>
-								<td style="color: <?php echo ($row['date_versement'] == '1970-01-01') ? 'beige' : '';  ?>; "><?php echo $row['date_versement']; ?></td>
-								
-								<td><?php echo $row['cree_le']; ?></td>
-								<td><?php echo $row['telefono']; ?></td>
-								<td><?php echo $row['email']; ?></td>
-								<td class="align-middle"><a class="btn btn-warning" href="modifierRecu.php?recu=<?php echo $row['recu']; ?>">modificar</a> </td>
-								<td class="align-middle"><a class="btn btn-danger" href="eliminerRecu.php?recu=<?php echo $row['recu']; ?>">eliminar</a></td>
-								<td class="align-middle"><a class="btn btn-success" target="_blank" href="generarPDFbyRecu.php?recu=<?php echo $row['recu']; ?>">Imprimer</a></td>
-								<td class="align-middle"><a class="btn btn-warning" target="_blank" href="generarFacturebyRecu.php?recu=<?php echo $row['recu']; ?>">Imprimer Facture</a></td>
+								<td><?php echo utf8_decode($row['police']); ?></td>
+								<th scope="row"><?php echo utf8_decode($row["du"] . " AU " . $row["au"]); ?></th>
+								<td><?php echo utf8_decode($row["designation"]); ?></td>
+								<td><?php echo utf8_decode($row["prime_net"]); ?></td>
+								<td><?php echo utf8_decode($row["taxes"]); ?></td>
+								<td><?php echo utf8_decode($row["tp"]); ?></td>
+								<td><?php echo utf8_decode($row["accesoires"]); ?></td>
+								<td><?php echo utf8_decode($row["totale"]); ?></td>
 							</tr>
-
-
-							<?php
-						}
-
-						?>
+							<?php }	?>
 
 					</tbody>
 					<tfoot>
-						<td class="bg-grays-active color-palette"><b></b></td>
-						<td class="bg-teals-active color-palette text-center">
-							<strong id="abiertoEnTiempo"></strong>
-						</td>
-						<td class="bg-teals-active color-palette text-center">
-							<strong></strong>
-						</td>
-						<td class="bg-teals-active color-palette text-center">
-							<strong></strong>
-						</td>
-						<td class="bg-teals-active color-palette text-center">
-							<strong></strong>
-						</td>
-						<td class="bg-teals-active color-palette text-center">
-							<strong></strong>
-						</td>
-						<td class="bg-teals-active color-palette text-center">
-							<strong></strong>
-						</td>
+						
+						
 						<td class="bg-teals-active color-palette text-center">
 							<strong></strong>
 						</td>
@@ -233,25 +227,25 @@ $array = mysqli_fetch_array($query);
 					<div class="col-2">
 						<a class="btn btn-warning" href="index.php" role="button">Retourner au formulaire</a>
 					</div>
-					<div class="col-2">
+				<!-- 	<div class="col-2">
 						<a class="btn btn-success" href="form_date.php" role="button">La liste par date</a>
-					</div>
+					</div> -->
 					<div class="col-2">
-						<a class="btn btn-danger" href="laListeExcel.php" role="button">La liste en excel</a>
+						<a class="btn btn-danger" href="laListeExcelFactureParClient.php" role="button">La liste en excel</a>
 					</div>
-					<div class="col-2">
+				<!-- 	<div class="col-2">
 						<a class="btn btn-primary" href="copiaSeguridad.php" role="button">Sauvegarde de securité de la base de données</a>
-					</div>
-					<div class="col-2">
+					</div> -->
+					<!-- <div class="col-2">
 						<a class="btn btn-success" href="diagram.php"  role="button">Diagram du montant</a>
-					</div>
+					</div> -->
 
 					<div class="col-1 ">
 						<a class="btn btn-success" href="index.php" role="button">Salir</a>
 					</div>
-					<div class="col-1">
+					<!-- <div class="col-1">
 						<a class="btn btn-danger" href="laListeExcelElimines.php" role="button">La liste des eliminés</a>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>
@@ -325,15 +319,15 @@ $array = mysqli_fetch_array($query);
 
 				drawCallback: function () {
 					var api = this.api();
-					var total = api.column( 10, {"filter":"applied"}).data().sum();
+					var total = api.column( 3, {"filter":"applied"}).data().sum();
 					$('#monto').html(total.toFixed(2));
-					var total1 = api.column( 11, {"filter":"applied"}).data().sum();
+					var total1 = api.column( 4, {"filter":"applied"}).data().sum();
 					$('#monto1').html(total1.toFixed(2));
-					var total2 = api.column( 12, {"filter":"applied"}).data().sum();
+					var total2 = api.column( 5, {"filter":"applied"}).data().sum();
 					$('#monto2').html(total2.toFixed(2));
-					var total3 = api.column( 13, {"filter":"applied"}).data().sum();
+					var total3 = api.column( 6, {"filter":"applied"}).data().sum();
 					$('#monto3').html(total3.toFixed(2));
-					var total4 = api.column( 14, {"filter":"applied"}).data().sum();
+					var total4 = api.column( 7, {"filter":"applied"}).data().sum();
 					$('#monto4').html(total4.toFixed(2));
 
 				}
