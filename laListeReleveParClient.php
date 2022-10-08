@@ -1,5 +1,5 @@
 <?php 
-
+header('Content-Type: text/html; charset=UTF-8');
 session_start();
 require_once('conexion.php');
 
@@ -47,7 +47,11 @@ $rowcount=mysqli_num_rows($queryClient);
 
 //	echo $array["recu"];
 //https://medium.com/@ramamity94/creating-customisable-beautiful-pdfs-using-jspdf-api-aem-and-angular-991dcc988bbd
-
+ function properText($str){
+    $str = mb_convert_encoding($str, "HTML-ENTITIES", "UTF-8");
+    $str = preg_replace('[a-zA-Z áéíóúÁÉÍÓÚñÑ.]',htmlentities('${1}'),$str);
+    return($str); 
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -160,7 +164,7 @@ $rowcount=mysqli_num_rows($queryClient);
 					<label for="le_client" class="btn btn-primary me-3 mt-3"><?php echo  utf8_decode($_GET["address"]); ?></label>
 					
 				</div>
-					<h2 class= "" style="text-align: center; color: red; "><u> <?php echo utf8_decode("QUITTANCE DE PRIME"); ?></u></h2>
+					<h2 class= "" style="text-align: center; color: red; "><u> <?php echo properText("RELEVÉ"); ?></u></h2>
 
 
 				<table class="table table-hover" id="laLista">
@@ -231,7 +235,7 @@ $rowcount=mysqli_num_rows($queryClient);
 						<a class="btn btn-success" href="form_date.php" role="button">La liste par date</a>
 					</div> -->
 					<div class="col-2">
-						<a class="btn btn-danger" href="laListeExcelFactureParClient.php" role="button">La liste en excel</a>
+						<a class="btn btn-danger" href="laListeExcelReleveParClient.php" role="button">La liste en excel</a>
 					</div>
 				<!-- 	<div class="col-2">
 						<a class="btn btn-primary" href="copiaSeguridad.php" role="button">Sauvegarde de securité de la base de données</a>
@@ -282,7 +286,7 @@ $rowcount=mysqli_num_rows($queryClient);
 			$('#le_client').change(function() {
 				$.ajax({
 					type: 'GET',
-					url: 'generarFacturebyClient.php',
+					url: 'generarRelevebyClient.php',
 					data: {
 						itemID: $(this).val()
 					},

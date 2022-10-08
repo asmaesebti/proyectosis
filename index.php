@@ -247,7 +247,7 @@ $array = mysqli_fetch_array($query);
 							</div>
 						</div>
 						<div class="col">
-							<div class="form-group">
+							<div class="form-group" hidden>
 								<label>Prenom Assure : *</label><span class="error" style="color: red;"><?php if(isset($_SESSION['error_prenom'])) echo $_SESSION['error_prenom'] ;  ?></span>
 								<input type="text" class="form-control" name="prenom" value="<?php echo (isset($_SESSION['prenom'])) ? $_SESSION['prenom'] : "";  ?>">
 								
@@ -414,6 +414,9 @@ $array = mysqli_fetch_array($query);
 			</div>
 			<div class="col text-center ">
 				<a class="btn btn-success" target="_blank" href="generarFactura.php">Generer Une Facture</a>
+			</div>
+			<div class="col text-center ">
+				<a class="btn btn-success" target="_blank" href="generarReleve.php">Generer Un Relevé</a>
 			</div>
 			<div class="col text-center ">
 				<a class="btn btn-success" href="escanear4.php">Scanner du code QR</a>

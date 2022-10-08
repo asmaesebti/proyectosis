@@ -18,7 +18,7 @@ $array = mysqli_fetch_array($query);
 
 
 
-$consultarClient = "SELECT recu, assure, prenom, address_client FROM `proyectosis`";
+$consultarClient = "SELECT distinct recu, assure, prenom, address_client FROM `proyectosis`";
 $queryClient = mysqli_query($connection, $consultarClient);
 $arrayClient = mysqli_fetch_array($queryClient);
 
@@ -72,12 +72,13 @@ $arrayClient = mysqli_fetch_array($queryClient);
 	<div class="container-fluid conjunto">
 		<h1 class= "" style= "text-align: center;">La liste de tous les reçus </h1>
 		<div class="row">
+			<div class="col">
 			<!-- <button type="button" class="btn btn-primary dropdown-toggle ms-5 me-5" data-bs-toggle="dropdown" aria-expanded="false" target="_blank" href="">
 				Imprimer toutes les factures par client
 			</button>  -->
 
 			<!-- Button trigger modal -->
-			<button type="button" class="btn btn-success ms-5 w-50" data-bs-toggle="modal" data-bs-target="#exampleModal">
+			<button type="button" class="btn btn-secondary ms-5 w-50" data-bs-toggle="modal" data-bs-target="#exampleModal">
 				Clicker içi pour imprimer toutes les factures en seleccionant un client
 			</button>
 
@@ -124,46 +125,109 @@ $arrayClient = mysqli_fetch_array($queryClient);
 				</div>
 			</div>
 		</div>
-		<div class="row">
 			<div class="col">
-				
-				<section>
+			<!-- <button type="button" class="btn btn-primary dropdown-toggle ms-5 me-5" data-bs-toggle="dropdown" aria-expanded="false" target="_blank" href="">
+				Imprimer toutes les factures par client
+			</button>  -->
 
-					<!-- Example single danger button -->
-					
-					<div class="btn-group m-3">
-						<button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-							Selectionner un client pour imprimer ses factures
-						</button>
-						<ul class="dropdown-menu">
-							<?php foreach ($queryClient as $row) { ?>
-								<li><a class="dropdown-item cliente" id=""  target="_blank" href="laListeFactureParClient.php?client=<?php echo $row['assure']; ?>&prenom=<?php echo $row['prenom']; ?>&address=<?php echo $row['address_client']; ?>"><?php echo $row['assure'] . " " . $row['prenom']; ?></a></li>
+			<!-- Button trigger modal -->
+			<button type="button" class="btn btn-success ms-5 w-50" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+				Clicker içi pour imprimer les relevés en seleccionant un client
+			</button>
 
-							<?php } ?>
-						</ul> 
-						<label for="le_client" class="btn btn-primary ms-3" id="mostrar_cliente"></label>
-						<script>
-							var btn = document.getElementsByClassName('cliente');
-							for (var i = 0; i < btn.length; i++) {
-								btn[i].addEventListener("click", function() {
-									document.getElementById("mostrar_cliente").innerHTML = "Le client seleccioner est : " + this.innerHTML;
-								});
-							}
-						</script>
+			<!-- Modal -->
+			<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Selectionner un client pour imprimer ses relevés</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<table class="table table-hover" id="laListaClientes">
+								<thead>
+									<tr>
+										<th scope="col">REÇU</th>
+										<th scope="col">NOM ASSURÉ</th>
+										<!-- <th scope="col">PRENOM ASSURÉ</th> -->
 
-						<!-- boton de prueba  -->
+									</tr>
+								</thead>
+								<tbody>
+									<?php 
+
+									foreach ($queryClient as $row) {
+										?>
+										<tr>
+											<td scope="row"><?php echo $row['recu']; ?></td>
+											<td><a class="dropdown-item cliente" id=""  target="_blank" href="laListeReleveParClient.php?client=<?php echo $row['assure']; ?>&prenom=<?php echo $row['prenom']; ?>&address=<?php echo $row['address_client']; ?>"><?php echo $row['assure'] . " " . $row['prenom']; ?></a></td>
+											<!-- <td><?php echo $row['prenom']; ?></td> -->
+
+										</tr>
+									<?php }	?>
+
+								</tbody>
+
+							</table>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+							<!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col">
+
+			<section>
+
+				<!-- Example single danger button -->
+
+				<div class="btn-group m-3">
+					<button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+						Selectionner un client pour imprimer ses factures
+					</button>
+					<ul class="dropdown-menu">
+						<?php foreach ($queryClient as $row) { ?>
+							<li><a class="dropdown-item cliente" id=""  target="_blank" href="laListeFactureParClient.php?client=<?php echo $row['assure']; ?>&prenom=<?php echo $row['prenom']; ?>&address=<?php echo $row['address_client']; ?>"><?php echo $row['assure'] . " " . $row['prenom']; ?></a></li>
+
+						<?php } ?>
+					</ul> 
+					<button type="button" class="btn btn-primary dropdown-toggle ms-5" data-bs-toggle="dropdown" aria-expanded="false">
+						Selectionner un client pour imprimer ses relevés
+					</button>
+					<ul class="dropdown-menu">
+						<?php foreach ($queryClient as $row) { ?>
+							<li><a class="dropdown-item cliente" id=""  target="_blank" href="laListeReleveParClient.php?client=<?php echo $row['assure']; ?>&prenom=<?php echo $row['prenom']; ?>&address=<?php echo $row['address_client']; ?>"><?php echo $row['assure'] . " " . $row['prenom']; ?></a></li>
+
+						<?php } ?>
+					</ul> 
+					<label for="le_client" class="btn btn-warning ms-3" id="mostrar_cliente"></label>
+					<script>
+						var btn = document.getElementsByClassName('cliente');
+						for (var i = 0; i < btn.length; i++) {
+							btn[i].addEventListener("click", function() {
+								document.getElementById("mostrar_cliente").innerHTML = "Le client seleccioner est : " + this.innerHTML;
+							});
+						}
+					</script>
+
+					<!-- boton de prueba  -->
 
 					<button hidden type="button" class="btn btn-primary dropdown-toggle ms-5 me-5" data-bs-toggle="dropdown" aria-expanded="false" target="_blank" href="">
-							Imprimer toutes les factures par client
-						</button> 
-						<ul class="dropdown-menu">
-							<?php foreach ($queryClient as $row) { ?>
-								<li><a class="dropdown-item cliente" id=""  target="_blank" href="generarFacturebyClient.php?client=<?php echo $row['assure']; ?>&prenom=<?php echo $row['prenom']; ?>&address=<?php echo $row['address_client']; ?>"><?php echo $row['assure'] . " " . $row['prenom']; ?></a></li>
+						Imprimer toutes les factures par client
+					</button> 
+					<ul class="dropdown-menu">
+						<?php foreach ($queryClient as $row) { ?>
+							<li><a class="dropdown-item cliente" id=""  target="_blank" href="generarFacturebyClient.php?client=<?php echo $row['assure']; ?>&prenom=<?php echo $row['prenom']; ?>&address=<?php echo $row['address_client']; ?>"><?php echo $row['assure'] . " " . $row['prenom']; ?></a></li>
 
-							<?php } ?>
-						</ul> 
+						<?php } ?>
+					</ul> 
 
-						<!-- <label for="le_client" class="btn btn-primary me-3">Selectionner un client pour imprimer ses factures :</label> -->
+					<!-- <label for="le_client" class="btn btn-primary me-3">Selectionner un client pour imprimer ses factures :</label> -->
 
 					<!-- 	<select name="le_client" id="le_client">
 							<option value="" >Selectionner un client</option>
@@ -201,7 +265,8 @@ $arrayClient = mysqli_fetch_array($queryClient);
 							<th scope="col">Modificar</th>
 							<th scope="col">Eliminar</th>
 							<th scope="col">Imprimer</th>
-							<th scope="col">Imprimer Facture</th>
+							<th scope="col">Facture</th>
+							<th scope="col">RELEVÉ</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -234,7 +299,8 @@ $arrayClient = mysqli_fetch_array($queryClient);
 								<td class="align-middle"><a class="btn btn-warning" href="modifierRecu.php?recu=<?php echo $row['recu']; ?>">modificar</a> </td>
 								<td class="align-middle"><a class="btn btn-danger" href="eliminerRecu.php?recu=<?php echo $row['recu']; ?>">eliminar</a></td>
 								<td class="align-middle"><a class="btn btn-success" target="_blank" href="generarPDFbyRecu.php?recu=<?php echo $row['recu']; ?>">Imprimer</a></td>
-								<td class="align-middle"><a class="btn btn-warning" target="_blank" href="generarFacturebyRecu.php?recu=<?php echo $row['recu']; ?>">Imprimer Facture</a></td>
+								<td class="align-middle"><a class="btn btn-secondary" target="_blank" href="generarFacturebyRecu.php?recu=<?php echo $row['recu']; ?>">Facture</a></td>
+								<td class="align-middle"><a class="btn btn-warning" target="_blank" href="generarRelevebyRecu.php?recu=<?php echo $row['recu']; ?>">Relevé</a></td>
 							</tr>
 
 

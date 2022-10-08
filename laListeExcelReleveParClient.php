@@ -20,7 +20,7 @@ $totalre = 0;
 
 
 header("Content-Type: application/xls");
-header("Content-Disposition: attachment; filename=listeExcelFactureParClient.xls");
+header("Content-Disposition: attachment; filename=listeExcelReleveParClient.xls");
 header("Pragma: no-cache");
 header("Expires: 0");
 
@@ -46,7 +46,7 @@ echo '<tr><th></th><th></th><th style="text-align: left;">'.utf8_decode($client)
 echo '<tr><th></th></tr>';
 echo '<tr><th></th><th></th><th style="text-align: left;">'.utf8_decode($address).'</th></tr>';
 echo '<tr><th></th></tr>';
-echo '<tr><th></th><th></th><th style="font-size: 135%;">'.utf8_decode("QUITTANCE DE PRIME").'</th></tr>';
+echo '<tr><th></th><th></th><th style="font-size: 135%;">'.utf8_decode("RELEVÉ").'</th></tr>';
 echo '<tr><th></th></tr>';
 echo '</table>';
 
