@@ -1,0 +1,39 @@
+{
+  "random": "9",
+  "random float": "5.755",
+  "bool": "false",
+  "date": "1990-02-22",
+  "regEx": "hellooooooooooooooooooooooooooooooo to you",
+  "enum": "json",
+  "firstname": "Paule",
+  "lastname": "Briney",
+  "city": "Rio Branco",
+  "country": "United States",
+  "countryCode": "GF",
+  "email uses current data": "Paule.Briney@gmail.com",
+  "email from expression": "Paule.Briney@yopmail.com",
+  "array": [
+    "Jinny",
+    "Kalina",
+    "Celene",
+    "Krystle",
+    "Anestassia"
+  ],
+  "array of objects": [
+    {
+      "index": "0",
+      "index start at 5": "5"
+    },
+    {
+      "index": "1",
+      "index start at 5": "6"
+    },
+    {
+      "index": "2",
+      "index start at 5": "7"
+    }
+  ],
+  "Vanessa": {
+    "age": "93"
+  }
+}

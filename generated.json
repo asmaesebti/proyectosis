@@ -1,0 +1,34 @@
+[
+  {"name": "Google",
+ "homepage_url": "http://www.google.com",
+ "blog_url": "",
+ "blog_feed_url": "",
+ "twitter_username": "",
+ "category_code": "ecommerce",
+ "tag_list": "retail-portal-online-shopping-markets",
+ "alias_list": null,
+ "image": null,
+ "products":
+  [],
+ "relationships":
+  [],
+ "competitions":
+  [],
+ "providerships":
+  [{"title": "Legal",
+    "is_past": false,
+    "provider":
+     {"name": "TaylorWessing",
+      "permalink": "taylorwessing"}}],
+ "offices":
+  [{"description": "European HQ",
+    "address1": "",
+    "address2": "",
+    "zip_code": "",
+    "city": "Brussels",
+    "state_code": null,
+    "country_code": "BEL",
+    "latitude": null,
+    "longitude": null}]}
+
+]

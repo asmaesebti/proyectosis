@@ -1,0 +1,42 @@
+[  
+  {  
+    "name": "sravan kumar3",  
+    "gender": "Male3",  
+    "subject": "Software engineering6"  
+  },  
+  {  
+    "name": "sudheer4",  
+    "gender": "Male4",  
+    "subject": "deep learning4"    
+  },  
+  {  
+    "name": "radha5",  
+    "gender": "Female5",  
+    "subject": "Software engineering5"  
+  },  
+  {  
+    "name": "vani5",  
+    "gender": "Female5",  
+    "subject": "Software engineering5"  
+  },
+  {  
+    "name": "vani1",  
+    "gender": "Female1",  
+    "subject": "Software engineering1"  
+  },
+  {  
+    "name": "vani2",  
+    "gender": "Female2",  
+    "subject": "Software engineering2"  
+  },
+  {  
+    "name": "vani3",  
+    "gender": "Female3",  
+    "subject": "Software engineering3"  
+  },
+  {  
+    "name": "vani4",  
+    "gender": "Female4",  
+    "subject": "Software engineering4"  
+  }
+]
