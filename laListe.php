@@ -91,7 +91,7 @@ $arrayClient = mysqli_fetch_array($queryClient);
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<div class="modal-body">
-							<table class="table table-hover" id="laListaClientes">
+							<table class="table table-hover" id="laListaClientesF">
 								<thead>
 									<tr>
 										<th scope="col">REÇU</th>
@@ -107,7 +107,7 @@ $arrayClient = mysqli_fetch_array($queryClient);
 										?>
 										<tr>
 											<td scope="row"><?php echo $row['recu']; ?></td>
-											<td><a class="dropdown-item cliente" id=""  target="_blank" href="laListeFactureParClient.php?client=<?php echo $row['assure']; ?>&prenom=<?php echo $row['prenom']; ?>&address=<?php echo $row['address_client']; ?>"><?php echo $row['assure'] . " " . $row['prenom']; ?></a></td>
+											<td><a class="dropdown-item cliente" id=""  target="_blank" href="laListeFactureParClient.php?client=<?php echo $row['assure']; ?>&prenom=<?php echo $row['prenom']; ?>&address=<?php echo $row['address_client']; ?>&recu=<?php echo $row['recu']; ?>"><?php echo $row['assure'] . " " . $row['prenom']; ?></a></td>
 											<!-- <td><?php echo $row['prenom']; ?></td> -->
 
 										</tr>
@@ -125,7 +125,7 @@ $arrayClient = mysqli_fetch_array($queryClient);
 				</div>
 			</div>
 		</div>
-			<div class="col">
+		<div class="col">
 			<!-- <button type="button" class="btn btn-primary dropdown-toggle ms-5 me-5" data-bs-toggle="dropdown" aria-expanded="false" target="_blank" href="">
 				Imprimer toutes les factures par client
 			</button>  -->
@@ -144,7 +144,7 @@ $arrayClient = mysqli_fetch_array($queryClient);
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<div class="modal-body">
-							<table class="table table-hover" id="laListaClientes">
+							<table class="table table-hover" id="laListaClientesR">
 								<thead>
 									<tr>
 										<th scope="col">REÇU</th>
@@ -160,7 +160,7 @@ $arrayClient = mysqli_fetch_array($queryClient);
 										?>
 										<tr>
 											<td scope="row"><?php echo $row['recu']; ?></td>
-											<td><a class="dropdown-item cliente" id=""  target="_blank" href="laListeReleveParClient.php?client=<?php echo $row['assure']; ?>&prenom=<?php echo $row['prenom']; ?>&address=<?php echo $row['address_client']; ?>"><?php echo $row['assure'] . " " . $row['prenom']; ?></a></td>
+											<td><a class="dropdown-item cliente" id=""  target="_blank" href="laListeReleveParClient.php?client=<?php echo $row['assure']; ?>&prenom=<?php echo $row['prenom']; ?>&address=<?php echo $row['address_client']; ?>&recu=<?php echo $row['recu']; ?>"><?php echo $row['assure'] . " " . $row['prenom']; ?></a></td>
 											<!-- <td><?php echo $row['prenom']; ?></td> -->
 
 										</tr>
@@ -187,7 +187,7 @@ $arrayClient = mysqli_fetch_array($queryClient);
 				<!-- Example single danger button -->
 
 				<div class="btn-group m-3">
-					<button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+					<button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" hidden>
 						Selectionner un client pour imprimer ses factures
 					</button>
 					<ul class="dropdown-menu">
@@ -196,7 +196,7 @@ $arrayClient = mysqli_fetch_array($queryClient);
 
 						<?php } ?>
 					</ul> 
-					<button type="button" class="btn btn-primary dropdown-toggle ms-5" data-bs-toggle="dropdown" aria-expanded="false">
+					<button type="button" class="btn btn-primary dropdown-toggle ms-5" data-bs-toggle="dropdown" aria-expanded="false" hidden>
 						Selectionner un client pour imprimer ses relevés
 					</button>
 					<ul class="dropdown-menu">
@@ -299,8 +299,8 @@ $arrayClient = mysqli_fetch_array($queryClient);
 								<td class="align-middle"><a class="btn btn-warning" href="modifierRecu.php?recu=<?php echo $row['recu']; ?>">modificar</a> </td>
 								<td class="align-middle"><a class="btn btn-danger" href="eliminerRecu.php?recu=<?php echo $row['recu']; ?>">eliminar</a></td>
 								<td class="align-middle"><a class="btn btn-success" target="_blank" href="generarPDFbyRecu.php?recu=<?php echo $row['recu']; ?>">Imprimer</a></td>
-								<td class="align-middle"><a class="btn btn-secondary" target="_blank" href="generarFacturebyRecu.php?recu=<?php echo $row['recu']; ?>">Facture</a></td>
-								<td class="align-middle"><a class="btn btn-warning" target="_blank" href="generarRelevebyRecu.php?recu=<?php echo $row['recu']; ?>">Relevé</a></td>
+								<td class="align-middle"><a class="btn btn-secondary" target="_blank" href="generarFacturebyRecuExcel.php?client=<?php echo $row['assure']; ?>&prenom=<?php echo $row['prenom']; ?>&address=<?php echo $row['address_client']; ?>&recu=<?php echo $row['recu']; ?>">Facture</a></td>
+								<td class="align-middle"><a class="btn btn-warning" target="_blank" href="generarRelevebyRecuExcel.php?client=<?php echo $row['assure']; ?>&prenom=<?php echo $row['prenom']; ?>&address=<?php echo $row['address_client']; ?>&recu=<?php echo $row['recu']; ?>">Relevé</a></td>
 							</tr>
 
 
@@ -470,9 +470,17 @@ $arrayClient = mysqli_fetch_array($queryClient);
 		} );
 	</script>
 
-	
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('#laListaClientesF').DataTable();
+		});
+	</script>
 
-	
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('#laListaClientesR').DataTable();
+		});
+	</script>
 
 </body>
 </html>

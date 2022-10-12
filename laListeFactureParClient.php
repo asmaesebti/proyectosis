@@ -10,9 +10,19 @@ mysqli_query($connection,"SET SESSION collation_connection ='utf8_unicode_ci'");
 // $query = mysqli_query($connection, $consultar);
 // $array = mysqli_fetch_array($query);
 
+$recu = $_GET['recu'];
 $client = $_GET['client'];
 $prenom = $_GET['prenom'];
 $address = $_GET['address'];
+
+if (!isset($_GET['recu'])) {
+	$recu_sesion = null;
+
+}else{
+	$recu = $_GET['recu'];
+	$_SESSION['recu'] = $recu;
+
+}
 
 if (!isset($_GET['client'])) {
 	$client_sesion = null;
@@ -54,6 +64,7 @@ $rowcount=mysqli_num_rows($queryClient);
 <!--divinectorweb.com-->
 <head>
 	<meta charset="utf8" />
+	<meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8">
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<title>Proyecto SIS</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -67,6 +78,7 @@ $rowcount=mysqli_num_rows($queryClient);
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.css"/>
 	<link rel="stylesheet" href="style.css">
 	<link rel="stylesheet" href="laListe.css">
+	<script src="" type="text/javascript"></script>
 	
 	<!-- SELECT * FROM `proyectosis` WHERE assure like '%ddd%' and prenom like '%ddd%' -->
 
@@ -150,88 +162,91 @@ $rowcount=mysqli_num_rows($queryClient);
 				</section>
 				<div>
 					<label for="le_client" class="btn btn-primary me-3"><?php echo utf8_decode('Rabat, le : '.date("d/m/Y")); ?></label>
-				<div>
-					
-					<label for="le_client" class="btn btn-primary me-3 mt-3"><?php echo utf8_decode($client) . " " . utf8_decode($_GET["prenom"]); ?></label>
-					
-				</div>
-				<div>
-					
-					<label for="le_client" class="btn btn-primary me-3 mt-3"><?php echo  utf8_decode($_GET["address"]); ?></label>
-					
-				</div>
-					<h2 class= "" style="text-align: center; color: red; "><u> <?php echo utf8_decode("QUITTANCE DE PRIME"); ?></u></h2>
+					<div>
 
+						<label for="le_client" class="btn btn-primary me-3 mt-3"><?php echo utf8_decode($client) . " " . utf8_decode($_GET["prenom"]); ?></label>
 
-				<table class="table table-hover" id="laLista">
-					<thead>
-						<tr>
-							<th scope="col">N° Police</th>
-							<th scope="col">Période</th>
-							<th scope="col">Désignation</th>
-							<th scope="col">Prime Nette</th>
-							<th scope="col">Taxes</th>
-							<th scope="col">T.P</th>
-							<th scope="col">ACCESOIRES</th>
-							<th scope="col">Total TTC</th>
-						</tr>
-					</thead>
-					<tbody>
-						<?php 
-						foreach ($queryClient as $row) {
-							?>
+					</div>
+					<div>
+
+						<label for="le_client" class="btn btn-primary me-3 mt-3"><?php echo  utf8_decode($_GET["address"]); ?></label>
+
+					</div>
+					<h2 class= "" style="text-align: center; color: red; "><u> <?php echo utf8_decode("FACTURE"); ?></u></h2>
+					
+					<button id="btnExport" onclick="exportToExcel('laLista')">EXPORT REPORT</button>
+					<button id="btnExport" onclick="fnExcelReport('laLista');"> EXPORT </button>
+					<button class="btn btn-danger me-3 mt-3 mb-3" onclick="exportTableToExcel('laLista', 'members-data')">Export Table Data To Excel File</button>
+					<button class="btn btn-secondary me-3 mt-3 mb-3" id="button">Eliminer la ligne seleccioner</button>
+					<table class="table table-hover" id="laLista">
+						<thead>
 							<tr>
-								<td><?php echo utf8_decode($row['police']); ?></td>
-								<th scope="row"><?php echo utf8_decode($row["du"] . " AU " . $row["au"]); ?></th>
-								<td><?php echo utf8_decode($row["designation"]); ?></td>
-								<td><?php echo utf8_decode($row["prime_net"]); ?></td>
-								<td><?php echo utf8_decode($row["taxes"]); ?></td>
-								<td><?php echo utf8_decode($row["tp"]); ?></td>
-								<td><?php echo utf8_decode($row["accesoires"]); ?></td>
-								<td><?php echo utf8_decode($row["totale"]); ?></td>
+								<th scope="col">N° Police</th>
+								<th scope="col">Période</th>
+								<th scope="col">Désignation</th>
+								<th scope="col">Prime Nette</th>
+								<th scope="col">Taxes</th>
+								<th scope="col">T.P</th>
+								<th scope="col">ACCESOIRES</th>
+								<th scope="col">Total TTC</th>
 							</tr>
+						</thead>
+						<tbody>
+							<?php 
+							foreach ($queryClient as $row) {
+								?>
+								<tr>
+									<td><?php echo utf8_decode($row['police']); ?></td>
+									<th scope="row"><?php echo utf8_decode($row["du"] . " AU " . $row["au"]); ?></th>
+									<td><?php echo utf8_decode($row["designation"]); ?></td>
+									<td><?php echo utf8_decode($row["prime_net"]); ?></td>
+									<td><?php echo utf8_decode($row["taxes"]); ?></td>
+									<td><?php echo utf8_decode($row["tp"]); ?></td>
+									<td><?php echo utf8_decode($row["accesoires"]); ?></td>
+									<td><?php echo utf8_decode($row["totale"]); ?></td>
+								</tr>
 							<?php }	?>
 
-					</tbody>
-					<tfoot>
-						
-						
-						<td class="bg-teals-active color-palette text-center">
-							<strong></strong>
-						</td>
-						<td class="bg-teals-active color-palette text-center">
-							<strong></strong>
-						</td>
-						
-						<td class="bg-teals-active color-palette text-center">
-							<strong><b>Total </b></strong>
-						</td>
-						<td class="bg-teals-active color-palette text-center">
-							<strong id="monto">0</strong>
-						</td>
-						<td class="bg-teals-active color-palette text-center">
-							<strong id="monto1">0</strong>
-						</td>
-						<td class="bg-teals-active color-palette text-center">
-							<strong id="monto2">0</strong>
-						</td>
-						<td class="bg-teals-active color-palette text-center">
-							<strong id="monto3">0</strong>
-						</td>
-						<td class="bg-teals-active color-palette text-center">
-							<strong id="monto4">0</strong>
-						</td>
-					</tfoot>
-				</table>
-				<div class="row mt-3 ">
-					<div class="col-2">
-						<a class="btn btn-warning" href="index.php" role="button">Retourner au formulaire</a>
-					</div>
+						</tbody>
+						<tfoot>
+
+
+							<td class="bg-teals-active color-palette text-center">
+								<strong></strong>
+							</td>
+							<td class="bg-teals-active color-palette text-center">
+								<strong></strong>
+							</td>
+
+							<td class="bg-teals-active color-palette text-center">
+								<strong><b>Total </b></strong>
+							</td>
+							<td class="bg-teals-active color-palette text-center">
+								<strong id="monto">0</strong>
+							</td>
+							<td class="bg-teals-active color-palette text-center">
+								<strong id="monto1">0</strong>
+							</td>
+							<td class="bg-teals-active color-palette text-center">
+								<strong id="monto2">0</strong>
+							</td>
+							<td class="bg-teals-active color-palette text-center">
+								<strong id="monto3">0</strong>
+							</td>
+							<td class="bg-teals-active color-palette text-center">
+								<strong id="monto4">0</strong>
+							</td>
+						</tfoot>
+					</table>
+					<div class="row mt-3 ">
+						<div class="col-2">
+							<a class="btn btn-warning" href="index.php" role="button">Retourner au formulaire</a>
+						</div>
 				<!-- 	<div class="col-2">
 						<a class="btn btn-success" href="form_date.php" role="button">La liste par date</a>
 					</div> -->
 					<div class="col-2">
-						<a class="btn btn-danger" href="laListeExcelFactureParClient.php" role="button">La liste en excel</a>
+						<a class="btn btn-danger" href="laListeExcelFactureParClient.php?id=<?php echo $_GET['recu']; ?>" role="button">La liste en excel</a>
 					</div>
 				<!-- 	<div class="col-2">
 						<a class="btn btn-primary" href="copiaSeguridad.php" role="button">Sauvegarde de securité de la base de données</a>
@@ -317,7 +332,18 @@ $rowcount=mysqli_num_rows($queryClient);
 				{ extend: 'csv', className: 'btn btn-success' },
 				{ extend: 'excel', className: 'btn btn-warning' },
 				{ extend: 'pdf', className: 'btn btn-danger' },
+				{
+					extend: 'print',
+					text: 'Imprimer toute la liste Print all (not just selected)',
+					exportOptions: {
+						modifier: {
+							selected: null
+						}
+					}
+					, className: 'btn btn-success'
+				}
 				],
+				select: true,
 
 				drawCallback: function () {
 					var api = this.api();
@@ -358,7 +384,127 @@ $rowcount=mysqli_num_rows($queryClient);
 
 	</script>
 
-	
+	<script>
+		$(document).ready(function () {
+			var table = $('#laLista').DataTable();
+
+			$('#laLista tbody').on('click', 'tr', function () {
+				if ($(this).hasClass('selected')) {
+					$(this).removeClass('selected');
+				} else {
+					table.$('tr.selected').removeClass('selected');
+					$(this).addClass('selected');
+				}
+			});
+
+			$('#button').click(function () {
+				table.row('.selected').remove().draw(false);
+			});
+		});
+	</script>
+<script>
+	function exportTableToExcel(tableID, filename = ''){
+    var downloadLink;
+    var dataType = 'application/vnd.ms-excel';
+    var tableSelect = document.getElementById(tableID);
+    var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+    
+    // Specify file name
+    filename = filename?filename+'.xls':'excel_data.xls';
+    
+    // Create download link element
+    downloadLink = document.createElement("a");
+    
+    document.body.appendChild(downloadLink);
+    
+    if(navigator.msSaveOrOpenBlob){
+        var blob = new Blob(['\ufeff', tableHTML], {
+            type: dataType
+        });
+        navigator.msSaveOrOpenBlob( blob, filename);
+    }else{
+        // Create a link to the file
+        downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+    
+        // Setting the file name
+        downloadLink.download = filename;
+        
+        //triggering the function
+        downloadLink.click();
+    }
+}
+</script>
+<script>	
+
+function fnExcelReport(tableID)
+{
+    var tab_text="<table border='2px'><tr bgcolor='#87AFC6'>";
+    var textRange; var j=0;
+    tab = document.getElementById(tableID); // id of table
+
+    for(j = 0 ; j < tab.rows.length ; j++) 
+    {     
+        tab_text=tab_text+tab.rows[j].innerHTML+"</tr>";
+        //tab_text=tab_text+"</tr>";
+    }
+
+    tab_text=tab_text+"</table>";
+    tab_text= tab_text.replace(/<A[^>]*>|<\/A>/g, "");//remove if u want links in your table
+    tab_text= tab_text.replace(/<img[^>]*>/gi,""); // remove if u want images in your table
+    tab_text= tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
+
+    var ua = window.navigator.userAgent;
+    var msie = ua.indexOf("MSIE "); 
+
+    if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
+    {
+        txtArea1.document.open("txt/html","replace");
+        txtArea1.document.write(tab_text);
+        txtArea1.document.close();
+        txtArea1.focus(); 
+        sa=txtArea1.document.execCommand("SaveAs",true,"Say Thanks to Sumit.xls");
+    }  
+    else                 //other browser not tested on IE 11
+        sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));  
+
+    return (sa);
+}
+
+</script>
+<script>	
+
+	var tab = document.getElementById('laLista'); 
+function exportToExcel(){
+var htmls = "";
+            var uri = 'data:application/vnd.ms-excel;base64,';
+            var template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'; 
+            var base64 = function(s) {
+                return window.btoa(unescape(encodeURIComponent(s)))
+            };
+
+            var format = function(s, c) {
+                return s.replace(/{(\w+)}/g, function(m, p) {
+                    return c[p];
+                })
+            };
+
+            htmls = tab.innerHTML;
+            
+
+            var ctx = {
+                worksheet : 'Worksheet',
+                table : htmls
+            }
+
+
+            var link = document.createElement("a");
+            link.download = "export.xls";
+            link.href = uri + base64(format(template, ctx));
+            link.click();
+}
+
+</script>
+
 
 </body>
 </html>

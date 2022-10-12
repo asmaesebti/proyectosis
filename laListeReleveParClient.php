@@ -10,9 +10,19 @@ mysqli_query($connection,"SET SESSION collation_connection ='utf8_unicode_ci'");
 // $query = mysqli_query($connection, $consultar);
 // $array = mysqli_fetch_array($query);
 
+$recu = $_GET['recu'];
 $client = $_GET['client'];
 $prenom = $_GET['prenom'];
 $address = $_GET['address'];
+
+if (!isset($_GET['recu'])) {
+	$recu_sesion = null;
+
+}else{
+	$recu = $_GET['recu'];
+	$_SESSION['recu'] = $recu;
+
+}
 
 if (!isset($_GET['client'])) {
 	$client_sesion = null;
@@ -47,10 +57,10 @@ $rowcount=mysqli_num_rows($queryClient);
 
 //	echo $array["recu"];
 //https://medium.com/@ramamity94/creating-customisable-beautiful-pdfs-using-jspdf-api-aem-and-angular-991dcc988bbd
- function properText($str){
-    $str = mb_convert_encoding($str, "HTML-ENTITIES", "UTF-8");
-    $str = preg_replace('[a-zA-Z áéíóúÁÉÍÓÚñÑ.]',htmlentities('${1}'),$str);
-    return($str); 
+function properText($str){
+	$str = mb_convert_encoding($str, "HTML-ENTITIES", "UTF-8");
+	$str = preg_replace('[a-zA-Z áéíóúÁÉÍÓÚñÑ.]',htmlentities('${1}'),$str);
+	return($str); 
 }
 ?>
 <!DOCTYPE html>
@@ -154,88 +164,88 @@ $rowcount=mysqli_num_rows($queryClient);
 				</section>
 				<div>
 					<label for="le_client" class="btn btn-primary me-3"><?php echo utf8_decode('Rabat, le : '.date("d/m/Y")); ?></label>
-				<div>
-					
-					<label for="le_client" class="btn btn-primary me-3 mt-3"><?php echo utf8_decode($client) . " " . utf8_decode($_GET["prenom"]); ?></label>
-					
-				</div>
-				<div>
-					
-					<label for="le_client" class="btn btn-primary me-3 mt-3"><?php echo  utf8_decode($_GET["address"]); ?></label>
-					
-				</div>
+					<div>
+
+						<label for="le_client" class="btn btn-primary me-3 mt-3"><?php echo utf8_decode($client) . " " . utf8_decode($_GET["prenom"]); ?></label>
+
+					</div>
+					<div>
+
+						<label for="le_client" class="btn btn-primary me-3 mt-3"><?php echo  utf8_decode($_GET["address"]); ?></label>
+
+					</div>
 					<h2 class= "" style="text-align: center; color: red; "><u> <?php echo properText("RELEVÉ"); ?></u></h2>
 
-
-				<table class="table table-hover" id="laLista">
-					<thead>
-						<tr>
-							<th scope="col">N° Police</th>
-							<th scope="col">Période</th>
-							<th scope="col">Désignation</th>
-							<th scope="col">Prime Nette</th>
-							<th scope="col">Taxes</th>
-							<th scope="col">T.P</th>
-							<th scope="col">ACCESOIRES</th>
-							<th scope="col">Total TTC</th>
-						</tr>
-					</thead>
-					<tbody>
-						<?php 
-						foreach ($queryClient as $row) {
-							?>
+					<button class="btn btn-secondary me-3 mt-3 mb-3" id="button">Eliminer la ligne seleccioner</button>
+					<table class="table table-hover" id="laLista">
+						<thead>
 							<tr>
-								<td><?php echo utf8_decode($row['police']); ?></td>
-								<th scope="row"><?php echo utf8_decode($row["du"] . " AU " . $row["au"]); ?></th>
-								<td><?php echo utf8_decode($row["designation"]); ?></td>
-								<td><?php echo utf8_decode($row["prime_net"]); ?></td>
-								<td><?php echo utf8_decode($row["taxes"]); ?></td>
-								<td><?php echo utf8_decode($row["tp"]); ?></td>
-								<td><?php echo utf8_decode($row["accesoires"]); ?></td>
-								<td><?php echo utf8_decode($row["totale"]); ?></td>
+								<th scope="col">N° Police</th>
+								<th scope="col">Période</th>
+								<th scope="col">Désignation</th>
+								<th scope="col">Prime Nette</th>
+								<th scope="col">Taxes</th>
+								<th scope="col">T.P</th>
+								<th scope="col">ACCESOIRES</th>
+								<th scope="col">Total TTC</th>
 							</tr>
+						</thead>
+						<tbody>
+							<?php 
+							foreach ($queryClient as $row) {
+								?>
+								<tr>
+									<td><?php echo utf8_decode($row['police']); ?></td>
+									<th scope="row"><?php echo utf8_decode($row["du"] . " AU " . $row["au"]); ?></th>
+									<td><?php echo utf8_decode($row["designation"]); ?></td>
+									<td><?php echo utf8_decode($row["prime_net"]); ?></td>
+									<td><?php echo utf8_decode($row["taxes"]); ?></td>
+									<td><?php echo utf8_decode($row["tp"]); ?></td>
+									<td><?php echo utf8_decode($row["accesoires"]); ?></td>
+									<td><?php echo utf8_decode($row["totale"]); ?></td>
+								</tr>
 							<?php }	?>
 
-					</tbody>
-					<tfoot>
-						
-						
-						<td class="bg-teals-active color-palette text-center">
-							<strong></strong>
-						</td>
-						<td class="bg-teals-active color-palette text-center">
-							<strong></strong>
-						</td>
-						
-						<td class="bg-teals-active color-palette text-center">
-							<strong><b>Total </b></strong>
-						</td>
-						<td class="bg-teals-active color-palette text-center">
-							<strong id="monto">0</strong>
-						</td>
-						<td class="bg-teals-active color-palette text-center">
-							<strong id="monto1">0</strong>
-						</td>
-						<td class="bg-teals-active color-palette text-center">
-							<strong id="monto2">0</strong>
-						</td>
-						<td class="bg-teals-active color-palette text-center">
-							<strong id="monto3">0</strong>
-						</td>
-						<td class="bg-teals-active color-palette text-center">
-							<strong id="monto4">0</strong>
-						</td>
-					</tfoot>
-				</table>
-				<div class="row mt-3 ">
-					<div class="col-2">
-						<a class="btn btn-warning" href="index.php" role="button">Retourner au formulaire</a>
-					</div>
+						</tbody>
+						<tfoot>
+
+
+							<td class="bg-teals-active color-palette text-center">
+								<strong></strong>
+							</td>
+							<td class="bg-teals-active color-palette text-center">
+								<strong></strong>
+							</td>
+
+							<td class="bg-teals-active color-palette text-center">
+								<strong><b>Total </b></strong>
+							</td>
+							<td class="bg-teals-active color-palette text-center">
+								<strong id="monto">0</strong>
+							</td>
+							<td class="bg-teals-active color-palette text-center">
+								<strong id="monto1">0</strong>
+							</td>
+							<td class="bg-teals-active color-palette text-center">
+								<strong id="monto2">0</strong>
+							</td>
+							<td class="bg-teals-active color-palette text-center">
+								<strong id="monto3">0</strong>
+							</td>
+							<td class="bg-teals-active color-palette text-center">
+								<strong id="monto4">0</strong>
+							</td>
+						</tfoot>
+					</table>
+					<div class="row mt-3 ">
+						<div class="col-2">
+							<a class="btn btn-warning" href="index.php" role="button">Retourner au formulaire</a>
+						</div>
 				<!-- 	<div class="col-2">
 						<a class="btn btn-success" href="form_date.php" role="button">La liste par date</a>
 					</div> -->
 					<div class="col-2">
-						<a class="btn btn-danger" href="laListeExcelReleveParClient.php" role="button">La liste en excel</a>
+						<a class="btn btn-danger" href="laListeExcelReleveParClient.php?id=<?php echo $_GET['recu']; ?>" role="button">La liste en excel</a>
 					</div>
 				<!-- 	<div class="col-2">
 						<a class="btn btn-primary" href="copiaSeguridad.php" role="button">Sauvegarde de securité de la base de données</a>
@@ -295,8 +305,8 @@ $rowcount=mysqli_num_rows($queryClient);
                 // do whatever here
                 alert(data);
                 console.log(data);
-            }
-        });
+             }
+          });
 			});
 		});
 	</script>
@@ -321,7 +331,19 @@ $rowcount=mysqli_num_rows($queryClient);
 				{ extend: 'csv', className: 'btn btn-success' },
 				{ extend: 'excel', className: 'btn btn-warning' },
 				{ extend: 'pdf', className: 'btn btn-danger' },
+				
+				{
+					extend: 'print',
+					text: 'Imprimer toute la liste Print all (not just selected)',
+					exportOptions: {
+						modifier: {
+							selected: null
+						}
+					}
+					, className: 'btn btn-success'
+				}
 				],
+				select: true,
 
 				drawCallback: function () {
 					var api = this.api();
@@ -362,7 +384,24 @@ $rowcount=mysqli_num_rows($queryClient);
 
 	</script>
 
-	
+	<script>
+		$(document).ready(function () {
+			var table = $('#laLista').DataTable();
+
+			$('#laLista tbody').on('click', 'tr', function () {
+				if ($(this).hasClass('selected')) {
+					$(this).removeClass('selected');
+				} else {
+					table.$('tr.selected').removeClass('selected');
+					$(this).addClass('selected');
+				}
+			});
+
+			$('#button').click(function () {
+				table.row('.selected').remove().draw(false);
+			});
+		});
+	</script>
 
 </body>
 </html>

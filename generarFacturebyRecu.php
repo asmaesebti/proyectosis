@@ -1,4 +1,4 @@
-<?php
+ºººººººººººººº0<?php
 // include class
 require('fpdf/fpdf.php');
 

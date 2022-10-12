@@ -5,6 +5,7 @@ require_once('conexion.php');
 ////he creado un comentario
 ///asmae
 
+$recu = $_SESSION['recu'] ;
 $client = $_SESSION['client'] ;
 $prenom = $_SESSION['prenom'] ;
 $address = $_SESSION['address'] ;
@@ -18,9 +19,16 @@ $totalch = 0;
 $totalvi = 0;
 $totalre = 0;
 
+$numero_factura = $client."-F-".str_pad($recu, 5, '0', STR_PAD_LEFT)."-".date("d-m-Y-G-i-s");
+
+if(isset($_GET['id'])){
+	$insertar = "INSERT INTO `facturas` (`nombre_factura`, `fecha_creacion` , `numero_factura`) VALUES ('$client', CURRENT_TIMESTAMP, '$numero_factura')";
+	$query = mysqli_query($connection, $insertar);
+}
+
 
 header("Content-Type: application/xls");
-header("Content-Disposition: attachment; filename=listeExcelFactureParClient.xls");
+header("Content-Disposition: attachment; filename=".$client."-F-".str_pad($recu, 5, '0', STR_PAD_LEFT)."-".date("d-m-Y-G-i-s").".xls");
 header("Pragma: no-cache");
 header("Expires: 0");
 
@@ -46,7 +54,7 @@ echo '<tr><th></th><th></th><th style="text-align: left;">'.utf8_decode($client)
 echo '<tr><th></th></tr>';
 echo '<tr><th></th><th></th><th style="text-align: left;">'.utf8_decode($address).'</th></tr>';
 echo '<tr><th></th></tr>';
-echo '<tr><th></th><th></th><th style="font-size: 135%;">'.utf8_decode("QUITTANCE DE PRIME").'</th></tr>';
+echo '<tr><th></th><th></th><th style="font-size: 135%; text-align: left;">'.utf8_decode("FACTURE"). utf8_decode('  Nº: F-') . str_pad($recu, 5, '0', STR_PAD_LEFT)."-".date("Y") .'</th></tr>';
 echo '<tr><th></th></tr>';
 echo '</table>';
 

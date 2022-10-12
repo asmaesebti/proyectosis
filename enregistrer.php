@@ -422,7 +422,7 @@ QRcode::png($codigoQr);
 echo "<br>";
 echo $contador;
 
-if ($contador == 8) {
+if ($contador == 7) {
 	
 	$insertar = "INSERT INTO `proyectosis` (`fecha_hoy`, `letype`, `attestation`, `police`, `designation`, `matricule`, `produit`,`assure`, `prenom`, `du`, `au` , `prime_net`, `taxes`, `tp`, `accesoires`, `totale`, `espece` ,  `cheque` , `virement`, `reste` ,  `cree_le`, `telefono`, `email` , `address_client`) VALUES ('$fecha_hoy','$leType','$attestation','$police', '$designation', '$matricule', '$produit','$assure', '$prenom' ,'$du','$au', '$prime_net', '$taxes', '$tp', '$accesoires', '$totale', '$espece', '$cheque', '$virement' , '$reste', CURRENT_TIMESTAMP, '$telefono', '$email' , '$address_client')";
 
