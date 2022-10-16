@@ -70,54 +70,54 @@ $rowcount=mysqli_num_rows($queryClient);
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" type="text/css"/>
 	<!-- <link href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css"/>
-	<link href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css"/> -->
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.0/sweetalert2.css"/>
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.0/sweetalert2.js"></script>
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.css"/>
-	<link rel="stylesheet" href="style.css">
-	<link rel="stylesheet" href="laListe.css">
-	<script src="" type="text/javascript"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/TableExport/5.2.0/css/tableexport.css" integrity="sha512-+m+NCQG6uttXsLjwxHTUdhov99LW3TSFEiM2LSFMwfOePszb2as348/96cCBG35mOK+3Gp4P0EQRWpKLZfGTnA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<link href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css"/> -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.0/sweetalert2.css"/>
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.0/sweetalert2.js"></script>
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.css"/>
+		<link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" href="laListe.css">
+		<script src="" type="text/javascript"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/TableExport/5.2.0/css/tableexport.css" integrity="sha512-+m+NCQG6uttXsLjwxHTUdhov99LW3TSFEiM2LSFMwfOePszb2as348/96cCBG35mOK+3Gp4P0EQRWpKLZfGTnA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-	<!-- SELECT * FROM `proyectosis` WHERE assure like '%ddd%' and prenom like '%ddd%' -->
+		<!-- SELECT * FROM `proyectosis` WHERE assure like '%ddd%' and prenom like '%ddd%' -->
 
-</head>
-<body class="fondo" style="background-color: beige;">
+	</head>
+	<body class="fondo" style="background-color: beige;">
 
-	<?php
-	if(isset($_GET['mensaje']) == 'ok') {
-		?>
-		<script type="text/javascript">
-			$(document).ready(function() {
-				swal({
-					title: '<?php echo $_GET['respuesta']; ?>',
-					text: '<?php echo $_GET['respuesta']; ?>',
-					type: 'success'
-				});
-			});
-		</script>
 		<?php
-	}
-	?>
+		if(isset($_GET['mensaje']) == 'ok') {
+			?>
+			<script type="text/javascript">
+				$(document).ready(function() {
+					swal({
+						title: '<?php echo $_GET['respuesta']; ?>',
+						text: '<?php echo $_GET['respuesta']; ?>',
+						type: 'success'
+					});
+				});
+			</script>
+			<?php
+		}
+		?>
 
-	<header class="container">
-		<img src="logo.png" width="100%" alt="">
-	</header>
-	
-	<div class="container-fluid conjunto">
-		<div class="row">
-			<div class="col">
-				<h1 class= ""> </h1>
-				<section>
+		<header class="container">
+			<img src="logo.png" width="100%" alt="">
+		</header>
 
-					<!-- Example single danger button -->
-					<?php 
+		<div class="container-fluid conjunto">
+			<div class="row">
+				<div class="col">
+					<h1 class= ""> </h1>
+					<section>
 
-					
+						<!-- Example single danger button -->
+						<?php 
+
+
 
 					// $consultarClient = "SELECT recu, assure, prenom FROM `proyectosis`";
 					// $queryClient = mysqli_query($connection, $consultarClient);
@@ -125,8 +125,8 @@ $rowcount=mysqli_num_rows($queryClient);
 
 // href="generarFacturebyRecu.php?recu=<?php echo $row['recu'];
 
-					?>
-					<div class="btn-group m-3">
+						?>
+						<div class="btn-group m-3">
 					<!-- 	<button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 							Selectionner un client pour imprimer ses factures
 						</button>
@@ -245,6 +245,7 @@ $rowcount=mysqli_num_rows($queryClient);
 							</tr>
 						</tfoot>
 					</table>
+					<input type="hidden" value="<?php echo $rowcount; ?>" id="rowcount">
 					<div class="row mt-3 ">
 						<div class="col-2">
 							<a class="btn btn-warning" href="index.php" role="button">Retourner au formulaire</a>
@@ -433,6 +434,39 @@ $rowcount=mysqli_num_rows($queryClient);
                 	msg += '</row>';
                 	return msg;
                 }
+                // $('row c[r*="28"]', sheet).attr( 's', '25' );
+                function addRow1(index, data) {
+                	var row = sheet.createElement('row');
+
+                	row.setAttribute("r", index);
+                	for (i = 0; i < data.length; i++) {
+                		var key = data[i].k;
+                		var value = data[i].v;
+
+                		var c = sheet.createElement('c');
+                		c.setAttribute("t", "inlineStr");
+                		c.setAttribute("s", "2"); /*set specific cell style here*/
+                		c.setAttribute("r", key + index);
+
+                		var is = sheet.createElement('is');
+                		var t = sheet.createElement('t');
+                		var text = sheet.createTextNode(value)
+
+
+                		t.appendChild(text);
+                		is.appendChild(t);
+                		c.appendChild(is);
+
+                		row.appendChild(c);
+
+                		debugger;
+                	}
+
+                	return row;
+                }
+
+        //         let footerIndex = $('sheetData row', sheet).length;
+        //         let $footerRows = $('tr', dataTable.footer());
 
         //              // If there are more than one footer rows
         //              if ($footerRows.length > 1) {
@@ -462,13 +496,43 @@ $rowcount=mysqli_num_rows($queryClient);
         //     }
         // };
 
+    //     table.rows.add( [ {
+    //     "N° Police":       "Tiger Nixon",
+    //     "Période":   "System Architect",
+    //     "Désignation":     "$3,120",
+    //     "Prime Nette": "2011/04/25",
+    //     "Taxes":     "Edinburgh",
+    //     "T.P":       "5421",
+    //     "ACCESOIRE": "ffffffff",
+    //     "Total TTC": "222222"
+    //       }
+    // ] )
+    // .draw();
 
+// var lastXfIndex = $('cellXfs xf', sheet).length - 1;
+//     	var n1 = '<numFmt formatCode="##0.0000%" numFmtId="300"/>';
+// var s1 = '<xf numFmtId="300" fontId="0" fillId="0" borderId="0" applyFont="1" applyFill="1" applyBorder="1" xfId="0" applyNumberFormat="1"/>';
+// var s2 = '<xf numFmtId="0" fontId="2" fillId="2" borderId="0" applyFont="1" applyFill="1" applyBorder="1" xfId="0" applyAlignment="1">' +
+// '<alignment horizontal="center"/></xf>';
+// sheet.childNodes[0].childNodes[1].childNodes[2].innerHTML += n1;
+// sheet.childNodes[0].childNodes[1].childNodes[2].innerHTML += s1 + s2;
 
-        let tt = Date.now();
-        const hoy = new Date(tt);
+// var fourDecPlaces = lastXfIndex + 1;
+// var greyBoldCentered = lastXfIndex + 2;
 
-        var le_client = document.getElementById("le_client");
-        var l_address = document.getElementById("l_address");
+// $('row:eq(6) c', sheet).attr('s', greyBoldCentered);
+
+let tt = Date.now();
+const hoy = new Date(tt);
+
+var le_client = document.getElementById("le_client");
+var l_address = document.getElementById("l_address");
+
+var monto = document.getElementById("monto");
+var monto1 = document.getElementById("monto1");
+var monto3 = document.getElementById("monto3");
+var monto4 = document.getElementById("monto4");
+
                 //insert
                 var r1 = Addrow(1, [{ key: 'A', value: '' }, { key: 'B', value: '' }, { key: 'C', value: '' }]);
                 var r2 = Addrow(2, [{ key: 'A', value: '' }, { key: 'B', value: '' }, { key: 'C', value: '' }]);
@@ -493,13 +557,69 @@ $rowcount=mysqli_num_rows($queryClient);
                 var r21 = Addrow(21, [{ key: 'A', value: '' }, { key: 'B', value: '' }, { key: 'C', value: '' }]);
                 var r22 = Addrow(22, [{ key: 'A', value: '' }, { key: 'B', value: '' }, { key: 'C', value: '' }]);
 
+                var elnodo = parseInt(6);
+                var rowcount = parseInt(document.getElementById("rowcount").value);
+                var v28 = parseInt(28);
+                var v29 = parseInt(29);
+                var v30 = parseInt(30);
+                var v31 = parseInt(31);
+                var elnum = parseInt((rowcount - 1));
+                console.log(rowcount);
+                var lavar = parseInt(2);
+
+                if (rowcount > lavar && rowcount <= 3) {
+                	elnodo = parseInt((elnodo + 1)) ;
+                	v28 = parseInt((v28+1));
+                	v29 = parseInt((v29 + 1));
+                	v30 = parseInt((v30+1));
+                	v31 = parseInt((v31+1));
+                }else if(rowcount > 3 && rowcount <= 4){
+                	elnodo = parseInt((elnodo + 2)) ;
+                	v28 = parseInt((v28+2));
+                	v29 = parseInt((v29 + 2));
+                	v30 = parseInt((v30+2));
+                	v31 = parseInt((v31+2));
+                }else if(rowcount > 4 && rowcount <= 5){
+                	elnodo = parseInt((elnodo + 3)) ;
+                	v28 = parseInt((v28+3));
+                	v29 = parseInt((v29 + 3));
+                	v30 = parseInt((v30+3));
+                	v31 = parseInt((v31+3));
+                }else if(rowcount > 5 && rowcount <= 6){
+                	elnodo = parseInt((elnodo + 4)) ;
+                	v28 = parseInt((v28+4));
+                	v29 = parseInt((v29 + 4));
+                	v30 = parseInt((v30+4));
+                	v31 = parseInt((v31+4));
+                }
+                else if(rowcount > 6 && rowcount <= 7){
+                	elnodo = parseInt((elnodo + 5)) ;
+                	v28 = parseInt((v28+5));
+                	v29 = parseInt((v29 + 5));
+                	v30 = parseInt((v30+5));
+                	v31 = parseInt((v31+5));
+                }
 
 
+                var r28 = addRow1(v28, [{ k: 'A', v: '' }, { k: 'B', v: '' }, { k: 'C', v: 'Total Primes:' }, { k: 'D', v: '' }, { k: 'E', v: '' }, { k: 'F', v: '' }, { k: 'G', v: '' }, { k: 'H', v: monto.innerHTML }]);
+                var r29 = addRow1(v29, [{ k: 'A', v: '' }, { k: 'B', v: '' }, { k: 'C', v: 'Total Taxes:' }, { k: 'D', v: '' }, { k: 'E', v: '' }, { k: 'F', v: '' }, { k: 'G', v: '' }, { k: 'H', v: monto1.innerHTML }]);
+             
+                var r30 = addRow1(v30, [{ k: 'A', v: '' }, { k: 'B', v: '' }, { k: 'C', v: 'Total Timbres & Accessoires:' },  { k: 'E', v: '' }, { k: 'F', v: '' }, { k: 'G', v: '' }, { k: 'H', v: monto3.innerHTML }]);
+                var r31 = addRow1(v31, [{ k: 'A', v: '' }, { k: 'B', v: '' }, { k: 'C', v: 'Total TTC:' }, { k: 'D', v: '' }, { k: 'E', v: '' }, { k: 'F', v: '' }, { k: 'G', v: '' }, { k: 'H', v: monto4.innerHTML }]);
+
+                var sheetData = sheet.getElementsByTagName('sheetData')[0];
+                sheetData.insertBefore(r28, sheetData.childNodes[elnodo]);
+                sheetData.insertBefore(r29, sheetData.childNodes[elnodo]);
+                sheetData.insertBefore(r31, sheetData.childNodes[elnodo]);
+                sheetData.insertBefore(r30, sheetData.childNodes[elnodo]);
 
                 sheet.childNodes[0].childNodes[1].innerHTML = r1 + r2+ r3+ r4+r5+r6+r7+r8+r9+r10+r11+r12+r13+r14+r15+r16+r17+r18+r19+r20+r21+r22+ sheet.childNodes[0].childNodes[1].innerHTML;
             }
             , className: 'btn btn-warning',
-              title: '',
+            title: '',
+            exportOptions: {
+            	columns: ':visible',
+            },
             
             "footerCallback": function ( row, data, start, end, display ) {
         //     	var api = this.api();
@@ -537,48 +657,48 @@ $rowcount=mysqli_num_rows($queryClient);
 				    // 	
 
 				},
-				 exportOptions : {
-                stripNewlines: false,
-                format : {
+				exportOptions : {
+					stripNewlines: false,
+					format : {
                          // footer : function (data, column, row){
                          // console.log(data.replace(/<br\s*[\/]?>/gi,'\n'));
                          // return data.replace(/<br\s*[\/]?>/gi,'\n');
                          //                                      }
-                          }
+                     }
                  }
 
 
-			},
-			{ extend: 'pdf', className: 'btn btn-danger' },
-			{
-				extend: 'print',
-				text: 'Imprimer toute la liste Print all (not just selected)',
-				exportOptions: {
-					modifier: {
-						selected: null
-					}
-				}
+             },
+             { extend: 'pdf', className: 'btn btn-danger' },
+             {
+             	extend: 'print',
+             	text: 'Imprimer toute la liste Print all (not just selected)',
+             	exportOptions: {
+             		modifier: {
+             			selected: null
+             		}
+             	}
 
-				, className: 'btn btn-success'
-			}
-			],
-			select: true,
+             	, className: 'btn btn-success'
+             }
+             ],
+             select: true,
 
-			drawCallback: function () {
-				var api = this.api();
-				var total = api.column( 3, {"filter":"applied"}).data().sum();
-				$('#monto').html(total.toFixed(2));
-				var total1 = api.column( 4, {"filter":"applied"}).data().sum();
-				$('#monto1').html(total1.toFixed(2));
-				var total2 = api.column( 5, {"filter":"applied"}).data().sum();
-				$('#monto2').html(total2.toFixed(2));
-				var total3 = api.column( 6, {"filter":"applied"}).data().sum();
-				$('#monto3').html(total3.toFixed(2));
-				var total4 = api.column( 7, {"filter":"applied"}).data().sum();
-				$('#monto4').html(total4.toFixed(2));
+             drawCallback: function () {
+             	var api = this.api();
+             	var total = api.column( 3, {"filter":"applied"}).data().sum();
+             	$('#monto').html(total.toFixed(2));
+             	var total1 = api.column( 4, {"filter":"applied"}).data().sum();
+             	$('#monto1').html(total1.toFixed(2));
+             	var total2 = api.column( 5, {"filter":"applied"}).data().sum();
+             	$('#monto2').html(total2.toFixed(2));
+             	var total3 = api.column( 6, {"filter":"applied"}).data().sum();
+             	$('#monto3').html(total3.toFixed(2));
+             	var total4 = api.column( 7, {"filter":"applied"}).data().sum();
+             	$('#monto4').html(total4.toFixed(2));
 
-			}
-		});
+             }
+         });
 
 } );
 </script>
